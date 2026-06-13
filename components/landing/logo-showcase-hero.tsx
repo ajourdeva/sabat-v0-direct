@@ -138,10 +138,7 @@ export function LogoShowcaseHero() {
       />
 
       {/* Content container with proper flex layout */}
-      <div className="relative z-10 w-full h-full flex flex-col items-center justify-between py-12 lg:py-16 px-4 lg:px-8">
-        {/* Empty spacer at top for visual balance - allows content to shift to center */}
-        <div className="flex-1" />
-
+      <div className="relative z-10 w-full h-full flex flex-col items-center justify-start py-12 lg:py-16 px-4 lg:px-8 pt-40 lg:pt-56">
         {/* Main content - centered */}
         <div className="flex flex-col items-center justify-center gap-8 lg:gap-12">
           {/* Animated title */}
@@ -186,10 +183,8 @@ export function LogoShowcaseHero() {
           </div>
         </div>
 
-        {/* Empty spacer at bottom for button positioning */}
-        <div className="flex-1 min-h-8" />
-
-        {/* Scroll indicator button */}
+        {/* Scroll indicator button at bottom */}
+        <div className="mt-auto pb-12">
         <button
           onClick={handleScroll}
           className="group cursor-pointer animate-fade-in"
@@ -207,40 +202,8 @@ export function LogoShowcaseHero() {
             </div>
           </div>
         </button>
-
-        {/* Spacer at bottom */}
-        <div className="h-4" />
+        </div>
       </div>
-
-      {/* Fade transition at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white dark:to-slate-950 pointer-events-none" />
-
-      <style jsx>{`
-        @keyframes spin {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out forwards;
-          opacity: 0;
-        }
-      `}</style>
     </section>
   );
 }
