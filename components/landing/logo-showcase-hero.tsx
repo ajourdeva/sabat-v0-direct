@@ -7,22 +7,6 @@ import { ChevronDown } from "lucide-react";
 export function LogoShowcaseHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        setMousePos({
-          x: e.clientX / rect.width,
-          y: e.clientY / rect.height,
-        });
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -102,8 +86,8 @@ export function LogoShowcaseHero() {
 
       // Draw morphing circles with shader-like effect
       ctx.globalAlpha = 0.12;
-      const centerX = w * mousePos.x;
-      const centerY = h * mousePos.y;
+      const centerX = w * 0.5;
+      const centerY = h * 0.5;
 
       for (let ring = 0; ring < 5; ring++) {
         const angle = time * (0.001 - ring * 0.0002);
@@ -170,10 +154,10 @@ export function LogoShowcaseHero() {
       window.removeEventListener("resize", resize);
       cancelAnimationFrame(animationId);
     };
-  }, [mousePos]);
+  }, []);
 
   const handleScroll = () => {
-    const nextSection = document.querySelector("#metrics");
+    const nextSection = document.querySelector("#hero-second");
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: "smooth" });
     }
@@ -191,8 +175,8 @@ export function LogoShowcaseHero() {
         style={{ opacity: 0.9 }}
       />
 
-      {/* Fade-out gradient at bottom for seamless transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 lg:h-40 bg-gradient-to-b from-transparent to-background pointer-events-none z-20" />
+      {/* Fade-out gradient at bottom for seamless transition - adapts to dark mode */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 lg:h-40 bg-gradient-to-b from-transparent to-background dark:to-slate-950 pointer-events-none z-20" />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full w-full px-4 lg:px-8">

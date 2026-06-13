@@ -14,7 +14,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-[120vh] flex flex-col justify-between overflow-hidden pb-20 lg:pb-32">
+    <section id="hero-second" className="relative min-h-[120vh] flex flex-col justify-between overflow-hidden pb-20 lg:pb-32">
       {/* Animated sphere background */}
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] lg:w-[900px] lg:h-[900px] opacity-100 pointer-events-none">
         <AnimatedSphere />
