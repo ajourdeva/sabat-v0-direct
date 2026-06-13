@@ -33,16 +33,17 @@ export function LogoShowcaseHero() {
       const h = canvas.height / (window.devicePixelRatio || 1);
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-      // Clear canvas with proper background color - pure white for light mode
-      const bgColor = isDark ? "#0f172a" : "#ffffff";
-      ctx.fillStyle = bgColor;
-      ctx.fillRect(0, 0, w, h);
+      // DO NOT fill background - let CSS handle it, canvas is ONLY for effects
+      // In light mode: pure white background from CSS
+      // In dark mode: dark background from CSS
+      // Canvas only draws animated effects on top
 
-      // Create animated gradient overlay with morphing shapes
+      ctx.clearRect(0, 0, w, h);
+
       const centerX = w * 0.5;
       const centerY = h * 0.5;
 
-      // Draw flowing gradient circles
+      // Draw flowing gradient circles - only in dark mode make them bright
       for (let i = 0; i < 3; i++) {
         const radius = 300 + i * 200 + Math.sin(time * 0.0008 + i) * 100;
         const angle = time * (0.0003 - i * 0.00005) + i * (Math.PI * 2 / 3);
@@ -53,12 +54,12 @@ export function LogoShowcaseHero() {
         const grad = ctx.createRadialGradient(x, y, 0, x, y, 400);
         
         if (isDark) {
-          grad.addColorStop(0, `rgba(59, 130, 246, 0.15)`);
-          grad.addColorStop(0.5, `rgba(30, 64, 175, 0.08)`);
+          grad.addColorStop(0, `rgba(59, 130, 246, 0.2)`);
+          grad.addColorStop(0.5, `rgba(30, 64, 175, 0.12)`);
           grad.addColorStop(1, `rgba(30, 64, 175, 0)`);
         } else {
-          grad.addColorStop(0, `rgba(59, 130, 246, 0.18)`);
-          grad.addColorStop(0.5, `rgba(30, 64, 175, 0.1)`);
+          grad.addColorStop(0, `rgba(59, 130, 246, 0.12)`);
+          grad.addColorStop(0.5, `rgba(30, 64, 175, 0.06)`);
           grad.addColorStop(1, `rgba(30, 64, 175, 0)`);
         }
         
@@ -68,8 +69,8 @@ export function LogoShowcaseHero() {
 
       // Add flowing wave patterns with more fluidity
       ctx.strokeStyle = isDark 
-        ? `rgba(30, 64, 175, ${0.06 + Math.sin(time * 0.003) * 0.04})` 
-        : `rgba(30, 64, 175, ${0.1 + Math.sin(time * 0.003) * 0.06})`;
+        ? `rgba(59, 130, 246, ${0.08 + Math.sin(time * 0.003) * 0.05})` 
+        : `rgba(30, 64, 175, ${0.08 + Math.sin(time * 0.003) * 0.04})`;
       ctx.lineWidth = 1.5;
 
       for (let waveLayer = 0; waveLayer < 6; waveLayer++) {
@@ -95,8 +96,8 @@ export function LogoShowcaseHero() {
         const pulse = Math.sin(time * 0.003 + ring * 0.5) * 30;
         
         ctx.strokeStyle = isDark
-          ? `rgba(59, 130, 246, ${0.1 + Math.sin(time * 0.004 + ring) * 0.08})`
-          : `rgba(30, 64, 175, ${0.12 + Math.sin(time * 0.004 + ring) * 0.1})`;
+          ? `rgba(59, 130, 246, ${0.12 + Math.sin(time * 0.004 + ring) * 0.1})`
+          : `rgba(30, 64, 175, ${0.08 + Math.sin(time * 0.004 + ring) * 0.06})`;
         ctx.lineWidth = 1;
         
         ctx.beginPath();
@@ -128,13 +129,12 @@ export function LogoShowcaseHero() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-slate-950"
+      className="relative min-h-screen w-full flex flex-col items-center justify-between overflow-hidden bg-white dark:bg-slate-950"
     >
-      {/* Canvas - animated background */}
+      {/* Canvas background - overlay only */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-        style={{ opacity: 0.6 }}
+        className="absolute inset-0 w-full h-full opacity-100"
       />
 
       {/* Content container with proper flex layout */}
