@@ -39,6 +39,33 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+.dark {
+  --background: oklch(0.12 0.01 60);
+  --foreground: oklch(0.985 0.002 90);
+  --card: oklch(0.15 0.01 60);
+  --card-foreground: oklch(0.985 0.002 90);
+  --popover: oklch(0.15 0.01 60);
+  --popover-foreground: oklch(0.985 0.002 90);
+  --primary: oklch(0.985 0.002 90);
+  --primary-foreground: oklch(0.12 0.01 60);
+  --secondary: oklch(0.2 0.01 60);
+  --secondary-foreground: oklch(0.985 0.002 90);
+  --muted: oklch(0.25 0.01 60);
+  --muted-foreground: oklch(0.65 0.02 60);
+  --accent: oklch(0.3 0.01 60);
+  --accent-foreground: oklch(0.985 0.002 90);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.25 0.01 60);
+  --input: oklch(0.2 0.01 60);
+  --ring: oklch(0.985 0.002 90);
+  --chart-1: oklch(0.985 0.002 90);
+  --chart-2: oklch(0.75 0.02 60);
+  --chart-3: oklch(0.55 0.02 60);
+  --chart-4: oklch(0.35 0.02 60);
+  --chart-5: oklch(0.25 0.01 60);
+}
+
 @theme inline {
   --font-sans: var(--font-instrument), 'Instrument Sans', system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), 'JetBrains Mono', monospace;

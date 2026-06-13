@@ -46,28 +46,28 @@ function AnimatedCounter({ end, suffix = "", prefix = "" }: { end: number; suffi
 
 const metrics = [
   { 
-    value: 2847392, 
-    suffix: "", 
+    value: 1500, 
+    suffix: "+", 
     prefix: "",
-    label: "API requests today",
+    label: "Organization Partners",
   },
   { 
     value: 99, 
-    suffix: ".99%", 
+    suffix: ".9%", 
     prefix: "",
-    label: "Uptime this quarter",
+    label: "Service Satisfaction",
   },
   { 
-    value: 23, 
-    suffix: "ms", 
+    value: 24, 
+    suffix: "/7", 
     prefix: "",
-    label: "Average response time",
+    label: "Support Available",
   },
   { 
-    value: 184, 
-    suffix: "", 
+    value: 50, 
+    suffix: "+", 
     prefix: "",
-    label: "Countries served",
+    label: "Cities Covered",
   },
 ];
 
@@ -94,23 +94,23 @@ export function MetricsSection() {
   }, []);
 
   return (
-    <section id="studio" ref={sectionRef} className="relative py-24 lg:py-32 border-y border-foreground/10">
+    <section id="metrics" ref={sectionRef} className="relative py-24 lg:py-32 border-y border-foreground/10">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 lg:mb-24">
           <div>
             <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
               <span className="w-8 h-px bg-foreground/30" />
-              Live metrics
+              Enterprise Trust Metrics
             </span>
             <h2
               className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              Performance you
+              Proven partner
               <br />
-              can measure.
+              for organizations.
             </h2>
           </div>
           <div className="flex items-center gap-4 font-mono text-sm text-muted-foreground">

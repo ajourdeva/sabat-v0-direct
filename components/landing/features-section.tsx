@@ -5,27 +5,21 @@ import { useEffect, useRef, useState } from "react";
 const features = [
   {
     number: "01",
-    title: "Instant Deployment",
-    description: "Push to production in seconds. Our edge network ensures your applications load instantly, anywhere in the world.",
+    title: "Corporate Accommodation",
+    description: "Seamless coordination of business hotel reservations, short-term and long-term stays, group bookings, project-based arrangements, and budget-aligned recommendations tailored to your organization&apos;s needs.",
     visual: "deploy",
   },
   {
     number: "02",
-    title: "AI-Native Workflows",
-    description: "Build intelligent applications with built-in AI capabilities. From inference to training, everything scales automatically.",
+    title: "Transfers & Executive Hospitality",
+    description: "Complete management of airport transfers, in-city transportation, guest reception services, chauffeur coordination, and executive hospitality services designed to create exceptional experiences.",
     visual: "ai",
   },
   {
     number: "03",
-    title: "Real-time Collaboration",
-    description: "Work together seamlessly. Live preview, instant feedback, and version control that actually makes sense.",
+    title: "Business Travel Operations",
+    description: "End-to-end coordination of domestic and international flights, travel planning, change management, ongoing support, and integrated mission logistics for seamless business journeys.",
     visual: "collab",
-  },
-  {
-    number: "04",
-    title: "Enterprise Security",
-    description: "Bank-grade encryption, SOC 2 compliance, and granular access controls. Your data stays yours.",
-    visual: "security",
   },
 ];
 
@@ -314,7 +308,7 @@ export function FeaturesSection() {
 
   return (
     <section
-      id="features"
+      id="services"
       ref={sectionRef}
       className="relative py-24 lg:py-32"
     >
@@ -323,16 +317,16 @@ export function FeaturesSection() {
         <div className="mb-16 lg:mb-24">
           <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
             <span className="w-8 h-px bg-foreground/30" />
-            Capabilities
+            Our Services
           </span>
           <h2
             className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            Everything you need.
+            Specialized solutions
             <br />
-            <span className="text-muted-foreground">Nothing you don&apos;t.</span>
+            <span className="text-muted-foreground">for corporate travel.</span>
           </h2>
         </div>
 
