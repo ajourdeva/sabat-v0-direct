@@ -51,14 +51,14 @@ export function LogoShowcaseHero() {
       // Create liquid gradient background with noise
       const gradient = ctx.createLinearGradient(0, 0, w, h);
       
-      // Animated gradient colors
-      const hue1 = (time * 0.02 + 210) % 360;
-      const hue2 = (time * 0.015 + 240) % 360;
-      const hue3 = (time * 0.01 + 270) % 360;
+      // Animated gradient colors - Blue hues only
+      const hue1 = (time * 0.02 + 220) % 360; // Blue
+      const hue2 = (time * 0.015 + 245) % 360; // Royal blue
+      const hue3 = (time * 0.01 + 270) % 360; // Dark blue-purple
 
-      gradient.addColorStop(0, `hsl(${hue1}, 85%, 92%)`);
-      gradient.addColorStop(0.5, `hsl(${hue2}, 75%, 88%)`);
-      gradient.addColorStop(1, `hsl(${hue3}, 80%, 94%)`);
+      gradient.addColorStop(0, `hsl(220, 85%, 92%)`);
+      gradient.addColorStop(0.5, `hsl(235, 75%, 88%)`);
+      gradient.addColorStop(1, `hsl(250, 80%, 94%)`);
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, w, h);
@@ -157,29 +157,8 @@ export function LogoShowcaseHero() {
         }
       }
 
-      // Add mouse-following glow with smooth falloff
-      const glowSize = 300;
-      const glowGrad = ctx.createRadialGradient(
-        centerX,
-        centerY,
-        0,
-        centerX,
-        centerY,
-        glowSize
-      );
-      glowGrad.addColorStop(
-        0,
-        `rgba(30, 64, 175, ${0.12 + Math.sin(time * 0.005) * 0.06})`
-      );
-      glowGrad.addColorStop(1, "rgba(30, 64, 175, 0)");
-
-      ctx.fillStyle = glowGrad;
-      ctx.fillRect(
-        centerX - glowSize,
-        centerY - glowSize,
-        glowSize * 2,
-        glowSize * 2
-      );
+      // Add mouse-following glow with smooth falloff - REMOVED
+      // Removed pointer brush stamp effect as requested
 
       time += 1;
       animationId = requestAnimationFrame(render);
@@ -194,7 +173,7 @@ export function LogoShowcaseHero() {
   }, [mousePos]);
 
   const handleScroll = () => {
-    const nextSection = document.querySelector("#services");
+    const nextSection = document.querySelector("#metrics");
     if (nextSection) {
       nextSection.scrollIntoView({ behavior: "smooth" });
     }
@@ -211,6 +190,9 @@ export function LogoShowcaseHero() {
         className="absolute inset-0 w-full h-full"
         style={{ opacity: 0.9 }}
       />
+
+      {/* Fade-out gradient at bottom for seamless transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 lg:h-40 bg-gradient-to-b from-transparent to-background pointer-events-none z-20" />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full w-full px-4 lg:px-8">
@@ -271,10 +253,10 @@ export function LogoShowcaseHero() {
           </p>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator - moved down with more spacing */}
         <button
           onClick={handleScroll}
-          className="absolute bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 group cursor-pointer animate-fade-in"
+          className="absolute bottom-6 lg:bottom-10 left-1/2 -translate-x-1/2 group cursor-pointer animate-fade-in"
           style={{ animationDelay: "0.5s" }}
           aria-label="Scroll to next section"
         >
