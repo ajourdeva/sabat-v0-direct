@@ -28,12 +28,21 @@ export function LogoShowcaseHero() {
     resize();
     window.addEventListener("resize", resize);
 
+    // Watch for color scheme changes
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleColorSchemeChange = () => {
+      // Force re-render on color scheme change
+      cancelAnimationFrame(animationId);
+      animationId = 0;
+    };
+    mediaQuery.addEventListener("change", handleColorSchemeChange);
+
     const render = () => {
       const w = canvas.width / (window.devicePixelRatio || 1);
       const h = canvas.height / (window.devicePixelRatio || 1);
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-      // Create liquid gradient background with noise
+      // Create liquid gradient background - fresh check each frame
       const gradient = ctx.createLinearGradient(0, 0, w, h);
       
       // Animated gradient colors - Blue hues only, adapting to dark/light mode
@@ -175,6 +184,7 @@ export function LogoShowcaseHero() {
 
     return () => {
       window.removeEventListener("resize", resize);
+      mediaQuery.removeEventListener("change", handleColorSchemeChange);
       cancelAnimationFrame(animationId);
     };
   }, []);
@@ -205,13 +215,13 @@ export function LogoShowcaseHero() {
       <div className="relative z-10 flex flex-col items-center justify-center h-full w-full px-4 lg:px-8">
         {/* Animated title with staggered entrance */}
         <div className="text-center mb-12 lg:mb-16 space-y-4">
-          <p className="text-xs lg:text-sm font-mono text-foreground/50 uppercase tracking-[0.2em] animate-fade-in">
+          <p className="text-xs lg:text-sm font-mono text-foreground/50 dark:text-foreground/70 uppercase tracking-[0.2em] animate-fade-in">
             Introducing
           </p>
-          <h1 className="text-5xl lg:text-7xl xl:text-8xl font-display font-bold tracking-tight animate-fade-in" style={{ animationDelay: "0.1s" }}>
+          <h1 className="text-5xl lg:text-7xl xl:text-8xl font-display font-bold tracking-tight text-foreground dark:text-white animate-fade-in" style={{ animationDelay: "0.1s" }}>
             SABAT
           </h1>
-          <p className="text-sm lg:text-base text-foreground/60 font-light tracking-wide animate-fade-in" style={{ animationDelay: "0.2s" }}>
+          <p className="text-sm lg:text-base text-foreground/60 dark:text-foreground/75 font-light tracking-wide animate-fade-in" style={{ animationDelay: "0.2s" }}>
             Excellence in Motion
           </p>
         </div>
@@ -253,10 +263,10 @@ export function LogoShowcaseHero() {
           </div>
         </div>
 
-        {/* Scroll indicator - positioned much lower with proper spacing */}
+        {/* Scroll indicator - positioned at bottom with proper spacing */}
         <button
           onClick={handleScroll}
-          className="absolute bottom-8 lg:bottom-16 left-1/2 -translate-x-1/2 group cursor-pointer animate-fade-in"
+          className="absolute bottom-12 lg:bottom-20 left-1/2 -translate-x-1/2 group cursor-pointer animate-fade-in"
           style={{ animationDelay: "0.5s" }}
           aria-label="Scroll to next section"
         >
