@@ -139,8 +139,8 @@ export function LogoShowcaseHero() {
 
       {/* Content container with proper flex layout */}
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-between py-12 lg:py-16 px-4 lg:px-8">
-        {/* Empty spacer at top for visual balance - reduced to shift content down */}
-        <div className="flex-1 max-h-16" />
+        {/* Empty spacer at top for visual balance - allows content to shift to center */}
+        <div className="flex-1" />
 
         {/* Main content - centered */}
         <div className="flex flex-col items-center justify-center gap-8 lg:gap-12">
@@ -186,8 +186,8 @@ export function LogoShowcaseHero() {
           </div>
         </div>
 
-        {/* Empty spacer with increased height to push button down and balance */}
-        <div className="flex-1 min-h-20" />
+        {/* Empty spacer at bottom for button positioning */}
+        <div className="flex-1 min-h-8" />
 
         {/* Scroll indicator button */}
         <button
