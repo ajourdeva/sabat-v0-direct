@@ -1,4 +1,5 @@
 import { Navigation } from "@/components/landing/navigation";
+import { LogoShowcaseHero } from "@/components/landing/logo-showcase-hero";
 import { HeroSection } from "@/components/landing/hero-section";
 import { FeaturesSection } from "@/components/landing/features-section";
 import { HowItWorksSection } from "@/components/landing/how-it-works-section";
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <main className="relative min-h-screen overflow-x-hidden noise-overlay">
       <Navigation />
+      <LogoShowcaseHero />
       <HeroSection />
       <MetricsSection />
       <FeaturesSection />

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { AnimatedSphere } from "./animated-sphere";
+import { ScrollIndicator } from "./scroll-indicator";
 
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -13,9 +14,9 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pb-32 lg:pb-48">
+    <section id="hero-second" className="relative min-h-[120vh] flex flex-col justify-between overflow-hidden pb-20 lg:pb-32">
       {/* Animated sphere background */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] lg:w-[800px] lg:h-[800px] opacity-100 pointer-events-none">
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] lg:w-[900px] lg:h-[900px] opacity-100 pointer-events-none">
         <AnimatedSphere />
       </div>
       
@@ -87,17 +88,10 @@ export function HeroSection() {
           >
             <Button 
               size="lg" 
-              className="bg-foreground hover:bg-foreground/90 text-background px-8 h-14 text-base rounded-full group"
+              className="bg-foreground hover:bg-foreground/90 text-background px-[101px] h-14 text-base rounded-full group"
             >
               Request Consultation
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="h-14 px-8 text-base rounded-full border-foreground/20 hover:bg-foreground/5"
-            >
-              Book a Demo
             </Button>
           </div>
         </div>
@@ -132,8 +126,10 @@ export function HeroSection() {
         </div>
       </div>
       
-      {/* Scroll indicator */}
-      
+      {/* Scroll indicator - positioned at bottom */}
+      <div className="relative z-10 flex justify-center">
+        <ScrollIndicator />
+      </div>
     </section>
   );
 }

@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "services": "خدمات",
+    "how_it_works": "نحوه کار",
+    "industries": "صنایع",
+    "about": "درباره SABAT",
+    "faq": "سوالات متداول",
+    "sign_in": "ورود",
+    "request_consultation": "درخواست مشاوره"
+  },
+  "hero": {
+    "introducing": "معرفی",
+    "excellence_in_motion": "تعالی در حرکت"
+  },
+  "cta": {
+    "request_consultation": "درخواست مشاوره",
+    "book_demo": "رزرو نمایش"
+  }
+}
