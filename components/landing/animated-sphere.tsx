@@ -88,7 +88,19 @@ export function AnimatedSphere() {
         ctx.fillText(point.char, point.x, point.y);
       });
       
+      // Draw center logo circle
+      ctx.globalAlpha = 0.6;
+      ctx.fillStyle = isDark ? "rgba(200, 200, 200, 0.3)" : "rgba(100, 100, 100, 0.2)";
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius * 0.15, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Draw center dot
       ctx.globalAlpha = 1;
+      ctx.fillStyle = textColor;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius * 0.04, 0, Math.PI * 2);
+      ctx.fill();
 
       time += 0.02;
       frameRef.current = requestAnimationFrame(render);
