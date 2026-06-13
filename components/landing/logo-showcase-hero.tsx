@@ -31,32 +31,43 @@ export function LogoShowcaseHero() {
     const render = () => {
       const w = canvas.width / (window.devicePixelRatio || 1);
       const h = canvas.height / (window.devicePixelRatio || 1);
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
       // Create liquid gradient background with noise
       const gradient = ctx.createLinearGradient(0, 0, w, h);
       
-      // Animated gradient colors - Blue hues only
-      const hue1 = (time * 0.02 + 220) % 360; // Blue
-      const hue2 = (time * 0.015 + 245) % 360; // Royal blue
-      const hue3 = (time * 0.01 + 270) % 360; // Dark blue-purple
-
-      gradient.addColorStop(0, `hsl(220, 85%, 92%)`);
-      gradient.addColorStop(0.5, `hsl(235, 75%, 88%)`);
-      gradient.addColorStop(1, `hsl(250, 80%, 94%)`);
+      // Animated gradient colors - Blue hues only, adapting to dark/light mode
+      if (isDark) {
+        // Dark mode: dark blue/black background
+        gradient.addColorStop(0, `hsl(220, 40%, 10%)`);
+        gradient.addColorStop(0.5, `hsl(235, 35%, 12%)`);
+        gradient.addColorStop(1, `hsl(250, 38%, 8%)`);
+      } else {
+        // Light mode: light blue background
+        gradient.addColorStop(0, `hsl(220, 85%, 92%)`);
+        gradient.addColorStop(0.5, `hsl(235, 75%, 88%)`);
+        gradient.addColorStop(1, `hsl(250, 80%, 94%)`);
+      }
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, w, h);
 
       // Add turbulent liquid effect with flowing shapes
       ctx.globalAlpha = 0.08;
+      const hue1 = (time * 0.02 + 220) % 360;
       for (let i = 0; i < 6; i++) {
         const x = w * 0.5 + Math.sin(time * 0.001 + i * 1.2) * w * 0.4;
         const y = h * 0.5 + Math.cos(time * 0.0008 + i * 0.9) * h * 0.3;
         const size = 200 + Math.sin(time * 0.003 + i) * 100;
 
         const radialGrad = ctx.createRadialGradient(x, y, size * 0.3, x, y, size);
-        radialGrad.addColorStop(0, `hsla(${hue1 + i * 20}, 100%, 50%, 0.6)`);
-        radialGrad.addColorStop(1, `hsla(${hue1 + i * 20}, 100%, 50%, 0)`);
+        if (isDark) {
+          radialGrad.addColorStop(0, `hsla(${hue1 + i * 20}, 100%, 40%, 0.6)`);
+          radialGrad.addColorStop(1, `hsla(${hue1 + i * 20}, 100%, 40%, 0)`);
+        } else {
+          radialGrad.addColorStop(0, `hsla(${hue1 + i * 20}, 100%, 50%, 0.6)`);
+          radialGrad.addColorStop(1, `hsla(${hue1 + i * 20}, 100%, 50%, 0)`);
+        }
 
         ctx.fillStyle = radialGrad;
         ctx.beginPath();
@@ -67,7 +78,9 @@ export function LogoShowcaseHero() {
       ctx.globalAlpha = 1;
 
       // Draw flowing wave patterns
-      ctx.strokeStyle = `rgba(30, 64, 175, ${0.08 + Math.sin(time * 0.005) * 0.04})`;
+      ctx.strokeStyle = isDark 
+        ? `rgba(30, 64, 175, ${0.04 + Math.sin(time * 0.005) * 0.02})`
+        : `rgba(30, 64, 175, ${0.08 + Math.sin(time * 0.005) * 0.04})`;
       ctx.lineWidth = 1;
 
       for (let waveLayer = 0; waveLayer < 4; waveLayer++) {
@@ -103,11 +116,19 @@ export function LogoShowcaseHero() {
           const y = centerY + Math.sin(a) * r;
 
           const grad = ctx.createRadialGradient(x, y, 0, x, y, 20);
-          grad.addColorStop(
-            0,
-            `hsla(${hue1 + ring * 15}, 90%, 60%, ${0.4 + Math.sin(time * 0.006 + i) * 0.3})`
-          );
-          grad.addColorStop(1, `hsla(${hue1 + ring * 15}, 90%, 60%, 0)`);
+          if (isDark) {
+            grad.addColorStop(
+              0,
+              `hsla(${hue1 + ring * 15}, 90%, 45%, ${0.4 + Math.sin(time * 0.006 + i) * 0.3})`
+            );
+            grad.addColorStop(1, `hsla(${hue1 + ring * 15}, 90%, 45%, 0)`);
+          } else {
+            grad.addColorStop(
+              0,
+              `hsla(${hue1 + ring * 15}, 90%, 60%, ${0.4 + Math.sin(time * 0.006 + i) * 0.3})`
+            );
+            grad.addColorStop(1, `hsla(${hue1 + ring * 15}, 90%, 60%, 0)`);
+          }
 
           ctx.fillStyle = grad;
           ctx.beginPath();
@@ -119,7 +140,9 @@ export function LogoShowcaseHero() {
       ctx.globalAlpha = 1;
 
       // Draw connecting network lines
-      ctx.strokeStyle = `rgba(30, 64, 175, ${0.06 + Math.sin(time * 0.004) * 0.04})`;
+      ctx.strokeStyle = isDark
+        ? `rgba(30, 64, 175, ${0.03 + Math.sin(time * 0.004) * 0.02})`
+        : `rgba(30, 64, 175, ${0.06 + Math.sin(time * 0.004) * 0.04})`;
       ctx.lineWidth = 0.5;
 
       for (let i = 0; i < 8; i++) {
@@ -230,10 +253,10 @@ export function LogoShowcaseHero() {
           </div>
         </div>
 
-        {/* Scroll indicator - moved down with more spacing */}
+        {/* Scroll indicator - positioned much lower with proper spacing */}
         <button
           onClick={handleScroll}
-          className="absolute bottom-6 lg:bottom-10 left-1/2 -translate-x-1/2 group cursor-pointer animate-fade-in"
+          className="absolute bottom-8 lg:bottom-16 left-1/2 -translate-x-1/2 group cursor-pointer animate-fade-in"
           style={{ animationDelay: "0.5s" }}
           aria-label="Scroll to next section"
         >
