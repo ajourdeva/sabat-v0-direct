@@ -2,158 +2,131 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 export function LogoShowcaseHero() {
   const [isVisible, setIsVisible] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  const handleScroll = () => {
+    const metricsSection = document.getElementById("metrics");
+    metricsSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-24">
-      {/* Subtle background grid */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={`h-${i}`}
-            className="absolute h-px bg-foreground/10"
-            style={{
-              top: `${16.66 * (i + 1)}%`,
-              left: 0,
-              right: 0,
-            }}
-          />
-        ))}
-        {[...Array(10)].map((_, i) => (
-          <div
-            key={`v-${i}`}
-            className="absolute w-px bg-foreground/10"
-            style={{
-              left: `${10 * (i + 1)}%`,
-              top: 0,
-              bottom: 0,
-            }}
-          />
-        ))}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Floating orbs */}
+        <div className="absolute top-10 left-10 w-64 h-64 bg-foreground/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-20 w-72 h-72 bg-foreground/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-foreground/3 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "0.5s" }} />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-12 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left content */}
-          <div className="space-y-8">
-            {/* Eyebrow */}
-            <div 
-              className={`transition-all duration-700 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
-            >
-              <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground">
-                <span className="w-8 h-px bg-foreground/30" />
-                Welcome to SABAT
-              </span>
-            </div>
+      {/* Mouse-following glow effect */}
+      <div 
+        className="absolute pointer-events-none w-96 h-96 bg-foreground/5 rounded-full blur-3xl transition-all duration-100"
+        style={{
+          left: mousePos.x - 192,
+          top: mousePos.y - 192,
+          opacity: isVisible ? 0.3 : 0,
+        }}
+      />
 
-            {/* Main headline */}
-            <h1 
-              className={`text-5xl lg:text-6xl font-display leading-tight tracking-tight transition-all duration-1000 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-            >
-              Enterprise-grade business travel coordination.
-            </h1>
-
-            {/* Description */}
-            <p 
-              className={`text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-lg transition-all duration-700 delay-200 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
-            >
-              Streamline accommodation, executive hospitality, transfers, and mission logistics with dedicated partnership and 24/7 support.
-            </p>
-
-            {/* CTA Buttons */}
-            <div 
-              className={`flex flex-col sm:flex-row items-start gap-4 pt-4 transition-all duration-700 delay-300 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
-            >
-              <Button 
-                size="lg" 
-                className="bg-foreground hover:bg-foreground/90 text-background px-8 h-14 text-base rounded-full group"
-              >
-                Request Consultation
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="h-14 px-8 text-base rounded-full border-foreground/30 hover:bg-foreground/5"
-              >
-                Learn More
-              </Button>
-            </div>
-
-            {/* Trust badges */}
-            <div 
-              className={`flex items-center gap-8 pt-8 border-t border-foreground/10 transition-all duration-700 delay-400 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
-            >
-              <div>
-                <div className="text-2xl font-display font-bold">1500+</div>
-                <div className="text-sm text-muted-foreground">Organization Partners</div>
-              </div>
-              <div className="h-12 w-px bg-foreground/10" />
-              <div>
-                <div className="text-2xl font-display font-bold">99.9%</div>
-                <div className="text-sm text-muted-foreground">Service Uptime</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right - Logo showcase */}
+      <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-6">
+        {/* Main content container */}
+        <div className="text-center space-y-16 lg:space-y-20">
+          {/* Subtitle with animation */}
           <div 
-            className={`flex items-center justify-center transition-all duration-1000 delay-300 ${
-              isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            className={`transition-all duration-1000 ${
+              isVisible ? "opacity-100" : "opacity-0"
             }`}
           >
-            <div className="relative w-full aspect-square flex items-center justify-center">
-              {/* Animated gradient background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-foreground/5 via-background to-foreground/5 rounded-2xl" />
+            <p className="text-sm lg:text-base font-mono text-muted-foreground tracking-widest uppercase">
+              Welcome to the future of
+            </p>
+          </div>
+
+          {/* Logo showcase - centered and floating */}
+          <div 
+            className={`transition-all duration-1200 ${
+              isVisible ? "opacity-100 scale-100" : "opacity-0 scale-80"
+            }`}
+          >
+            <div className="relative inline-block">
+              {/* Animated rotating ring */}
+              <div className="absolute inset-0 w-80 h-80 lg:w-96 lg:h-96 rounded-full border border-foreground/10 animate-spin" style={{ animationDuration: "20s" }} />
               
-              {/* Subtle animated border */}
-              <div className="absolute inset-0 border border-foreground/10 rounded-2xl" />
-              
-              {/* Logo container with subtle shadow and glow */}
-              <div className="relative z-10 p-12 flex items-center justify-center">
-                <div className="relative">
-                  {/* Glow effect */}
-                  <div className="absolute inset-0 blur-3xl opacity-20 bg-foreground rounded-full animate-pulse" />
-                  
-                  {/* Logo image */}
-                  <Image 
-                    src="/sabat-logo.png" 
-                    alt="SABAT Logo" 
-                    width={300}
-                    height={300}
-                    className="relative z-10 w-64 h-64 lg:w-80 lg:h-80 object-contain"
-                    priority
-                  />
-                </div>
+              {/* Second rotating ring - opposite direction */}
+              <div className="absolute inset-8 w-64 h-64 lg:w-80 lg:h-80 rounded-full border border-foreground/5 animate-spin" style={{ animationDuration: "30s", animationDirection: "reverse" }} />
+
+              {/* Logo container */}
+              <div className="relative w-80 h-80 lg:w-96 lg:h-96 flex items-center justify-center">
+                <Image 
+                  src="/sabat-logo.png" 
+                  alt="SABAT" 
+                  width={200}
+                  height={200}
+                  className="w-48 h-48 lg:w-56 lg:h-56 object-contain drop-shadow-lg"
+                  priority
+                />
               </div>
             </div>
           </div>
+
+          {/* Brand name */}
+          <div 
+            className={`transition-all duration-1200 delay-200 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            <h1 className="text-6xl lg:text-8xl font-display font-bold tracking-tight">
+              SABAT
+            </h1>
+            <p className="text-lg lg:text-2xl text-muted-foreground mt-6 font-light tracking-wide">
+              Professional Corporate Travel Excellence
+            </p>
+          </div>
+
+          {/* Minimal divider line */}
+          <div 
+            className={`w-24 h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent mx-auto transition-all duration-1200 delay-300 ${
+              isVisible ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+            }`}
+          />
         </div>
 
-        {/* Bottom accent line */}
-        <div 
-          className={`mt-20 h-px bg-gradient-to-r from-transparent via-foreground/20 to-transparent transition-all duration-1000 delay-500 ${
-            isVisible ? "opacity-100" : "opacity-0"
-          }`}
-        />
+        {/* Scroll indicator - positioned at bottom */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+          <button
+            onClick={handleScroll}
+            className="group flex flex-col items-center gap-2 cursor-pointer transition-all duration-300 hover:opacity-100 opacity-60"
+            aria-label="Scroll to next section"
+          >
+            <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+              Scroll
+            </span>
+            <div className="relative w-6 h-10 border border-foreground/30 rounded-full flex items-start justify-center p-2 group-hover:border-foreground/60 transition-colors">
+              <ChevronDown 
+                className="w-3 h-3 text-foreground/40 group-hover:text-foreground/60 animate-bounce" 
+                style={{ animationDuration: "2s" }}
+              />
+            </div>
+          </button>
+        </div>
       </div>
     </section>
   );
