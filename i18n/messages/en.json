@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "services": "Services",
+    "how_it_works": "How It Works",
+    "industries": "Industries",
+    "about": "About SABAT",
+    "faq": "FAQ",
+    "sign_in": "Sign in",
+    "request_consultation": "Request Consultation"
+  },
+  "hero": {
+    "introducing": "Introducing",
+    "excellence_in_motion": "Excellence in Motion"
+  },
+  "cta": {
+    "request_consultation": "Request Consultation",
+    "book_demo": "Book a Demo"
+  }
+}
