@@ -1,14 +1,116 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 
 export function LogoShowcaseHero() {
-  const [isVisible, setIsVisible] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsVisible(true);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    let time = 0;
+    let animationId = 0;
+
+    const render = () => {
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      
+      // Clear with gradient
+      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      
+      if (isDark) {
+        gradient.addColorStop(0, "rgba(15, 23, 42, 1)");
+        gradient.addColorStop(0.5, "rgba(30, 64, 175, 0.02)");
+        gradient.addColorStop(1, "rgba(15, 23, 42, 1)");
+      } else {
+        gradient.addColorStop(0, "rgba(248, 250, 252, 1)");
+        gradient.addColorStop(0.5, "rgba(30, 64, 175, 0.03)");
+        gradient.addColorStop(1, "rgba(248, 250, 252, 1)");
+      }
+      
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+
+      // Animated flowing waves
+      ctx.strokeStyle = isDark ? "rgba(30, 64, 175, 0.08)" : "rgba(30, 64, 175, 0.06)";
+      ctx.lineWidth = 2;
+
+      for (let wave = 0; wave < 4; wave++) {
+        ctx.beginPath();
+        const waveAmplitude = 40 + wave * 20;
+        const waveFrequency = 0.008 + wave * 0.002;
+        const phaseShift = time * (0.3 - wave * 0.05);
+
+        for (let x = 0; x < canvas.width; x += 5) {
+          const y =
+            centerY +
+            Math.sin(x * waveFrequency + phaseShift) * waveAmplitude +
+            Math.cos(time * 0.5 + wave) * 20;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      // Vertical flowing lines
+      ctx.strokeStyle = isDark ? "rgba(30, 64, 175, 0.05)" : "rgba(30, 64, 175, 0.04)";
+      ctx.lineWidth = 1;
+
+      for (let line = 0; line < 6; line++) {
+        ctx.beginPath();
+        const lineX = centerX - 200 + (line * 80);
+        for (let y = 0; y < canvas.height; y += 5) {
+          const x =
+            lineX +
+            Math.sin(y * 0.005 + time * 0.4 + line) * 30 +
+            Math.cos(time * 0.3) * 15;
+          if (y === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      // Pulsing circles in background
+      ctx.fillStyle = isDark ? "rgba(30, 64, 175, 0.04)" : "rgba(30, 64, 175, 0.03)";
+      for (let i = 0; i < 8; i++) {
+        const angle = (time * 0.1 + (i * Math.PI * 2) / 8);
+        const distance = 300 + Math.sin(time * 0.3 + i) * 100;
+        const x = centerX + Math.cos(angle) * distance;
+        const y = centerY + Math.sin(angle) * distance;
+        const size = 2 + Math.sin(time * 0.5 + i * 0.8) * 1.5;
+
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      time += 0.016;
+      animationId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(animationId);
+    };
   }, []);
 
   const handleScroll = () => {
@@ -17,120 +119,147 @@ export function LogoShowcaseHero() {
   };
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center bg-background overflow-hidden">
-      {/* Subtle animated background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-80 h-80 bg-blue-500/8 rounded-full blur-3xl" style={{ animation: "float 20s ease-in-out infinite" }} />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-600/6 rounded-full blur-3xl" style={{ animation: "float 25s ease-in-out infinite reverse" }} />
-      </div>
+    <section
+      ref={containerRef}
+      className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden"
+    >
+      {/* Shader background */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full"
+        style={{ opacity: 0.8 }}
+      />
 
-      {/* Main content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-16 py-32 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          
-          {/* Left Content */}
-          <div className={`space-y-8 transition-all duration-1000 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-20"}`}>
-            
-            {/* Eyebrow */}
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-mono text-foreground/50 uppercase tracking-widest">Welcome</span>
-              <div className="w-12 h-px bg-gradient-to-r from-blue-600 to-transparent" />
-            </div>
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center text-center px-6">
+        {/* Logo */}
+        <div className="mb-8 lg:mb-12 animate-fade-in">
+          <div className="relative w-32 h-32 lg:w-48 lg:h-48 group">
+            {/* Glow effect */}
+            <div className="absolute inset-0 rounded-full blur-2xl bg-blue-600/10 group-hover:bg-blue-600/20 transition-all duration-500 animate-pulse" />
 
-            {/* Headline */}
-            <div className="space-y-4">
-              <h1 className="text-5xl lg:text-7xl xl:text-8xl font-display font-bold tracking-tight text-foreground">
-                SABAT
-              </h1>
-              <p className="text-base lg:text-lg text-foreground/70">Professional corporate travel excellence</p>
-            </div>
+            {/* Rotating ring */}
+            <div
+              className="absolute inset-0 rounded-full border border-blue-600/30"
+              style={{ animation: "spin 40s linear infinite" }}
+            />
 
-            {/* Description */}
-            <p className="text-base lg:text-lg text-foreground/60 leading-relaxed max-w-lg">
-              Seamless coordination of accommodation, transfers, and business travel operations. One trusted partner for exceptional journeys.
-            </p>
+            {/* Inner ring */}
+            <div
+              className="absolute inset-4 rounded-full border border-blue-600/15"
+              style={{ animation: "spin 50s linear infinite reverse" }}
+            />
 
-            {/* Stats or trust markers */}
-            <div className="flex gap-8 pt-4">
-              <div className="space-y-1">
-                <p className="text-2xl lg:text-3xl font-display font-bold text-blue-600">24/7</p>
-                <p className="text-xs lg:text-sm text-foreground/60">Support Available</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-2xl lg:text-3xl font-display font-bold text-blue-600">99.9%</p>
-                <p className="text-xs lg:text-sm text-foreground/60">Satisfaction</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right - Logo Showcase */}
-          <div className={`flex items-center justify-center transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}>
-            <div className="relative w-72 h-72 lg:w-96 lg:h-96">
-              
-              {/* Animated background glow */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-600/10 via-blue-500/5 to-blue-600/8 blur-2xl" style={{ animation: "pulse 4s ease-in-out infinite" }} />
-              
-              {/* Decorative rings */}
-              <div className="absolute inset-0 rounded-3xl border border-blue-600/20" style={{ animation: "rotate 30s linear infinite" }} />
-              <div className="absolute inset-6 rounded-3xl border border-blue-600/10" style={{ animation: "rotate 45s linear infinite reverse" }} />
-
-              {/* Logo container */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-56 h-56 lg:w-72 lg:h-72">
-                  <Image
-                    src="/sabat-logo.png"
-                    alt="SABAT Logo"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-              </div>
-
-              {/* Corner accents */}
-              <div className="absolute -top-3 -right-3 w-2 h-2 bg-blue-600/60 rounded-full" style={{ animation: "pulse 3s ease-in-out infinite" }} />
-              <div className="absolute -bottom-3 -left-3 w-2.5 h-2.5 bg-blue-600/40 rounded-full" style={{ animation: "pulse 4s ease-in-out infinite" }} />
+            {/* Logo */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Image
+                src="/sabat-logo.png"
+                alt="SABAT"
+                width={180}
+                height={180}
+                className="w-full h-full object-contain drop-shadow-lg"
+                priority
+              />
             </div>
           </div>
         </div>
+
+        {/* Animated SABAT Text */}
+        <div className="mb-6 lg:mb-8 space-y-4">
+          <h1 className="text-6xl lg:text-8xl xl:text-9xl font-display font-bold tracking-tighter">
+            <span
+              className="inline-block animate-fade-in"
+              style={{
+                background: "linear-gradient(135deg, #1E40AF 0%, #2563EB 50%, #1E40AF 100%)",
+                backgroundSize: "200% 200%",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                animation: "gradientShift 4s ease infinite",
+              }}
+            >
+              SABAT
+            </span>
+          </h1>
+          <p className="text-sm lg:text-base text-foreground/50 font-light tracking-widest uppercase animate-fade-in" style={{ animationDelay: "0.1s" }}>
+            Excellence in Motion
+          </p>
+        </div>
+
+        {/* Scroll button */}
+        <button
+          onClick={handleScroll}
+          className="mt-24 lg:mt-32 group cursor-pointer animate-fade-in"
+          style={{ animationDelay: "0.3s" }}
+          aria-label="Scroll to next section"
+        >
+          <div className="flex flex-col items-center gap-3">
+            <span className="text-xs text-foreground/40 font-mono uppercase tracking-widest group-hover:text-foreground/60 transition-colors">
+              Explore
+            </span>
+            <div className="w-6 h-10 border border-foreground/20 rounded-full flex items-center justify-center group-hover:border-foreground/40 transition-colors">
+              <ChevronDown
+                className="w-3 h-3 text-foreground/30 group-hover:text-foreground/50"
+                style={{
+                  animation: "bounce 2s ease-in-out infinite",
+                }}
+              />
+            </div>
+          </div>
+        </button>
       </div>
 
-      {/* Scroll indicator - at the very bottom */}
-      <button
-        onClick={handleScroll}
-        className="absolute bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 z-20 group cursor-pointer"
-        aria-label="Scroll to next section"
-      >
-        <div className="flex flex-col items-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-          <span className="text-xs font-mono text-foreground/60 uppercase tracking-widest">Scroll</span>
-          <div className="w-6 h-10 border border-foreground/30 rounded-full flex items-center justify-center group-hover:border-foreground/50 transition-colors">
-            <ChevronDown className="w-3 h-3 text-foreground/50 group-hover:text-foreground/70" style={{ animation: "bounce-down 2s ease-in-out infinite" }} />
-          </div>
-        </div>
-      </button>
-
-      {/* Fade at bottom for seamless transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
+      {/* Fade overlay at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background to-transparent pointer-events-none z-5" />
 
       <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-30px); }
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
         }
-        
-        @keyframes rotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+
+        @keyframes gradientShift {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
         }
-        
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
+
+        @keyframes bounce {
+          0%,
+          100% {
+            transform: translateY(0);
+            opacity: 0.4;
+          }
+          50% {
+            transform: translateY(8px);
+            opacity: 1;
+          }
         }
-        
-        @keyframes bounce-down {
-          0%, 100% { transform: translateY(0); opacity: 0.5; }
-          50% { transform: translateY(8px); opacity: 1; }
+
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out forwards;
+          opacity: 0;
         }
       `}</style>
     </section>
