@@ -166,7 +166,7 @@ export function LogoShowcaseHero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden"
+      className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-black"
     >
       {/* Canvas - liquid gradient background */}
       <canvas
@@ -228,13 +228,6 @@ export function LogoShowcaseHero() {
               style={{ animation: "spin 30s linear infinite reverse" }}
             />
           </div>
-        </div>
-
-        {/* Tagline with animation */}
-        <div className="text-center max-w-2xl mb-16 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-          <p className="text-base lg:text-lg text-foreground/70 leading-relaxed font-light">
-            Professional corporate travel management reimagined for excellence
-          </p>
         </div>
 
         {/* Scroll indicator - moved down with more spacing */}
