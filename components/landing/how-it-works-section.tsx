@@ -1,43 +1,29 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { CheckCircle2, Users, Clock, Zap } from "lucide-react";
 
 const steps = [
   {
     number: "I",
     title: "Consultation",
     description: "We understand your organization's unique travel needs, budget constraints, and operational requirements.",
-    code: `// Initial Assessment
-const requirements = {
-  travelers: 'executive-team',
-  frequency: 'monthly',
-  accommodations: 'luxury',
-  support: '24/7'
-}`,
+    icon: Users,
+    highlights: ["Assess needs", "Set budget", "Define scope"]
   },
   {
     number: "II",
     title: "Coordination",
     description: "We design customized service plans tailored to your needs, integrating all travel and accommodation services.",
-    code: `// Service Design
-const plan = {
-  hotels: 'curated-partners',
-  transfers: 'dedicated',
-  support: 'managed',
-  integration: 'seamless'
-}`,
+    icon: Zap,
+    highlights: ["Design plan", "Select partners", "Configure systems"]
   },
   {
     number: "III",
     title: "Execution & Support",
     description: "We manage every operational detail before, during, and after travel with continuous support.",
-    code: `// Live Coordination
-sabat.monitor({
-  realtime: true,
-  support: 24/7,
-  changes: 'managed',
-  satisfaction: '100%'
-})`,
+    icon: CheckCircle2,
+    highlights: ["Execute bookings", "Monitor travel", "Support 24/7"]
   },
 ];
 
@@ -142,54 +128,65 @@ export function HowItWorksSection() {
             ))}
           </div>
 
-          {/* Code display */}
+          {/* Visual step display */}
           <div className="lg:sticky lg:top-32 self-start">
-            <div className="border border-background/10 overflow-hidden">
-              {/* Window header */}
-              <div className="px-6 py-4 border-b border-background/10 flex items-center justify-between">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-background/20" />
-                  <div className="w-3 h-3 rounded-full bg-background/20" />
-                  <div className="w-3 h-3 rounded-full bg-background/20" />
-                </div>
-                <span className="text-xs font-mono text-background/40">sabat-coordination.ts</span>
-              </div>
-
-              {/* Code content */}
-              <div className="p-8 font-mono text-sm min-h-[280px]">
-                <pre className="text-background/70">
-                  {steps[activeStep].code.split('\n').map((line, lineIndex) => (
-                    <div 
-                      key={`${activeStep}-${lineIndex}`} 
-                      className="leading-loose code-line-reveal"
-                      style={{ 
-                        animationDelay: `${lineIndex * 80}ms`,
-                      }}
-                    >
-                      <span className="text-background/20 select-none w-8 inline-block">{lineIndex + 1}</span>
-                      <span className="inline-flex">
-                        {line.split('').map((char, charIndex) => (
-                          <span
-                            key={`${activeStep}-${lineIndex}-${charIndex}`}
-                            className="code-char-reveal"
-                            style={{
-                              animationDelay: `${lineIndex * 80 + charIndex * 15}ms`,
-                            }}
-                          >
-                            {char === ' ' ? '\u00A0' : char}
-                          </span>
-                        ))}
-                      </span>
+            <div className="space-y-6">
+              {steps.map((step, index) => {
+                const Icon = step.icon;
+                const isActive = activeStep === index;
+                
+                return (
+                  <div
+                    key={step.number}
+                    className={`p-8 border transition-all duration-500 ${
+                      isActive
+                        ? "border-background/30 bg-background/5"
+                        : "border-background/10 bg-transparent"
+                    }`}
+                  >
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className={`p-3 rounded-lg transition-colors duration-500 ${
+                        isActive ? "bg-background/20" : "bg-background/10"
+                      }`}>
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <div className="text-sm font-mono text-background/40 mb-1">Step {step.number}</div>
+                        <h3 className="text-lg font-display">{step.title}</h3>
+                      </div>
                     </div>
-                  ))}
-                </pre>
-              </div>
 
-              {/* Status */}
-              <div className="px-6 py-4 border-t border-background/10 flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-xs font-mono text-background/40">Ready</span>
-              </div>
+                    {isActive && (
+                      <div className="space-y-3 mt-6 pt-6 border-t border-background/10">
+                        <div className="text-sm text-background/60 leading-relaxed mb-4">
+                          {step.description}
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {step.highlights.map((highlight, i) => (
+                            <div
+                              key={i}
+                              className="text-xs px-3 py-1 rounded-full bg-background/10 text-background/80"
+                            >
+                              {highlight}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Timeline connector */}
+            <div className="mt-8 p-6 border border-background/10 bg-background/5 text-center">
+              <Clock className="w-8 h-8 mx-auto mb-3 opacity-50" />
+              <p className="text-sm text-background/60">
+                Typical implementation: 2-4 weeks
+              </p>
+              <p className="text-xs text-background/40 mt-2">
+                Ongoing support included
+              </p>
             </div>
           </div>
         </div>
@@ -199,32 +196,6 @@ export function HowItWorksSection() {
         @keyframes progress {
           from { width: 0%; }
           to { width: 100%; }
-        }
-        
-        .code-line-reveal {
-          opacity: 0;
-          transform: translateX(-8px);
-          animation: lineReveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-        
-        @keyframes lineReveal {
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        .code-char-reveal {
-          opacity: 0;
-          filter: blur(8px);
-          animation: charReveal 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-        
-        @keyframes charReveal {
-          to {
-            opacity: 1;
-            filter: blur(0);
-          }
         }
       `}</style>
     </section>
