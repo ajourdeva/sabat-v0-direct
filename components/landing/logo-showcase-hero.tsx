@@ -33,73 +33,75 @@ export function LogoShowcaseHero() {
       const h = canvas.height / (window.devicePixelRatio || 1);
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-      // Clear canvas with proper background color
-      const bgColor = isDark ? "#0f172a" : "#f8fafc";
+      // Clear canvas with proper background color - pure white for light mode
+      const bgColor = isDark ? "#0f172a" : "#ffffff";
       ctx.fillStyle = bgColor;
       ctx.fillRect(0, 0, w, h);
 
-      // Create gradient overlay
-      const gradient = ctx.createLinearGradient(0, 0, w, h);
-      
-      if (isDark) {
-        gradient.addColorStop(0, `rgba(30, 64, 175, 0.08)`);
-        gradient.addColorStop(0.5, `rgba(59, 130, 246, 0.06)`);
-        gradient.addColorStop(1, `rgba(30, 64, 175, 0.08)`);
-      } else {
-        gradient.addColorStop(0, `rgba(30, 64, 175, 0.15)`);
-        gradient.addColorStop(0.5, `rgba(59, 130, 246, 0.12)`);
-        gradient.addColorStop(1, `rgba(30, 64, 175, 0.15)`);
+      // Create animated gradient overlay with morphing shapes
+      const centerX = w * 0.5;
+      const centerY = h * 0.5;
+
+      // Draw flowing gradient circles
+      for (let i = 0; i < 3; i++) {
+        const radius = 300 + i * 200 + Math.sin(time * 0.0008 + i) * 100;
+        const angle = time * (0.0003 - i * 0.00005) + i * (Math.PI * 2 / 3);
+        
+        const x = centerX + Math.cos(angle) * radius;
+        const y = centerY + Math.sin(angle) * radius;
+        
+        const grad = ctx.createRadialGradient(x, y, 0, x, y, 400);
+        
+        if (isDark) {
+          grad.addColorStop(0, `rgba(59, 130, 246, 0.15)`);
+          grad.addColorStop(0.5, `rgba(30, 64, 175, 0.08)`);
+          grad.addColorStop(1, `rgba(30, 64, 175, 0)`);
+        } else {
+          grad.addColorStop(0, `rgba(59, 130, 246, 0.18)`);
+          grad.addColorStop(0.5, `rgba(30, 64, 175, 0.1)`);
+          grad.addColorStop(1, `rgba(30, 64, 175, 0)`);
+        }
+        
+        ctx.fillStyle = grad;
+        ctx.fillRect(x - 400, y - 400, 800, 800);
       }
 
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, w, h);
-
-      // Add flowing wave patterns
+      // Add flowing wave patterns with more fluidity
       ctx.strokeStyle = isDark 
-        ? `rgba(30, 64, 175, 0.08)` 
-        : `rgba(30, 64, 175, 0.12)`;
-      ctx.lineWidth = 1;
+        ? `rgba(30, 64, 175, ${0.06 + Math.sin(time * 0.003) * 0.04})` 
+        : `rgba(30, 64, 175, ${0.1 + Math.sin(time * 0.003) * 0.06})`;
+      ctx.lineWidth = 1.5;
 
-      for (let waveLayer = 0; waveLayer < 4; waveLayer++) {
+      for (let waveLayer = 0; waveLayer < 6; waveLayer++) {
         ctx.beginPath();
-        for (let x = 0; x < w; x += 30) {
+        for (let x = 0; x < w; x += 25) {
           const y =
             h * 0.5 +
-            Math.sin(x * 0.01 + time * 0.002 + waveLayer * 1.5) * 40 +
-            Math.cos(x * 0.005 + time * 0.0015 + waveLayer) * 30 +
-            waveLayer * 20;
+            Math.sin(x * 0.01 + time * 0.0025 + waveLayer * 1.2) * 50 +
+            Math.cos(x * 0.006 + time * 0.002 + waveLayer * 0.8) * 40 +
+            Math.sin(time * 0.001 + waveLayer * 0.5) * 30 +
+            waveLayer * 15;
           if (x === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
         ctx.stroke();
       }
 
-      // Draw morphing circles
-      ctx.globalAlpha = 0.1;
-      const centerX = w * 0.5;
-      const centerY = h * 0.5;
-      const baseHue = 220;
+      // Draw animated morphing circles with pulsing effect
+      ctx.globalAlpha = 0.08;
 
-      for (let ring = 0; ring < 5; ring++) {
-        const angle = time * (0.001 - ring * 0.0002);
-        const radius = 60 + ring * 50 + Math.sin(time * 0.003 + ring * 0.5) * 30;
-
-        for (let i = 0; i < 12; i++) {
-          const a = angle + (i * Math.PI * 2) / 12;
-          const r = radius * (1 + Math.sin(time * 0.005 + i * 0.3 + ring * 0.8) * 0.3);
-          const x = centerX + Math.cos(a) * r;
-          const y = centerY + Math.sin(a) * r;
-
-          const grad = ctx.createRadialGradient(x, y, 0, x, y, 20);
-          const lightness = isDark ? 45 : 60;
-          grad.addColorStop(0, `hsla(${baseHue + ring * 15}, 90%, ${lightness}%, 0.5)`);
-          grad.addColorStop(1, `hsla(${baseHue + ring * 15}, 90%, ${lightness}%, 0)`);
-
-          ctx.fillStyle = grad;
-          ctx.beginPath();
-          ctx.arc(x, y, 15, 0, Math.PI * 2);
-          ctx.fill();
-        }
+      for (let ring = 0; ring < 4; ring++) {
+        const baseRadius = 100 + ring * 80;
+        const pulse = Math.sin(time * 0.003 + ring * 0.5) * 30;
+        
+        ctx.strokeStyle = isDark
+          ? `rgba(59, 130, 246, ${0.1 + Math.sin(time * 0.004 + ring) * 0.08})`
+          : `rgba(30, 64, 175, ${0.12 + Math.sin(time * 0.004 + ring) * 0.1})`;
+        ctx.lineWidth = 1;
+        
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, baseRadius + pulse, 0, Math.PI * 2);
+        ctx.stroke();
       }
 
       ctx.globalAlpha = 1;
