@@ -13,7 +13,7 @@ export function AnimatedSphere() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const chars = "░▒▓█▀▄▌▐│─┤├┴┬╭╮╰╯";
+    const sabatLetters = "SABAT";
     let time = 0;
 
     const resize = () => {
@@ -29,13 +29,19 @@ export function AnimatedSphere() {
 
     const render = () => {
       const rect = canvas.getBoundingClientRect();
+      
+      // Determine text color based on background
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches || 
+                     document.documentElement.classList.contains("dark");
+      const textColor = isDark ? "#1E40AF" : "#1E40AF";
+      
       ctx.clearRect(0, 0, rect.width, rect.height);
 
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
       const radius = Math.min(rect.width, rect.height) * 0.525;
 
-      ctx.font = "12px monospace";
+      ctx.font = "16px monospace";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
@@ -43,6 +49,7 @@ export function AnimatedSphere() {
       const points: { x: number; y: number; z: number; char: string }[] = [];
 
       // Generate sphere points
+      let charIndex = 0;
       for (let phi = 0; phi < Math.PI * 2; phi += 0.15) {
         for (let theta = 0; theta < Math.PI; theta += 0.15) {
           const x = Math.sin(theta) * Math.cos(phi + time * 0.5);
@@ -60,13 +67,14 @@ export function AnimatedSphere() {
           const finalZ = y * Math.sin(rotX) + newZ * Math.cos(rotX);
 
           const depth = (finalZ + 1) / 2;
-          const charIndex = Math.floor(depth * (chars.length - 1));
+          const letter = sabatLetters[charIndex % sabatLetters.length];
+          charIndex++;
 
           points.push({
             x: centerX + newX * radius,
             y: centerY + newY * radius,
             z: finalZ,
-            char: chars[charIndex],
+            char: letter,
           });
         }
       }
@@ -76,10 +84,13 @@ export function AnimatedSphere() {
 
       // Draw points
       points.forEach((point) => {
-        const alpha = 0.2 + (point.z + 1) * 0.4;
-        ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`;
+        const alpha = 0.25 + (point.z + 1) * 0.35;
+        ctx.fillStyle = textColor;
+        ctx.globalAlpha = alpha;
         ctx.fillText(point.char, point.x, point.y);
       });
+      
+      ctx.globalAlpha = 1;
 
       time += 0.02;
       frameRef.current = requestAnimationFrame(render);
