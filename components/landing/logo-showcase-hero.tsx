@@ -1,12 +1,28 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 
 export function LogoShowcaseHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setMousePos({
+          x: e.clientX / rect.width,
+          y: e.clientY / rect.height,
+        });
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -15,119 +31,136 @@ export function LogoShowcaseHero() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    let time = 0;
+    let animationId = 0;
+
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.scale(dpr, dpr);
     };
 
     resize();
     window.addEventListener("resize", resize);
 
-    let time = 0;
-    let animationId = 0;
-
     const render = () => {
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const w = canvas.width / (window.devicePixelRatio || 1);
+      const h = canvas.height / (window.devicePixelRatio || 1);
+
+      // Create liquid gradient background with noise
+      const gradient = ctx.createLinearGradient(0, 0, w, h);
       
-      // Create gradient background
-      const bgGradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      if (isDark) {
-        bgGradient.addColorStop(0, "#0f172a");
-        bgGradient.addColorStop(0.5, "#1e293b");
-        bgGradient.addColorStop(1, "#0f172a");
-      } else {
-        bgGradient.addColorStop(0, "#f8fafc");
-        bgGradient.addColorStop(0.5, "#f1f5f9");
-        bgGradient.addColorStop(1, "#f8fafc");
-      }
-      ctx.fillStyle = bgGradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Animated gradient colors - Blue hues only
+      const hue1 = (time * 0.02 + 220) % 360; // Blue
+      const hue2 = (time * 0.015 + 245) % 360; // Royal blue
+      const hue3 = (time * 0.01 + 270) % 360; // Dark blue-purple
 
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
-      
-      // Radial glow from center
-      const radialGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 600);
-      radialGlow.addColorStop(0, isDark ? "rgba(30, 64, 175, 0.15)" : "rgba(30, 64, 175, 0.08)");
-      radialGlow.addColorStop(1, isDark ? "rgba(30, 64, 175, 0)" : "rgba(30, 64, 175, 0)");
-      ctx.fillStyle = radialGlow;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      gradient.addColorStop(0, `hsl(220, 85%, 92%)`);
+      gradient.addColorStop(0.5, `hsl(235, 75%, 88%)`);
+      gradient.addColorStop(1, `hsl(250, 80%, 94%)`);
 
-      // Animated flowing waves
-      ctx.strokeStyle = isDark ? "rgba(30, 64, 175, 0.12)" : "rgba(30, 64, 175, 0.08)";
-      ctx.lineWidth = 1.5;
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, w, h);
 
-      for (let layer = 0; layer < 5; layer++) {
+      // Add turbulent liquid effect with flowing shapes
+      ctx.globalAlpha = 0.08;
+      for (let i = 0; i < 6; i++) {
+        const x = w * 0.5 + Math.sin(time * 0.001 + i * 1.2) * w * 0.4;
+        const y = h * 0.5 + Math.cos(time * 0.0008 + i * 0.9) * h * 0.3;
+        const size = 200 + Math.sin(time * 0.003 + i) * 100;
+
+        const radialGrad = ctx.createRadialGradient(x, y, size * 0.3, x, y, size);
+        radialGrad.addColorStop(0, `hsla(${hue1 + i * 20}, 100%, 50%, 0.6)`);
+        radialGrad.addColorStop(1, `hsla(${hue1 + i * 20}, 100%, 50%, 0)`);
+
+        ctx.fillStyle = radialGrad;
         ctx.beginPath();
-        const amplitude = 50 + layer * 20;
-        const frequency = 0.005 + layer * 0.001;
-        const phase = time * 0.3 + layer * 0.5;
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
-        for (let x = 0; x < canvas.width; x += 4) {
+      ctx.globalAlpha = 1;
+
+      // Draw flowing wave patterns
+      ctx.strokeStyle = `rgba(30, 64, 175, ${0.08 + Math.sin(time * 0.005) * 0.04})`;
+      ctx.lineWidth = 1;
+
+      for (let waveLayer = 0; waveLayer < 4; waveLayer++) {
+        ctx.beginPath();
+        for (let x = 0; x < w; x += 30) {
           const y =
-            centerY +
-            Math.sin(x * frequency + phase) * amplitude +
-            Math.cos(time * 0.2 + layer) * 30;
+            h * 0.5 +
+            Math.sin(x * 0.01 + time * 0.002 + waveLayer * 1.5) * 40 +
+            Math.cos(x * 0.005 + time * 0.0015 + waveLayer) * 30 +
+            waveLayer * 20;
           if (x === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
         ctx.stroke();
       }
 
-      // Vertical flowing streams
-      ctx.strokeStyle = isDark ? "rgba(30, 64, 175, 0.08)" : "rgba(30, 64, 175, 0.05)";
-      ctx.lineWidth = 1;
+      // Draw morphing circles with shader-like effect
+      ctx.globalAlpha = 0.12;
+      const centerX = w * mousePos.x;
+      const centerY = h * mousePos.y;
 
-      for (let stream = 0; stream < 8; stream++) {
-        ctx.beginPath();
-        const startX = centerX - 300 + (stream * 85);
-        for (let y = 0; y < canvas.height; y += 5) {
-          const x =
-            startX +
-            Math.sin(y * 0.006 + time * 0.4 + stream * 0.8) * 40 +
-            Math.cos(time * 0.25 + stream) * 20;
-          if (y === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
+      for (let ring = 0; ring < 5; ring++) {
+        const angle = time * (0.001 - ring * 0.0002);
+        const radius = 60 + ring * 50 + Math.sin(time * 0.003 + ring * 0.5) * 30;
+        const distortion = Math.sin(time * 0.004 + ring) * 0.15;
+
+        for (let i = 0; i < 12; i++) {
+          const a = (angle + (i * Math.PI * 2) / 12) * (1 + distortion);
+          const r =
+            radius *
+            (1 + Math.sin(time * 0.005 + i * 0.3 + ring * 0.8) * 0.3);
+          const x = centerX + Math.cos(a) * r;
+          const y = centerY + Math.sin(a) * r;
+
+          const grad = ctx.createRadialGradient(x, y, 0, x, y, 20);
+          grad.addColorStop(
+            0,
+            `hsla(${hue1 + ring * 15}, 90%, 60%, ${0.4 + Math.sin(time * 0.006 + i) * 0.3})`
+          );
+          grad.addColorStop(1, `hsla(${hue1 + ring * 15}, 90%, 60%, 0)`);
+
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(x, y, 15, 0, Math.PI * 2);
+          ctx.fill();
         }
-        ctx.stroke();
       }
 
-      // Animated orbital dots
-      ctx.fillStyle = isDark ? "rgba(30, 64, 175, 0.6)" : "rgba(30, 64, 175, 0.4)";
-      for (let i = 0; i < 12; i++) {
-        const angle = time * 0.12 + (i * Math.PI * 2) / 12;
-        const distance = 200 + Math.sin(time * 0.3 + i * 0.6) * 60;
-        const x = centerX + Math.cos(angle) * distance;
-        const y = centerY + Math.sin(angle) * distance;
-        const size = 2 + Math.sin(time * 0.8 + i * 0.5) * 1.2;
+      ctx.globalAlpha = 1;
 
-        ctx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      // Draw connecting network lines
+      ctx.strokeStyle = `rgba(30, 64, 175, ${0.06 + Math.sin(time * 0.004) * 0.04})`;
+      ctx.lineWidth = 0.5;
 
-      // Concentric pulsing rings
-      ctx.strokeStyle = isDark ? "rgba(30, 64, 175, 0.1)" : "rgba(30, 64, 175, 0.06)";
-      ctx.lineWidth = 1;
+      for (let i = 0; i < 8; i++) {
+        for (let j = i + 1; j < 8; j++) {
+          const a1 = time * (0.001 - i * 0.0002) + (i * Math.PI * 2) / 8;
+          const a2 = time * (0.001 - j * 0.0002) + (j * Math.PI * 2) / 8;
+          const r1 = 120 + Math.sin(time * 0.003 + i) * 40;
+          const r2 = 120 + Math.sin(time * 0.003 + j) * 40;
 
-      for (let ring = 1; ring <= 4; ring++) {
-        const baseRadius = 150 * ring;
-        const pulse = Math.sin(time * 0.5 + ring * 0.7) * 30;
-        const wobble = Math.sin(time * 0.2 + ring) * 0.02;
+          const x1 = centerX + Math.cos(a1) * r1;
+          const y1 = centerY + Math.sin(a1) * r1;
+          const x2 = centerX + Math.cos(a2) * r2;
+          const y2 = centerY + Math.sin(a2) * r2;
 
-        ctx.beginPath();
-        for (let angle = 0; angle < Math.PI * 2; angle += 0.08) {
-          const radius = baseRadius + pulse + Math.sin(angle * 3 + time * 0.3) * 20;
-          const x = centerX + Math.cos(angle) * radius * (1 + wobble);
-          const y = centerY + Math.sin(angle) * radius * (1 + wobble);
-          if (angle === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
         }
-        ctx.closePath();
-        ctx.stroke();
       }
 
-      time += 0.016;
+      // Add mouse-following glow with smooth falloff - REMOVED
+      // Removed pointer brush stamp effect as requested
+
+      time += 1;
       animationId = requestAnimationFrame(render);
     };
 
@@ -137,12 +170,12 @@ export function LogoShowcaseHero() {
       window.removeEventListener("resize", resize);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [mousePos]);
 
   const handleScroll = () => {
-    const metricsSection = document.getElementById("metrics");
-    if (metricsSection) {
-      metricsSection.scrollIntoView({ behavior: "smooth" });
+    const nextSection = document.querySelector("#metrics");
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -151,109 +184,111 @@ export function LogoShowcaseHero() {
       ref={containerRef}
       className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Canvas background */}
+      {/* Canvas - liquid gradient background */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
-        style={{ opacity: 0.6 }}
+        style={{ opacity: 0.9 }}
       />
 
-      {/* Content with proper spacing */}
-      <div className="relative z-10 flex flex-col items-center justify-center text-center space-y-24 lg:space-y-32 px-6">
-        
-        {/* Tagline at top */}
-        <div className="animate-fade-in" style={{ animationDelay: "0s" }}>
-          <p className="text-xs lg:text-sm text-foreground/50 font-mono tracking-widest uppercase">
-            Professional Corporate Travel Management
+      {/* Fade-out gradient at bottom for seamless transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 lg:h-40 bg-gradient-to-b from-transparent to-background pointer-events-none z-20" />
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full w-full px-4 lg:px-8">
+        {/* Animated title with staggered entrance */}
+        <div className="text-center mb-12 lg:mb-16 space-y-4">
+          <p className="text-xs lg:text-sm font-mono text-foreground/50 uppercase tracking-[0.2em] animate-fade-in">
+            Introducing
           </p>
-        </div>
-
-        {/* Large logo */}
-        <div className="animate-fade-in" style={{ animationDelay: "0.1s" }}>
-          <div className="relative w-40 h-40 lg:w-56 lg:h-56">
-            {/* Outer rotating ring */}
-            <div
-              className="absolute inset-0 rounded-full border-2 border-foreground/20"
-              style={{ animation: "spin 30s linear infinite" }}
-            />
-            
-            {/* Middle ring */}
-            <div
-              className="absolute inset-4 rounded-full border border-foreground/10"
-              style={{ animation: "spin 40s linear infinite reverse" }}
-            />
-            
-            {/* Inner ring */}
-            <div
-              className="absolute inset-8 rounded-full border border-foreground/5"
-              style={{ animation: "spin 50s linear infinite" }}
-            />
-
-            {/* Logo center */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Image
-                src="/sabat-logo.png"
-                alt="SABAT"
-                width={180}
-                height={180}
-                className="w-24 h-24 lg:w-36 lg:h-36 object-contain"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Main headline with sophisticated gradient */}
-        <div className="space-y-6 lg:space-y-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-          <h1 className="text-6xl lg:text-8xl xl:text-9xl font-display font-bold leading-[1.1] tracking-tighter">
-            <span 
-              className="inline-block"
-              style={{
-                background: "linear-gradient(135deg, hsl(220, 90%, 56%), hsl(235, 85%, 50%), hsl(250, 88%, 52%), hsl(235, 85%, 50%), hsl(220, 90%, 56%))",
-                backgroundSize: "300% 300%",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-                animation: "gradientFlow 6s ease infinite",
-              }}
-            >
-              SABAT
-            </span>
+          <h1 className="text-5xl lg:text-7xl xl:text-8xl font-display font-bold tracking-tight animate-fade-in" style={{ animationDelay: "0.1s" }}>
+            SABAT
           </h1>
-          
-          {/* Subheading */}
-          <p className="text-lg lg:text-2xl text-foreground/60 font-light tracking-wide max-w-2xl mx-auto">
+          <p className="text-sm lg:text-base text-foreground/60 font-light tracking-wide animate-fade-in" style={{ animationDelay: "0.2s" }}>
             Excellence in Motion
           </p>
         </div>
 
-        {/* Scroll button at bottom */}
+        {/* Logo with animated frame */}
+        <div className="relative mb-16 lg:mb-20 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+          {/* Animated frame with morphing shape */}
+          <div className="relative inline-block">
+            {/* Outer morphing border */}
+            <div
+              className="absolute inset-0 rounded-3xl"
+              style={{
+                background: `linear-gradient(45deg, rgba(30, 64, 175, 0.2), rgba(30, 64, 175, 0.1))`,
+                animation: "morph 8s ease-in-out infinite",
+              }}
+            />
+
+            {/* Logo container */}
+            <div className="relative w-40 h-40 lg:w-48 lg:h-48 flex items-center justify-center p-6 lg:p-8">
+              <Image
+                src="/sabat-logo.png"
+                alt="SABAT"
+                width={160}
+                height={160}
+                className="w-full h-full object-contain drop-shadow-lg"
+                priority
+              />
+            </div>
+
+            {/* Inner glow rings */}
+            <div
+              className="absolute inset-0 rounded-3xl border border-foreground/20"
+              style={{ animation: "spin 20s linear infinite" }}
+            />
+            <div
+              className="absolute inset-2 rounded-3xl border border-foreground/10"
+              style={{ animation: "spin 30s linear infinite reverse" }}
+            />
+          </div>
+        </div>
+
+        {/* Tagline with animation */}
+        <div className="text-center max-w-2xl mb-16 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+          <p className="text-base lg:text-lg text-foreground/70 leading-relaxed font-light">
+            Professional corporate travel management reimagined for excellence
+          </p>
+        </div>
+
+        {/* Scroll indicator - moved down with more spacing */}
         <button
           onClick={handleScroll}
-          className="group cursor-pointer animate-fade-in"
-          style={{ animationDelay: "0.4s" }}
+          className="absolute bottom-6 lg:bottom-10 left-1/2 -translate-x-1/2 group cursor-pointer animate-fade-in"
+          style={{ animationDelay: "0.5s" }}
+          aria-label="Scroll to next section"
         >
-          <div className="flex flex-col items-center gap-3">
-            <span className="text-xs text-foreground/40 font-mono uppercase tracking-widest group-hover:text-foreground/60 transition-colors duration-300">
+          <div className="flex flex-col items-center gap-2 transition-all duration-300 group-hover:opacity-100 opacity-70">
+            <span className="text-[10px] lg:text-xs font-mono text-foreground/50 uppercase tracking-widest">
               Explore
             </span>
-            <div className="relative w-6 h-10 border border-foreground/20 rounded-full flex items-center justify-center group-hover:border-foreground/40 transition-colors duration-300">
-              <ChevronDown
-                className="w-3.5 h-3.5 text-foreground/30 group-hover:text-foreground/50 transition-colors duration-300"
-                style={{
-                  animation: "bounce 2.5s ease-in-out infinite",
-                }}
-              />
+            <div
+              className="w-5 h-8 border border-foreground/40 rounded-full flex items-start justify-center p-1.5 group-hover:border-foreground/60 transition-colors"
+              style={{
+                animation: "scroll-float 2s ease-in-out infinite",
+              }}
+            >
+              <ChevronDown className="w-3 h-3 text-foreground/50 group-hover:text-foreground/70" />
             </div>
           </div>
         </button>
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/50 to-transparent pointer-events-none z-20" />
-
-      {/* Styles */}
+      {/* Global animations */}
       <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
         @keyframes spin {
           from {
             transform: rotate(0deg);
@@ -263,38 +298,27 @@ export function LogoShowcaseHero() {
           }
         }
 
-        @keyframes gradientFlow {
+        @keyframes morph {
           0% {
-            background-position: 0% 50%;
+            border-radius: 40%;
           }
           50% {
-            background-position: 100% 50%;
+            border-radius: 60%;
           }
           100% {
-            background-position: 0% 50%;
+            border-radius: 40%;
           }
         }
 
-        @keyframes bounce {
+        @keyframes scroll-float {
           0%,
           100% {
             transform: translateY(0);
-            opacity: 0.5;
+            opacity: 0.6;
           }
           50% {
-            transform: translateY(10px);
+            transform: translateY(6px);
             opacity: 1;
-          }
-        }
-
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
           }
         }
 
