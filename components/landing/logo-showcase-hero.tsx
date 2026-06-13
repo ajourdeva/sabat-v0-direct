@@ -31,23 +31,18 @@ export function LogoShowcaseHero() {
     const render = () => {
       const w = canvas.width / (window.devicePixelRatio || 1);
       const h = canvas.height / (window.devicePixelRatio || 1);
-      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
       // Create liquid gradient background with noise
       const gradient = ctx.createLinearGradient(0, 0, w, h);
       
-      // Animated gradient colors - Blue hues only, adapting to dark mode
-      if (isDark) {
-        // Dark mode: dark background with blue accents
-        gradient.addColorStop(0, `hsl(220, 40%, 12%)`);
-        gradient.addColorStop(0.5, `hsl(235, 35%, 15%)`);
-        gradient.addColorStop(1, `hsl(250, 38%, 10%)`);
-      } else {
-        // Light mode: light background with blue accents
-        gradient.addColorStop(0, `hsl(220, 85%, 92%)`);
-        gradient.addColorStop(0.5, `hsl(235, 75%, 88%)`);
-        gradient.addColorStop(1, `hsl(250, 80%, 94%)`);
-      }
+      // Animated gradient colors - Blue hues only
+      const hue1 = (time * 0.02 + 220) % 360; // Blue
+      const hue2 = (time * 0.015 + 245) % 360; // Royal blue
+      const hue3 = (time * 0.01 + 270) % 360; // Dark blue-purple
+
+      gradient.addColorStop(0, `hsl(220, 85%, 92%)`);
+      gradient.addColorStop(0.5, `hsl(235, 75%, 88%)`);
+      gradient.addColorStop(1, `hsl(250, 80%, 94%)`);
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, w, h);
@@ -235,11 +230,11 @@ export function LogoShowcaseHero() {
           </div>
         </div>
 
-        {/* Scroll indicator - positioned lower with padding */}
+        {/* Scroll indicator - moved down with more spacing */}
         <button
           onClick={handleScroll}
-          className="absolute bottom-16 lg:bottom-24 group cursor-pointer animate-fade-in"
-          style={{ animationDelay: "0.6s" }}
+          className="absolute bottom-6 lg:bottom-10 left-1/2 -translate-x-1/2 group cursor-pointer animate-fade-in"
+          style={{ animationDelay: "0.5s" }}
           aria-label="Scroll to next section"
         >
           <div className="flex flex-col items-center gap-2 transition-all duration-300 group-hover:opacity-100 opacity-70">
