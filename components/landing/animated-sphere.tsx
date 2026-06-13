@@ -33,7 +33,7 @@ export function AnimatedSphere() {
       // Determine text color based on background
       const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches || 
                      document.documentElement.classList.contains("dark");
-      const textColor = "#1E40AF";
+      const textColor = isDark ? "rgba(200, 200, 200, 0.8)" : "rgba(100, 100, 100, 0.6)";
       
       ctx.clearRect(0, 0, rect.width, rect.height);
 
@@ -49,8 +49,8 @@ export function AnimatedSphere() {
 
       // Generate sphere points with SABAT letters only
       let charIndex = 0;
-      for (let phi = 0; phi < Math.PI * 2; phi += 0.12) {
-        for (let theta = 0.2; theta < Math.PI - 0.2; theta += 0.12) {
+      for (let phi = 0; phi < Math.PI * 2; phi += 0.25) {
+        for (let theta = 0.2; theta < Math.PI - 0.2; theta += 0.25) {
           const x = Math.sin(theta) * Math.cos(phi + time * 0.5);
           const y = Math.sin(theta) * Math.sin(phi + time * 0.5);
           const z = Math.cos(theta);
