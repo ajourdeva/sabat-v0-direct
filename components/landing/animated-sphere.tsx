@@ -103,28 +103,12 @@ export function AnimatedSphere() {
       ctx.arc(centerX, centerY, radius * 0.15, 0, Math.PI * 2);
       ctx.fill();
       
-      // Draw rotating logo at center with 3D perspective
+      // Draw rotating logo at center
       if (logoRef.current) {
         ctx.globalAlpha = 1;
         ctx.save();
-        
-        // Create 3D rotation effect
-        const rotY = time * 0.3;
-        const rotX = time * 0.2;
-        
-        // Apply perspective scaling based on rotation
-        const scaleZ = Math.cos(rotX) * 0.8 + 1.2; // Scale between 0.4 and 2
-        
         ctx.translate(centerX, centerY);
-        
-        // Apply rotations
-        const perspectiveX = Math.sin(rotX) * 15;
-        const perspectiveY = Math.sin(rotY) * 15;
-        
-        ctx.translate(perspectiveX, perspectiveY);
-        ctx.rotate(rotY);
-        ctx.scale(scaleZ, Math.max(0.3, scaleZ * 0.8)); // Add perspective squashing
-        
+        ctx.rotate(time * 0.3); // Rotate with sphere
         const logoSize = radius * 0.2;
         ctx.drawImage(logoRef.current, -logoSize / 2, -logoSize / 2, logoSize, logoSize);
         ctx.restore();
