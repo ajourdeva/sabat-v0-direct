@@ -69,7 +69,7 @@ export function ContactSection() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              Ready to simplify your travel operations?
+              Ready to get SABATIZED?
             </h2>
             <p
               className={`text-lg text-muted-foreground leading-relaxed mb-12 transition-all duration-700 delay-100 ${
