@@ -156,18 +156,16 @@ export function LogoShowcaseHero() {
 
           {/* Logo */}
           <div className="relative w-48 h-48 lg:w-64 lg:h-64 animate-fade-in" style={{ animationDelay: "0.1s", animation: "fade-in 0.6s ease-out !important" }}>
-            {/* Glowing frame */}
-            <div className="absolute inset-0 rounded-3xl border-2 border-foreground/20 dark:border-foreground/30 shadow-2xl shadow-blue-500/20 dark:shadow-blue-600/30" />
+            {/* Glowing frame - STATIC, NO ROTATION */}
+            <div className="absolute inset-0 rounded-3xl border-2 border-foreground/20 dark:border-foreground/30 shadow-2xl shadow-blue-500/20 dark:shadow-blue-600/30" style={{ animation: "none !important" }} />
             
-            {/* Rotating rings */}
-            <div
-              className="absolute inset-0 rounded-3xl border border-foreground/10 dark:border-foreground/20"
-              style={{ animation: "spin 20s linear infinite" }}
-            />
-            <div
-              className="absolute inset-2 rounded-3xl border border-foreground/5 dark:border-foreground/10"
-              style={{ animation: "spin 30s linear infinite reverse" }}
-            />
+            {/* Rotating rings container */}
+            <div style={{ animation: "spin 20s linear infinite", position: "absolute", inset: 0 }}>
+              <div className="absolute inset-0 rounded-3xl border border-foreground/10 dark:border-foreground/20" />
+            </div>
+            <div style={{ animation: "spin 30s linear infinite reverse", position: "absolute", inset: "0.5rem" }}>
+              <div className="rounded-3xl border border-foreground/5 dark:border-foreground/10 h-full" />
+            </div>
 
             {/* Logo image */}
             <div className="absolute inset-0 flex items-center justify-center" style={{ animation: "none !important" }}>
