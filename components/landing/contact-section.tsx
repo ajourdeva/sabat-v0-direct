@@ -244,7 +244,7 @@ export function ContactSection() {
                 type="submit"
                 className="w-full bg-foreground hover:bg-foreground/90 text-background rounded-lg h-12 text-base font-medium group"
               >
-                {submitted ? "Thank you!" : "Request Consultation"}
+                {submitted ? "Thank you!" : "Book Consultation"}
                 {!submitted && <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />}
               </Button>
 
