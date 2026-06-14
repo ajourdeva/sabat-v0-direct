@@ -170,7 +170,7 @@ export function LogoShowcaseHero() {
             />
 
             {/* Logo image */}
-            <div className="absolute inset-0 flex items-center justify-center" style={{ animation: "none" }}>
+            <div className="absolute inset-0 flex items-center justify-center" style={{ animation: "none !important" }}>
               <Image
                 src="/sabat-logo.png"
                 alt="SABAT"
@@ -178,7 +178,7 @@ export function LogoShowcaseHero() {
                 height={240}
                 className="object-contain w-2/3 h-2/3"
                 priority
-                style={{ animation: "none" }}
+                style={{ animation: "none !important" }}
               />
             </div>
           </div>
