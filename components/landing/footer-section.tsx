@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MessageCircle, Instagram, Send, Linkedin, MapPin, Youtube } from "lucide-react";
 import { AnimatedWave } from "./animated-wave";
 
 const footerLinks = {
@@ -23,9 +23,12 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { name: "Twitter", href: "#" },
-  { name: "GitHub", href: "#" },
-  { name: "LinkedIn", href: "#" },
+  { name: "WhatsApp", href: "#", icon: MessageCircle },
+  { name: "Instagram", href: "#", icon: Instagram },
+  { name: "Telegram", href: "#", icon: Send },
+  { name: "LinkedIn", href: "#", icon: Linkedin },
+  { name: "TripAdvisor", href: "#", icon: MapPin },
+  { name: "YouTube", href: "#", icon: Youtube },
 ];
 
 export function FooterSection() {
@@ -51,17 +54,23 @@ export function FooterSection() {
               </p>
 
               {/* Social Links */}
-              <div className="flex gap-6">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 group"
-                  >
-                    {link.name}
-                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                  </a>
-                ))}
+              <div className="p-6 border border-foreground/10 rounded-lg bg-background/50 backdrop-blur-sm">
+                <p className="text-xs font-medium text-foreground/60 mb-4 uppercase tracking-wide">Connect With Us</p>
+                <div className="grid grid-cols-3 gap-3">
+                  {socialLinks.map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <a
+                        key={link.name}
+                        href={link.href}
+                        title={link.name}
+                        className="flex items-center justify-center w-10 h-10 rounded-lg border border-foreground/10 text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-all duration-200 group"
+                      >
+                        <Icon className="w-5 h-5" />
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
