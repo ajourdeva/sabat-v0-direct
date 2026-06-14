@@ -155,7 +155,7 @@ export function LogoShowcaseHero() {
           </div>
 
           {/* Logo */}
-          <div className="relative w-48 h-48 lg:w-64 lg:h-64 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+          <div className="relative w-48 h-48 lg:w-64 lg:h-64 animate-fade-in" style={{ animationDelay: "0.1s", animation: "fade-in 0.6s ease-out !important" }}>
             {/* Glowing frame */}
             <div className="absolute inset-0 rounded-3xl border-2 border-foreground/20 dark:border-foreground/30 shadow-2xl shadow-blue-500/20 dark:shadow-blue-600/30" />
             
