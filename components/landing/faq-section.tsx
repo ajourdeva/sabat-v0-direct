@@ -33,19 +33,6 @@ const faqs = [
 function FAQItem({ question, answer, index, isOpen, onToggle }: any) {
   return (
     <div className="border-b border-foreground/10 last:border-0">
-      <button
-        onClick={() => onToggle(index)}
-        className="w-full py-6 lg:py-8 flex items-start justify-between group text-left hover:text-foreground/80 transition-colors"
-      >
-        <span className="text-lg lg:text-xl font-display tracking-tight flex-1 pr-6">
-          {question}
-        </span>
-        <ChevronDown
-          className={`w-5 h-5 shrink-0 mt-1 text-muted-foreground transition-transform duration-500 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        />
-      </button>
       {isOpen && (
         <div className="pb-6 lg:pb-8 animate-in fade-in slide-in-from-top-4 duration-300">
           <p className="text-base lg:text-lg text-muted-foreground leading-relaxed">

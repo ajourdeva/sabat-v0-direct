@@ -62,27 +62,27 @@ export function HeroSection() {
         {/* Main headline */}
         <div className="mb-12">
           <h1 
-            className={`text-[clamp(3rem,12vw,8rem)] font-display leading-[0.95] tracking-tight transition-all duration-1000 ${
+            className={`text-[clamp(3rem,12vw,6rem)] font-display leading-[0.95] tracking-tight transition-all duration-1000 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            The platform behind exceptional business journeys.
+            Professional Corporate Travel Solutions
           </h1>
         </div>
         
-        {/* Description */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-end">
+        {/* Description and CTA */}
+        <div className="max-w-2xl">
           <p 
-            className={`text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-2xl transition-all duration-700 delay-200 ${
+            className={`text-xl lg:text-2xl text-muted-foreground leading-relaxed mb-8 transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
             SABAT helps organizations coordinate accommodation, executive hospitality, transfers, and business travel operations through one trusted partner.
           </p>
           
-          {/* CTAs */}
+          {/* CTA Button - directly under paragraph */}
           <div 
-            className={`flex flex-col sm:flex-row items-start gap-4 transition-all duration-700 delay-300 ${
+            className={`transition-all duration-700 delay-300 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
