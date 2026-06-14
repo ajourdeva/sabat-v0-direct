@@ -57,27 +57,27 @@ export function FooterSection() {
                 {/* Address Section */}
                 <div className="text-sm text-muted-foreground mb-8">
                   <p className="font-medium text-foreground mb-2">Address</p>
-                  <p>Tehran, Iran</p>
-                </div>
-              </div>
+                  <p className="mb-6">Tehran, Iran</p>
 
-              {/* Social Links Box - Below Address */}
-              <div className="p-6 border border-foreground/10 rounded-lg bg-background/50 backdrop-blur-sm w-fit">
-                <p className="text-xs font-medium text-foreground/60 mb-4 uppercase tracking-wide">Connect With Us</p>
-                <div className="grid grid-cols-3 gap-3">
-                  {socialLinks.map((link) => {
-                    const Icon = link.icon;
-                    return (
-                      <a
-                        key={link.name}
-                        href={link.href}
-                        title={link.name}
-                        className="flex items-center justify-center w-10 h-10 rounded-lg border border-foreground/10 text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-all duration-200 group"
-                      >
-                        <Icon className="w-5 h-5" />
-                      </a>
-                    );
-                  })}
+                  {/* Social Links Box - Below Address */}
+                  <div className="p-6 border border-foreground/10 rounded-lg bg-background/50 backdrop-blur-sm w-fit">
+                    <p className="text-xs font-medium text-foreground/60 mb-4 uppercase tracking-wide">Connect With Us</p>
+                    <div className="grid grid-cols-3 gap-3">
+                      {socialLinks.map((link) => {
+                        const Icon = link.icon;
+                        return (
+                          <a
+                            key={link.name}
+                            href={link.href}
+                            title={link.name}
+                            className="flex items-center justify-center w-10 h-10 rounded-lg border border-foreground/10 text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-all duration-200 group"
+                          >
+                            <Icon className="w-5 h-5" />
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
