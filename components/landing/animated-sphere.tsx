@@ -105,10 +105,9 @@ export function AnimatedSphere() {
       
       // Draw rotating logo at center
       if (logoRef.current) {
-        ctx.globalAlpha = 1;
+        ctx.globalAlpha = 0.3;
         ctx.save();
         ctx.translate(centerX, centerY);
-        ctx.rotate(time * 0.3); // Rotate with sphere
         const logoSize = radius * 0.2;
         ctx.drawImage(logoRef.current, -logoSize / 2, -logoSize / 2, logoSize, logoSize);
         ctx.restore();
