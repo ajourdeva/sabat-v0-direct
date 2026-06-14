@@ -5,10 +5,6 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    question: "Why doesn't SABAT offer direct online booking?",
-    answer: "Direct online booking doesn't capture the complexity of corporate travel needs. Every organization has unique requirements, budget constraints, and operational preferences. Our consultative approach ensures we design solutions that align perfectly with your team's needs, rather than forcing a one-size-fits-all model.",
-  },
-  {
     question: "How are services customized for our organization?",
     answer: "We begin with a comprehensive consultation to understand your travel patterns, budget, service preferences, and specific requirements. Based on these insights, we design tailored service packages that address your unique operational challenges and objectives.",
   },
