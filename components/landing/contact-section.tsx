@@ -2,7 +2,16 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle, Instagram, Send, Linkedin, MapPin, Youtube } from "lucide-react";
+
+const socialLinks = [
+  { name: "WhatsApp", href: "#", icon: MessageCircle },
+  { name: "Instagram", href: "#", icon: Instagram },
+  { name: "Telegram", href: "#", icon: Send },
+  { name: "LinkedIn", href: "#", icon: Linkedin },
+  { name: "TripAdvisor", href: "#", icon: MapPin },
+  { name: "YouTube", href: "#", icon: Youtube },
+];
 
 export function ContactSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -96,6 +105,26 @@ export function ContactSection() {
               <div>
                 <p className="text-sm font-mono text-muted-foreground mb-2">Address</p>
                 <p className="text-lg text-foreground">Tehran, Iran</p>
+              </div>
+
+              {/* Social Links Box */}
+              <div className="p-6 border border-foreground/10 rounded-lg bg-background/50 backdrop-blur-sm w-fit">
+                <p className="text-xs font-medium text-foreground/60 mb-4 uppercase tracking-wide">Connect With Us</p>
+                <div className="grid grid-cols-3 gap-3">
+                  {socialLinks.map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <a
+                        key={link.name}
+                        href={link.href}
+                        title={link.name}
+                        className="flex items-center justify-center w-10 h-10 rounded-lg border border-foreground/10 text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-all duration-200 group"
+                      >
+                        <Icon className="w-5 h-5" />
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>

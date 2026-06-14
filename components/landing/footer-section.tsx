@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, MessageCircle, Instagram, Send, Linkedin, MapPin, Youtube } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { AnimatedWave } from "./animated-wave";
 
 const footerLinks = {
@@ -22,14 +22,7 @@ const footerLinks = {
   ],
 };
 
-const socialLinks = [
-  { name: "WhatsApp", href: "#", icon: MessageCircle },
-  { name: "Instagram", href: "#", icon: Instagram },
-  { name: "Telegram", href: "#", icon: Send },
-  { name: "LinkedIn", href: "#", icon: Linkedin },
-  { name: "TripAdvisor", href: "#", icon: MapPin },
-  { name: "YouTube", href: "#", icon: Youtube },
-];
+
 
 export function FooterSection() {
   return (
@@ -55,29 +48,9 @@ export function FooterSection() {
                 </p>
 
                 {/* Address Section */}
-                <div className="text-sm text-muted-foreground mb-8">
+                <div className="text-sm text-muted-foreground">
                   <p className="font-medium text-foreground mb-2">Address</p>
-                  <p className="mb-6">Tehran, Iran</p>
-
-                  {/* Social Links Box - Below Address */}
-                  <div className="p-6 border border-foreground/10 rounded-lg bg-background/50 backdrop-blur-sm w-fit">
-                    <p className="text-xs font-medium text-foreground/60 mb-4 uppercase tracking-wide">Connect With Us</p>
-                    <div className="grid grid-cols-3 gap-3">
-                      {socialLinks.map((link) => {
-                        const Icon = link.icon;
-                        return (
-                          <a
-                            key={link.name}
-                            href={link.href}
-                            title={link.name}
-                            className="flex items-center justify-center w-10 h-10 rounded-lg border border-foreground/10 text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-all duration-200 group"
-                          >
-                            <Icon className="w-5 h-5" />
-                          </a>
-                        );
-                      })}
-                    </div>
-                  </div>
+                  <p>Tehran, Iran</p>
                 </div>
               </div>
             </div>
