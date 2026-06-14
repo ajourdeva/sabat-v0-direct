@@ -42,19 +42,27 @@ export function FooterSection() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Main Footer */}
         <div className="py-16 lg:py-24">
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-12 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 lg:gap-8">
             {/* Brand Column */}
-            <div className="col-span-2">
-              <a href="#" className="inline-flex items-center gap-2 mb-6">
-                <span className="text-2xl font-display font-bold">SABAT</span>
-              </a>
+            <div className="col-span-1 lg:col-span-2 flex flex-col gap-8">
+              <div>
+                <a href="#" className="inline-flex items-center gap-2 mb-6">
+                  <span className="text-2xl font-display font-bold">SABAT</span>
+                </a>
 
-              <p className="text-muted-foreground leading-relaxed mb-8 max-w-xs">
-                Professional corporate travel management. Expert coordination for exceptional business journeys.
-              </p>
+                <p className="text-muted-foreground leading-relaxed mb-4 max-w-xs">
+                  Professional corporate travel management. Expert coordination for exceptional business journeys.
+                </p>
 
-              {/* Social Links */}
-              <div className="p-6 border border-foreground/10 rounded-lg bg-background/50 backdrop-blur-sm">
+                {/* Address Section */}
+                <div className="text-sm text-muted-foreground mb-8">
+                  <p className="font-medium text-foreground mb-2">Address</p>
+                  <p>Tehran, Iran</p>
+                </div>
+              </div>
+
+              {/* Social Links Box - Below Address */}
+              <div className="p-6 border border-foreground/10 rounded-lg bg-background/50 backdrop-blur-sm w-fit">
                 <p className="text-xs font-medium text-foreground/60 mb-4 uppercase tracking-wide">Connect With Us</p>
                 <div className="grid grid-cols-3 gap-3">
                   {socialLinks.map((link) => {
