@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, Instagram, Send, Linkedin, MapPin, Youtube } from "lucide-react";
 
 const socialLinks = [
-  { name: "WhatsApp", href: "#", icon: MessageCircle },
+  { name: "WhatsApp", href: "https://wa.me/989982550013", icon: MessageCircle },
   { name: "Instagram", href: "#", icon: Instagram },
   { name: "Telegram", href: "#", icon: Send },
   { name: "LinkedIn", href: "#", icon: Linkedin },
@@ -95,8 +95,20 @@ export function ContactSection() {
               }`}
             >
               <div>
-                <p className="text-sm font-mono text-muted-foreground mb-2">Phone</p>
-                <p className="text-lg text-foreground">+98 (XXX) XXX-XXXX</p>
+                <p className="text-sm font-mono text-muted-foreground mb-2">WhatsApp Business</p>
+                <a href="https://wa.me/989982550013" className="text-lg text-foreground hover:text-foreground/80 transition-colors">+98 998 255 0013</a>
+              </div>
+              <div>
+                <p className="text-sm font-mono text-muted-foreground mb-2">Office</p>
+                <p className="text-lg text-foreground">+98 21 5621 7234</p>
+              </div>
+              <div>
+                <p className="text-sm font-mono text-muted-foreground mb-2">Mobile</p>
+                <div className="space-y-1">
+                  <p className="text-lg text-foreground">+98 998 255 0013</p>
+                  <p className="text-lg text-foreground">+98 998 255 0014</p>
+                  <p className="text-lg text-foreground">+98 998 255 0015</p>
+                </div>
               </div>
               <div>
                 <p className="text-sm font-mono text-muted-foreground mb-2">Email</p>
