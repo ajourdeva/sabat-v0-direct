@@ -13,17 +13,17 @@ const steps = [
   },
   {
     number: "II",
-    title: "Coordination",
-    description: "We design customized service plans tailored to your needs, integrating all travel and accommodation services.",
+    title: "Design & Implementation",
+    description: "We design customized service plans and handle every operational detail, integrating all travel and accommodation services with continuous support.",
     icon: Zap,
-    highlights: ["Design plan", "Select partners", "Configure systems"]
+    highlights: ["Design plan", "Execute bookings", "Support 24/7"]
   },
   {
     number: "III",
-    title: "Execution & Support",
-    description: "We manage every operational detail before, during, and after travel with continuous support.",
+    title: "Optimization",
+    description: "We monitor performance, gather feedback, and continuously refine our solutions to ensure maximum value for your organization.",
     icon: CheckCircle2,
-    highlights: ["Execute bookings", "Monitor travel", "Support 24/7"]
+    highlights: ["Monitor results", "Gather feedback", "Refine strategy"]
   },
 ];
 
@@ -82,7 +82,7 @@ export function HowItWorksSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            Four-step partnership.
+            Three-step partnership.
             <br />
             <span className="text-background/50">Tailored solutions.</span>
           </h2>
