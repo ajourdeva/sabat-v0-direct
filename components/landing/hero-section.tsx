@@ -99,14 +99,10 @@ export function HeroSection() {
       </div>
       
       {/* Stats marquee - full width outside container */}
-      <div 
-        className={`absolute bottom-32 lg:bottom-48 left-0 right-0 transition-all duration-700 delay-500 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <div className="flex gap-16 marquee whitespace-nowrap">
+      <div className="absolute bottom-32 lg:bottom-48 left-0 right-0">
+        <div className="flex gap-24 marquee whitespace-nowrap">
           {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex gap-16">
+            <div key={i} className="flex gap-24">
               {[
                 { value: "24/7", label: "Operational Support", company: "DEDICATED" },
                 { value: "100%", label: "Dedicated Coordination", company: "COMMITTED" },
@@ -114,10 +110,10 @@ export function HeroSection() {
                 { value: "Enterprise", label: "Service Standards", company: "TRUSTED" },
               ].map((stat) => (
                 <div key={`${stat.company}-${i}`} className="flex items-baseline gap-4">
-                  <span className="text-4xl lg:text-5xl font-display">{stat.value}</span>
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-5xl lg:text-7xl font-display">{stat.value}</span>
+                  <span className="text-base text-muted-foreground">
                     {stat.label}
-                    <span className="block font-mono text-xs mt-1">{stat.company}</span>
+                    <span className="block font-mono text-sm mt-1">{stat.company}</span>
                   </span>
                 </div>
               ))}
