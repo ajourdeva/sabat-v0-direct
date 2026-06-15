@@ -140,7 +140,7 @@
 
   @keyframes marquee {
     0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-50% - 3rem)); }
+    100% { transform: translateX(-33.333%); }
   }
   
   @keyframes marquee-reverse {

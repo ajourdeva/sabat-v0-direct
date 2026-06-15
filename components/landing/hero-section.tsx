@@ -101,7 +101,7 @@ export function HeroSection() {
       {/* Stats marquee - full width outside container */}
       <div className="absolute bottom-32 lg:bottom-48 left-0 right-0">
         <div className="flex gap-24 marquee whitespace-nowrap">
-          {[...Array(2)].map((_, i) => (
+          {[...Array(3)].map((_, i) => (
             <div key={i} className="flex gap-24">
               {[
                 { value: "24/7", label: "Operational Support", company: "DEDICATED" },
