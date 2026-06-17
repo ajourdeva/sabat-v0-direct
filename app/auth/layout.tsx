@@ -1,44 +1,38 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { Navigation } from "@/components/landing/navigation";
+
 export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="min-h-screen grid lg:grid-cols-2">
-      {/* Left side - Brand & Animation */}
-      <div className="hidden lg:flex flex-col justify-between p-8 bg-gradient-to-br from-background to-background/50 border-r border-foreground/10">
-        <div>
-          <div className="text-2xl font-display font-bold">SABAT</div>
-        </div>
-        
-        <div className="space-y-8">
-          <div>
-            <h1 className="text-4xl font-display font-bold leading-tight mb-4">
-              Corporate travel,{" "}
-              <span className="text-foreground/50">simplified</span>
-            </h1>
-            <p className="text-muted-foreground text-lg">
-              Professional travel management solutions for enterprise teams.
-            </p>
-          </div>
-          
-          {/* Abstract animation placeholder */}
-          <div className="w-32 h-32 rounded-lg border border-foreground/10 bg-foreground/5 flex items-center justify-center">
-            <div className="w-20 h-20 rounded-full border border-foreground/20 flex items-center justify-center">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 opacity-30"></div>
-            </div>
-          </div>
-        </div>
+  const [mounted, setMounted] = useState(false);
 
-        <div className="text-sm text-muted-foreground">
-          <p>Enterprise travel coordination</p>
-          <p>Enterprise travel coordination</p>
-        </div>
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navigation />
+      
+      {/* Animated gradient background */}
+      <div className="fixed inset-0 top-16 -z-10 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-foreground/5" />
+        
+        {/* Animated gradient blobs */}
+        <div className="absolute top-1/4 -left-1/3 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+        <div className="absolute top-1/3 -right-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{ animationDelay: "4s" }} />
       </div>
 
-      {/* Right side - Auth Form */}
-      <div className="flex items-center justify-center p-6 lg:p-8">
-        {children}
+      {/* Centered auth content */}
+      <div className="flex-1 flex items-center justify-center p-6 lg:p-8">
+        <div className="w-full max-w-md">
+          {mounted && children}
+        </div>
       </div>
     </div>
   );
