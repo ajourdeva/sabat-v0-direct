@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogIn, UserPlus } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import Image from "next/image";
+import Link from "next/link";
 
 const navLinks = [
   { name: "Services", href: "#services" },
@@ -17,6 +18,7 @@ const navLinks = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,9 +77,39 @@ export function Navigation() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
             <ThemeToggle />
-            <a href="#contact" className={`text-foreground/70 hover:text-foreground transition-all duration-500 ${isScrolled ? "text-xs" : "text-sm"}`}>
-              Sign in
-            </a>
+            
+            {/* Profile Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                className="p-2 hover:bg-foreground/10 rounded-lg transition-colors"
+                aria-label="Profile menu"
+              >
+                <User className="w-5 h-5" />
+              </button>
+              
+              {isProfileMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-background border border-foreground/10 rounded-lg shadow-lg z-50">
+                  <Link
+                    href="/auth/signin"
+                    className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-foreground/5 transition-colors border-b border-foreground/10"
+                    onClick={() => setIsProfileMenuOpen(false)}
+                  >
+                    <LogIn className="w-4 h-4" />
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/auth/signup"
+                    className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-foreground/5 transition-colors"
+                    onClick={() => setIsProfileMenuOpen(false)}
+                  >
+                    <UserPlus className="w-4 h-4" />
+                    Sign Up
+                  </Link>
+                </div>
+              )}
+            </div>
+            
             <Button
               size="sm"
               className={`bg-foreground hover:bg-foreground/90 text-background rounded-full transition-all duration-500 ${isScrolled ? "px-4 h-8 text-xs" : "px-6"}`}
@@ -132,26 +164,36 @@ export function Navigation() {
           </div>
           
           {/* Bottom CTAs */}
-          <div className={`flex gap-4 pt-8 border-t border-foreground/10 transition-all duration-500 ${
+          <div className={`flex flex-col gap-3 pt-8 border-t border-foreground/10 transition-all duration-500 ${
             isMobileMenuOpen 
               ? "opacity-100 translate-y-0" 
               : "opacity-0 translate-y-4"
           }`}
           style={{ transitionDelay: isMobileMenuOpen ? "300ms" : "0ms" }}
           >
-            <Button 
-              variant="outline" 
-              className="flex-1 rounded-full h-14 text-base"
+            <Link 
+              href="/auth/signin"
+              className="w-full"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Sign in
-            </Button>
-            <Button 
-              className="flex-1 bg-foreground text-background rounded-full h-14 text-base"
+              <Button 
+                variant="outline" 
+                className="w-full rounded-full h-12 text-base"
+              >
+                Sign In
+              </Button>
+            </Link>
+            <Link 
+              href="/auth/signup"
+              className="w-full"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Book Consultation
-            </Button>
+              <Button 
+                className="w-full bg-foreground text-background rounded-full h-12 text-base"
+              >
+                Sign Up
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
