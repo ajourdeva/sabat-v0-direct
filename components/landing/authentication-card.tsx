@@ -135,8 +135,8 @@ export default function AuthenticationCard() {
     <div className={`w-[450px] max-w-[450px] transition-all duration-700 ease-out ${getCardHeight()}`}>
       <div className="relative h-full">
         {/* Glass morphism card */}
-        <div className="absolute inset-0 bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/10 to-transparent rounded-3xl" />
+        <div className="absolute inset-0 bg-white/10 dark:bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 dark:border-white/20 shadow-2xl">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/10 to-transparent dark:from-white/10 dark:via-transparent dark:to-transparent rounded-3xl" />
         </div>
 
         {/* Content */}
@@ -144,23 +144,23 @@ export default function AuthenticationCard() {
           {step === "login" && (
             <div className="flex-1 flex flex-col justify-center space-y-6">
               <div className="text-center space-y-2">
-                <h1 className="text-2xl font-semibold text-white">Welcome Back</h1>
-                <p className="text-white/70">Sign in to your account</p>
+                <h1 className="text-2xl font-semibold text-foreground dark:text-white">Welcome Back</h1>
+                <p className="text-foreground/70 dark:text-white/70">Sign in to your account</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-white/90">
+                  <Label htmlFor="email" className="text-foreground/90 dark:text-white/90">
                     Email
                   </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 w-4 h-4" />
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 w-4 h-4" />
                     <Input
                       id="email"
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
-                      className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 focus:ring-white/20"
+                      className="pl-10 bg-foreground/5 dark:bg-white/10 border-foreground/20 dark:border-white/20 text-foreground dark:text-white placeholder:text-foreground/50 dark:placeholder:text-white/50 focus:border-foreground/40 dark:focus:border-white/40 focus:ring-foreground/20 dark:focus:ring-white/20"
                       placeholder="Enter your email"
                       required
                     />
@@ -168,24 +168,24 @@ export default function AuthenticationCard() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-white/90">
+                  <Label htmlFor="password" className="text-foreground/90 dark:text-white/90">
                     Password
                   </Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 w-4 h-4" />
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 w-4 h-4" />
                     <Input
                       id="password"
                       type={showPassword ? "text" : "password"}
                       value={formData.password}
                       onChange={(e) => handleInputChange("password", e.target.value)}
-                      className="pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 focus:ring-white/20"
+                      className="pl-10 pr-10 bg-foreground/5 dark:bg-white/10 border-foreground/20 dark:border-white/20 text-foreground dark:text-white placeholder:text-foreground/50 dark:placeholder:text-white/50 focus:border-foreground/40 dark:focus:border-white/40 focus:ring-foreground/20 dark:focus:ring-white/20"
                       placeholder="Enter your password"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white/70"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 hover:text-foreground/70 dark:hover:text-white/70"
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -196,7 +196,7 @@ export default function AuthenticationCard() {
                   <button
                     type="button"
                     onClick={goToForgotPassword}
-                    className="text-white/70 hover:text-white text-sm transition-colors"
+                    className="text-foreground/70 dark:text-white/70 hover:text-foreground dark:hover:text-white text-sm transition-colors"
                   >
                     Forgot password?
                   </button>
@@ -205,7 +205,7 @@ export default function AuthenticationCard() {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-white/20 hover:bg-white/30 text-white border border-white/30 hover:border-white/40 h-11 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm"
+                  className="w-full bg-foreground/10 dark:bg-white/20 hover:bg-foreground/20 dark:hover:bg-white/30 text-foreground dark:text-white border border-foreground/30 dark:border-white/30 hover:border-foreground/40 dark:hover:border-white/40 h-11 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm"
                 >
                   {isLoading ? "Signing in..." : "Sign In"}
                 </Button>
@@ -214,7 +214,7 @@ export default function AuthenticationCard() {
               <div className="text-center">
                 <button
                   onClick={() => switchMode("signup")}
-                  className="text-white/70 hover:text-white text-sm transition-colors"
+                  className="text-foreground/70 dark:text-white/70 hover:text-foreground dark:hover:text-white text-sm transition-colors"
                 >
                   {"Don't have an account? Sign up"}
                 </button>
@@ -225,23 +225,23 @@ export default function AuthenticationCard() {
           {step === "signup" && (
             <div className="flex-1 flex flex-col justify-center space-y-6">
               <div className="text-center space-y-2">
-                <h1 className="text-2xl font-semibold text-white">Create Account</h1>
-                <p className="text-white/70">Join us today</p>
+                <h1 className="text-2xl font-semibold text-foreground dark:text-white">Create Account</h1>
+                <p className="text-foreground/70 dark:text-white/70">Join us today</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-white/90">
+                  <Label htmlFor="name" className="text-foreground/90 dark:text-white/90">
                     Full Name
                   </Label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 w-4 h-4" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 w-4 h-4" />
                     <Input
                       id="name"
                       type="text"
                       value={formData.name}
                       onChange={(e) => handleInputChange("name", e.target.value)}
-                      className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 focus:ring-white/20"
+                      className="pl-10 bg-foreground/5 dark:bg-white/10 border-foreground/20 dark:border-white/20 text-foreground dark:text-white placeholder:text-foreground/50 dark:placeholder:text-white/50 focus:border-foreground/40 dark:focus:border-white/40 focus:ring-foreground/20 dark:focus:ring-white/20"
                       placeholder="Enter your full name"
                       required
                     />
@@ -249,17 +249,17 @@ export default function AuthenticationCard() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email" className="text-white/90">
+                  <Label htmlFor="signup-email" className="text-foreground/90 dark:text-white/90">
                     Email
                   </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 w-4 h-4" />
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 w-4 h-4" />
                     <Input
                       id="signup-email"
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
-                      className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 focus:ring-white/20"
+                      className="pl-10 bg-foreground/5 dark:bg-white/10 border-foreground/20 dark:border-white/20 text-foreground dark:text-white placeholder:text-foreground/50 dark:placeholder:text-white/50 focus:border-foreground/40 dark:focus:border-white/40 focus:ring-foreground/20 dark:focus:ring-white/20"
                       placeholder="Enter your email"
                       required
                     />
@@ -267,24 +267,24 @@ export default function AuthenticationCard() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password" className="text-white/90">
+                  <Label htmlFor="signup-password" className="text-foreground/90 dark:text-white/90">
                     Password
                   </Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 w-4 h-4" />
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 w-4 h-4" />
                     <Input
                       id="signup-password"
                       type={showPassword ? "text" : "password"}
                       value={formData.password}
                       onChange={(e) => handleInputChange("password", e.target.value)}
-                      className="pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 focus:ring-white/20"
+                      className="pl-10 pr-10 bg-foreground/5 dark:bg-white/10 border-foreground/20 dark:border-white/20 text-foreground dark:text-white placeholder:text-foreground/50 dark:placeholder:text-white/50 focus:border-foreground/40 dark:focus:border-white/40 focus:ring-foreground/20 dark:focus:ring-white/20"
                       placeholder="Create a password"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white/70"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 hover:text-foreground/70 dark:hover:text-white/70"
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -293,22 +293,22 @@ export default function AuthenticationCard() {
                   {formData.password && (
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs text-white/60">Password strength</span>
+                        <span className="text-xs text-foreground/60 dark:text-white/60">Password strength</span>
                         <span
                           className={`text-xs font-medium ${
                             passwordStrength.strength === 100
-                              ? "text-white/90"
+                              ? "text-foreground/90 dark:text-white/90"
                               : passwordStrength.strength >= 75
-                                ? "text-white/80"
+                                ? "text-foreground/80 dark:text-white/80"
                                 : passwordStrength.strength >= 50
-                                  ? "text-white/70"
-                                  : "text-white/50"
+                                  ? "text-foreground/70 dark:text-white/70"
+                                  : "text-foreground/50 dark:text-white/50"
                           }`}
                         >
                           {passwordStrength.label}
                         </span>
                       </div>
-                      <div className="w-full bg-white/10 rounded-full h-1.5">
+                      <div className="w-full bg-foreground/10 dark:bg-white/10 rounded-full h-1.5">
                         <div
                           className={`h-1.5 rounded-full transition-all duration-300 ${passwordStrength.color}`}
                           style={{ width: `${passwordStrength.strength}%` }}
@@ -319,11 +319,11 @@ export default function AuthenticationCard() {
                           <div key={index} className="flex items-center space-x-2">
                             <div
                               className={`w-1.5 h-1.5 rounded-full ${
-                                req.test(formData.password) ? "bg-white/80" : "bg-white/20"
+                                req.test(formData.password) ? "bg-foreground/80 dark:bg-white/80" : "bg-foreground/20 dark:bg-white/20"
                               }`}
                             />
                             <span
-                              className={`text-xs ${req.test(formData.password) ? "text-white/80" : "text-white/40"}`}
+                              className={`text-xs ${req.test(formData.password) ? "text-foreground/80 dark:text-white/80" : "text-foreground/40 dark:text-white/40"}`}
                             >
                               {req.label}
                             </span>
@@ -335,37 +335,37 @@ export default function AuthenticationCard() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="confirm-password" className="text-white/90">
+                  <Label htmlFor="confirm-password" className="text-foreground/90 dark:text-white/90">
                     Confirm Password
                   </Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 w-4 h-4" />
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 w-4 h-4" />
                     <Input
                       id="confirm-password"
                       type={showConfirmPassword ? "text" : "password"}
                       value={formData.confirmPassword}
                       onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                      className="pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 focus:ring-white/20"
+                      className="pl-10 pr-10 bg-foreground/5 dark:bg-white/10 border-foreground/20 dark:border-white/20 text-foreground dark:text-white placeholder:text-foreground/50 dark:placeholder:text-white/50 focus:border-foreground/40 dark:focus:border-white/40 focus:ring-foreground/20 dark:focus:ring-white/20"
                       placeholder="Confirm your password"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white/70"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 hover:text-foreground/70 dark:hover:text-white/70"
                     >
                       {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
                   </div>
                   {formData.confirmPassword && formData.password !== formData.confirmPassword && (
-                    <p className="text-xs text-red-400">Passwords do not match</p>
+                    <p className="text-xs text-red-600 dark:text-red-400">Passwords do not match</p>
                   )}
                 </div>
 
                 <Button
                   type="submit"
                   disabled={isLoading || !isSignupValid}
-                  className="w-full bg-white/20 hover:bg-white/30 text-white border border-white/30 hover:border-white/40 h-11 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm disabled:opacity-50"
+                  className="w-full bg-foreground/10 dark:bg-white/20 hover:bg-foreground/20 dark:hover:bg-white/30 text-foreground dark:text-white border border-foreground/30 dark:border-white/30 hover:border-foreground/40 dark:hover:border-white/40 h-11 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm disabled:opacity-50"
                 >
                   {isLoading ? "Creating account..." : "Sign Up"}
                 </Button>
@@ -374,7 +374,7 @@ export default function AuthenticationCard() {
               <div className="text-center">
                 <button
                   onClick={() => switchMode("login")}
-                  className="text-white/70 hover:text-white text-sm transition-colors"
+                  className="text-foreground/70 dark:text-white/70 hover:text-foreground dark:hover:text-white text-sm transition-colors"
                 >
                   Already have an account? Sign in
                 </button>
@@ -386,29 +386,29 @@ export default function AuthenticationCard() {
             <div className="flex-1 flex flex-col justify-center space-y-6">
               <button
                 onClick={resetToLogin}
-                className="absolute top-6 left-6 text-white/70 hover:text-white transition-colors"
+                className="absolute top-6 left-6 text-foreground/70 dark:text-white/70 hover:text-foreground dark:hover:text-white transition-colors"
               >
                 <ArrowLeft className="w-5 h-5" />
               </button>
 
               <div className="text-center space-y-2">
-                <h1 className="text-2xl font-semibold text-white">Reset Password</h1>
-                <p className="text-white/70">Enter your email to receive reset instructions</p>
+                <h1 className="text-2xl font-semibold text-foreground dark:text-white">Reset Password</h1>
+                <p className="text-foreground/70 dark:text-white/70">Enter your email to receive reset instructions</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="reset-email" className="text-white/90">
+                  <Label htmlFor="reset-email" className="text-foreground/90 dark:text-white/90">
                     Email
                   </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 w-4 h-4" />
+                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 w-4 h-4" />
                     <Input
                       id="reset-email"
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
-                      className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 focus:ring-white/20"
+                      className="pl-10 bg-foreground/5 dark:bg-white/10 border-foreground/20 dark:border-white/20 text-foreground dark:text-white placeholder:text-foreground/50 dark:placeholder:text-white/50 focus:border-foreground/40 dark:focus:border-white/40 focus:ring-foreground/20 dark:focus:ring-white/20"
                       placeholder="Enter your email"
                       required
                     />
@@ -418,7 +418,7 @@ export default function AuthenticationCard() {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-white/20 hover:bg-white/30 text-white border border-white/30 hover:border-white/40 h-11 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm"
+                  className="w-full bg-foreground/10 dark:bg-white/20 hover:bg-foreground/20 dark:hover:bg-white/30 text-foreground dark:text-white border border-foreground/30 dark:border-white/30 hover:border-foreground/40 dark:hover:border-white/40 h-11 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm"
                 >
                   {isLoading ? "Sending..." : "Send Reset Link"}
                 </Button>
@@ -430,39 +430,39 @@ export default function AuthenticationCard() {
             <div className="flex-1 flex flex-col justify-center space-y-6">
               <button
                 onClick={() => setStep("forgot-password")}
-                className="absolute top-6 left-6 text-white/70 hover:text-white transition-colors"
+                className="absolute top-6 left-6 text-foreground/70 dark:text-white/70 hover:text-foreground dark:hover:text-white transition-colors"
               >
                 <ArrowLeft className="w-5 h-5" />
               </button>
 
               <div className="text-center space-y-2">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center mx-auto">
-                  <Shield className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-foreground/10 dark:bg-white/20 backdrop-blur-sm border border-foreground/30 dark:border-white/30 rounded-full flex items-center justify-center mx-auto">
+                  <Shield className="w-6 h-6 text-foreground dark:text-white" />
                 </div>
-                <h1 className="text-2xl font-semibold text-white">Create New Password</h1>
-                <p className="text-white/70">Enter your new password below</p>
+                <h1 className="text-2xl font-semibold text-foreground dark:text-white">Create New Password</h1>
+                <p className="text-foreground/70 dark:text-white/70">Enter your new password below</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="new-password" className="text-white/90">
+                  <Label htmlFor="new-password" className="text-foreground/90 dark:text-white/90">
                     New Password
                   </Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 w-4 h-4" />
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 w-4 h-4" />
                     <Input
                       id="new-password"
                       type={showPassword ? "text" : "password"}
                       value={formData.password}
                       onChange={(e) => handleInputChange("password", e.target.value)}
-                      className="pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 focus:ring-white/20"
+                      className="pl-10 pr-10 bg-foreground/5 dark:bg-white/10 border-foreground/20 dark:border-white/20 text-foreground dark:text-white placeholder:text-foreground/50 dark:placeholder:text-white/50 focus:border-foreground/40 dark:focus:border-white/40 focus:ring-foreground/20 dark:focus:ring-white/20"
                       placeholder="Enter new password"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white/70"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 hover:text-foreground/70 dark:hover:text-white/70"
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -470,39 +470,39 @@ export default function AuthenticationCard() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="confirm-new-password" className="text-white/90">
-                    Confirm New Password
+                  <Label htmlFor="confirm-new-password" className="text-foreground/90 dark:text-white/90">
+                    Confirm Password
                   </Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 w-4 h-4" />
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 w-4 h-4" />
                     <Input
                       id="confirm-new-password"
                       type={showConfirmPassword ? "text" : "password"}
                       value={formData.confirmPassword}
                       onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                      className="pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 focus:ring-white/20"
+                      className="pl-10 pr-10 bg-foreground/5 dark:bg-white/10 border-foreground/20 dark:border-white/20 text-foreground dark:text-white placeholder:text-foreground/50 dark:placeholder:text-white/50 focus:border-foreground/40 dark:focus:border-white/40 focus:ring-foreground/20 dark:focus:ring-white/20"
                       placeholder="Confirm new password"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white/70"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-foreground/50 dark:text-white/50 hover:text-foreground/70 dark:hover:text-white/70"
                     >
                       {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
                   </div>
                   {formData.confirmPassword && formData.password !== formData.confirmPassword && (
-                    <p className="text-xs text-red-400">Passwords do not match</p>
+                    <p className="text-xs text-red-600 dark:text-red-400">Passwords do not match</p>
                   )}
                 </div>
 
                 <Button
                   type="submit"
-                  disabled={isLoading || !formData.password || formData.password !== formData.confirmPassword}
-                  className="w-full bg-white/20 hover:bg-white/30 text-white border border-white/30 hover:border-white/40 h-11 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm disabled:opacity-50"
+                  disabled={isLoading}
+                  className="w-full bg-foreground/10 dark:bg-white/20 hover:bg-foreground/20 dark:hover:bg-white/30 text-foreground dark:text-white border border-foreground/30 dark:border-white/30 hover:border-foreground/40 dark:hover:border-white/40 h-11 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm"
                 >
-                  {isLoading ? "Updating..." : "Update Password"}
+                  {isLoading ? "Resetting..." : "Reset Password"}
                 </Button>
               </form>
             </div>
@@ -512,15 +512,15 @@ export default function AuthenticationCard() {
             <div className="flex-1 flex flex-col justify-center space-y-6">
               <button
                 onClick={() => setStep(mode)}
-                className="absolute top-6 left-6 text-white/70 hover:text-white transition-colors"
+                className="absolute top-6 left-6 text-foreground/70 dark:text-white/70 hover:text-foreground dark:hover:text-white transition-colors"
               >
                 <ArrowLeft className="w-5 h-5" />
               </button>
 
               <div className="text-center space-y-2">
-                <h1 className="text-2xl font-semibold text-white">Verify Your Email</h1>
-                <p className="text-white/70">Enter the 6-digit code sent to</p>
-                <p className="text-white font-medium">{formData.email}</p>
+                <h1 className="text-2xl font-semibold text-foreground dark:text-white">Verify Your Email</h1>
+                <p className="text-foreground/70 dark:text-white/70">Enter the 6-digit code sent to</p>
+                <p className="text-foreground dark:text-white font-medium">{formData.email}</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -532,7 +532,7 @@ export default function AuthenticationCard() {
                       type="text"
                       value={digit}
                       onChange={(e) => handleOtpChange(index, e.target.value)}
-                      className="w-12 h-12 text-center text-lg font-semibold bg-white/10 border-white/20 text-white focus:border-white/40 focus:ring-white/20 rounded-xl"
+                      className="w-12 h-12 text-center text-lg font-semibold bg-foreground/5 dark:bg-white/10 border-foreground/20 dark:border-white/20 text-foreground dark:text-white focus:border-foreground/40 dark:focus:border-white/40 focus:ring-foreground/20 dark:focus:ring-white/20 rounded-xl"
                       maxLength={1}
                     />
                   ))}
@@ -541,14 +541,14 @@ export default function AuthenticationCard() {
                 <Button
                   type="submit"
                   disabled={isLoading || formData.otp.some((digit) => !digit)}
-                  className="w-full bg-white/20 hover:bg-white/30 text-white border border-white/30 hover:border-white/40 h-11 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm"
+                  className="w-full bg-foreground/10 dark:bg-white/20 hover:bg-foreground/20 dark:hover:bg-white/30 text-foreground dark:text-white border border-foreground/30 dark:border-white/30 hover:border-foreground/40 dark:hover:border-white/40 h-11 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm"
                 >
                   {isLoading ? "Verifying..." : "Verify Code"}
                 </Button>
               </form>
 
               <div className="text-center">
-                <button className="text-white/70 hover:text-white text-sm transition-colors">Resend code</button>
+                <button className="text-foreground/70 dark:text-white/70 hover:text-foreground dark:hover:text-white text-sm transition-colors">Resend code</button>
               </div>
             </div>
           )}
@@ -557,20 +557,20 @@ export default function AuthenticationCard() {
             <div className="flex-1 flex flex-col justify-center items-center space-y-6">
               <button
                 onClick={resetToLogin}
-                className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+                className="absolute top-6 right-6 text-foreground/70 dark:text-white/70 hover:text-foreground dark:hover:text-white transition-colors p-1 rounded-full hover:bg-foreground/10 dark:hover:bg-white/10"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="w-16 h-16 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center">
-                <Check className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-foreground/10 dark:bg-white/20 backdrop-blur-sm border border-foreground/30 dark:border-white/30 rounded-full flex items-center justify-center">
+                <Check className="w-8 h-8 text-foreground dark:text-white" />
               </div>
 
               <div className="text-center space-y-2">
-                <h1 className="text-2xl font-semibold text-white">
+                <h1 className="text-2xl font-semibold text-foreground dark:text-white">
                   {step === "success" && mode === "signup" ? "Welcome!" : "Success!"}
                 </h1>
-                <p className="text-white/70">
+                <p className="text-foreground/70 dark:text-white/70">
                   {step === "success" && mode === "signup"
                     ? "Your account has been verified successfully"
                     : "Your password has been reset successfully"}
@@ -578,10 +578,10 @@ export default function AuthenticationCard() {
               </div>
 
               <Button
-                onClick={() => window.open("https://www.youtube.com/@diecastbydollar", "_blank")}
-                className="w-full bg-white/20 hover:bg-white/30 text-white border border-white/30 hover:border-white/40 h-11 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm"
+                onClick={resetToLogin}
+                className="w-full bg-foreground/10 dark:bg-white/20 hover:bg-foreground/20 dark:hover:bg-white/30 text-foreground dark:text-white border border-foreground/30 dark:border-white/30 hover:border-foreground/40 dark:hover:border-white/40 h-11 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm"
               >
-                Subscribe on YouTube
+                Back to Login
               </Button>
             </div>
           )}
