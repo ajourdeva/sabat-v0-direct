@@ -131,7 +131,7 @@ export function MetricsSection() {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2 font-mono text-sm text-muted-foreground">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span>Live • Global Operations</span>
+              <span>Live </span>
             </div>
             <div className="flex flex-wrap gap-6 font-mono text-xs text-muted-foreground">
               {timezones.map((tz) => (
