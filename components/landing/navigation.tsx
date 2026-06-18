@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, User, LogIn, UserPlus } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
-import { LanguageSwitcher } from "@/components/language-switcher";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -77,7 +76,6 @@ export function Navigation() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <LanguageSwitcher />
             <ThemeToggle />
             
             {/* Profile Dropdown */}
