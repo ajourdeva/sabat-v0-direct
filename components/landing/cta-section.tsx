@@ -71,7 +71,7 @@ export function CtaSection() {
                     variant="outline"
                     className="h-14 px-8 text-base rounded-full border-foreground/20 hover:bg-foreground/5"
                   >
-                    Schedule a Demo
+                    Schedule a Meeting
                   </Button>
                 </div>
 
