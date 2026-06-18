@@ -66,7 +66,7 @@ export function HeroSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            Professional Corporate Travel Solutions
+            Your Global Partner in Corporate Travel
           </h1>
         </div>
         
