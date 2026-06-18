@@ -58,10 +58,10 @@ const metrics = [
     label: "Service Satisfaction",
   },
   { 
-    value: 24, 
-    suffix: "/7", 
+    value: 5000, 
+    suffix: "+", 
     prefix: "",
-    label: "Support Available",
+    label: "Hotel Partners",
   },
   { 
     value: 50, 

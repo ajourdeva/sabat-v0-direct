@@ -99,24 +99,24 @@ export function HeroSection() {
       </div>
       
       {/* Stats marquee - full width outside container */}
-      <div className="absolute bottom-32 lg:bottom-48 left-0 right-0">
+      <div className="absolute bottom-32 lg:bottom-48 left-0 right-0 overflow-hidden">
         <div className="flex gap-24 marquee whitespace-nowrap">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="flex gap-24">
-              {[
-                { value: "24/7", label: "Operational Support", company: "DEDICATED" },
-                { value: "100%", label: "Dedicated Coordination", company: "COMMITTED" },
-                { value: "Nationwide", label: "Hospitality Network", company: "COVERAGE" },
-                { value: "Enterprise", label: "Service Standards", company: "TRUSTED" },
-              ].map((stat) => (
-                <div key={`${stat.company}-${i}`} className="flex items-baseline gap-4">
-                  <span className="text-5xl lg:text-7xl font-display">{stat.value}</span>
-                  <span className="text-base text-muted-foreground">
-                    {stat.label}
-                    <span className="block font-mono text-sm mt-1">{stat.company}</span>
-                  </span>
-                </div>
-              ))}
+          {[
+            { value: "+5000", label: "Hotel Partners", company: "GLOBAL" },
+            { value: "100%", label: "Dedicated Coordination", company: "COMMITTED" },
+            { value: "Nationwide", label: "Hospitality Network", company: "COVERAGE" },
+            { value: "Enterprise", label: "Service Standards", company: "TRUSTED" },
+            { value: "+5000", label: "Hotel Partners", company: "GLOBAL" },
+            { value: "100%", label: "Dedicated Coordination", company: "COMMITTED" },
+            { value: "Nationwide", label: "Hospitality Network", company: "COVERAGE" },
+            { value: "Enterprise", label: "Service Standards", company: "TRUSTED" },
+          ].map((stat, index) => (
+            <div key={index} className="flex items-baseline gap-4 flex-shrink-0">
+              <span className="text-5xl lg:text-7xl font-display">{stat.value}</span>
+              <span className="text-base text-muted-foreground">
+                {stat.label}
+                <span className="block font-mono text-sm mt-1">{stat.company}</span>
+              </span>
             </div>
           ))}
         </div>
