@@ -69,7 +69,7 @@ export function ContactSection() {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left Content */}
           <div>
-            <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
+            <span className="inline-flex items-center gap-3 text-sm font-sans text-muted-foreground mb-6">
               <span className="w-8 h-px bg-foreground/30" />
               Get Started
             </span>

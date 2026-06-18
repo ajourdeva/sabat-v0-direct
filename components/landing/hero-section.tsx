@@ -53,7 +53,7 @@ export function HeroSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground">
+          <span className="inline-flex items-center gap-3 text-sm font-sans text-muted-foreground">
             <span className="w-8 h-px bg-foreground/30" />
             Professional Corporate Travel Management
           </span>
