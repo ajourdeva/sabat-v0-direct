@@ -74,10 +74,7 @@ const metrics = [
 export function MetricsSection() {
   const [time, setTime] = useState(new Date());
   const [isVisible, setIsVisible] = useState(false);
-  const [rotatingWordIndex, setRotatingWordIndex] = useState(0);
   const sectionRef = useRef<HTMLSection>(null);
-  
-  const rotatingWords = ["Organizations", "Hotels", "Corporations"];
 
   const timezones = [
     { city: "Tehran", offset: 3.5 },
@@ -98,13 +95,6 @@ export function MetricsSection() {
     const interval = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    const wordInterval = setInterval(() => {
-      setRotatingWordIndex((prev) => (prev + 1) % rotatingWords.length);
-    }, 3000);
-    return () => clearInterval(wordInterval);
-  }, [rotatingWords.length]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -135,7 +125,7 @@ export function MetricsSection() {
             >
               Proven partner
               <br />
-              for <span className="inline-block min-w-[280px] lg:min-w-[350px] transition-all duration-500">{rotatingWords[rotatingWordIndex]}</span>.
+              for organizations.
             </h2>
           </div>
           <div className="flex flex-col gap-4">
