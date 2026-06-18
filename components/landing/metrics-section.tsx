@@ -74,7 +74,22 @@ const metrics = [
 export function MetricsSection() {
   const [time, setTime] = useState(new Date());
   const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLSection>(null);
+
+  const timezones = [
+    { city: "Tehran", offset: 3.5 },
+    { city: "London", offset: 0 },
+    { city: "New York", offset: -5 },
+    { city: "Dubai", offset: 4 },
+    { city: "Tokyo", offset: 9 },
+    { city: "Sydney", offset: 10 },
+  ];
+
+  const getTimeInZone = (tzOffset: number) => {
+    const utc = new Date(time.getTime() + time.getTimezoneOffset() * 60000);
+    const zoneTime = new Date(utc.getTime() + tzOffset * 3600000);
+    return zoneTime.toLocaleTimeString();
+  };
 
   useEffect(() => {
     const interval = setInterval(() => setTime(new Date()), 1000);
@@ -113,13 +128,19 @@ export function MetricsSection() {
               for organizations.
             </h2>
           </div>
-          <div className="flex items-center gap-4 font-mono text-sm text-muted-foreground">
-            <span className="flex items-center gap-2">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-2 font-mono text-sm text-muted-foreground">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              Live
-            </span>
-            <span className="text-foreground/30">|</span>
-            <span>{time.toLocaleTimeString()}</span>
+              <span>Live • Global Operations</span>
+            </div>
+            <div className="flex flex-wrap gap-6 font-mono text-xs text-muted-foreground">
+              {timezones.map((tz) => (
+                <div key={tz.city} className="flex items-center gap-2">
+                  <span className="text-foreground/70">{tz.city}</span>
+                  <span className="text-foreground/50">{getTimeInZone(tz.offset)}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         
