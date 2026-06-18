@@ -5,10 +5,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { AnimatedSphere } from "./animated-sphere";
 import { ScrollIndicator } from "./scroll-indicator";
-import { useLanguage } from "@/lib/language-store";
 
 export function HeroSection() {
-  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -57,7 +55,7 @@ export function HeroSection() {
         >
           <span className="inline-flex items-center gap-3 text-sm font-sans text-muted-foreground">
             <span className="w-8 h-px bg-foreground/30" />
-            {t('hero.tagline')}
+            Professional Corporate Travel Management
           </span>
         </div>
         
@@ -68,7 +66,7 @@ export function HeroSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            {t('hero.title')}
+            Your Global Partner in Corporate Travel
           </h1>
         </div>
         
@@ -79,7 +77,7 @@ export function HeroSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            {t('hero.description')}
+            SABAT helps organizations coordinate accommodation, executive hospitality, transfers, and business travel operations through one trusted partner.
           </p>
           
           {/* CTA Button - directly under paragraph */}
