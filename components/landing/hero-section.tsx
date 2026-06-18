@@ -113,9 +113,9 @@ export function HeroSection() {
           ].map((stat, index) => (
             <div key={index} className="flex items-baseline gap-4 flex-shrink-0">
               <span className="text-5xl lg:text-7xl font-display">{stat.value}</span>
-              <span className="text-base text-muted-foreground">
+              <span className="text-base text-muted-foreground font-light">
                 {stat.label}
-                <span className="block font-mono text-sm mt-1">{stat.company}</span>
+                <span className="block font-semibold text-xs mt-1 tracking-wider uppercase">{stat.company}</span>
               </span>
             </div>
           ))}
