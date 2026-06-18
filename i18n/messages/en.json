@@ -6,14 +6,68 @@
     "about": "About SABAT",
     "faq": "FAQ",
     "sign_in": "Sign in",
-    "request_consultation": "Request Consultation"
+    "sign_up": "Sign Up",
+    "book_consultation": "Book Consultation"
   },
   "hero": {
-    "introducing": "Introducing",
-    "excellence_in_motion": "Excellence in Motion"
+    "tagline": "Professional Corporate Travel Management",
+    "title": "Your Global Partner in Corporate Travel",
+    "description": "SABAT helps organizations coordinate accommodation, executive hospitality, transfers, and business travel operations through one trusted partner."
   },
-  "cta": {
-    "request_consultation": "Request Consultation",
-    "book_demo": "Book a Demo"
+  "metrics": {
+    "enterprise_trust": "Enterprise Trust Metrics",
+    "organization_partners": "Organization Partners",
+    "service_satisfaction": "Service Satisfaction",
+    "hotel_partners": "Hotel Partners",
+    "cities_covered": "Cities Covered"
+  },
+  "features": {
+    "title": "Our Services",
+    "accommodation": "Accommodation Coordination",
+    "accommodation_desc": "Manage corporate housing and temporary accommodations globally",
+    "hospitality": "Executive Hospitality",
+    "hospitality_desc": "Premium guest services and executive reception management",
+    "transfers": "Ground Transportation",
+    "transfers_desc": "Seamless airport pickups and business travel logistics",
+    "operations": "Travel Operations",
+    "operations_desc": "End-to-end business travel management and support"
+  },
+  "how_it_works": {
+    "title": "How SABAT Works",
+    "step1": "Consultation",
+    "step1_desc": "Discuss your travel needs",
+    "step2": "Planning",
+    "step2_desc": "Customized solutions designed",
+    "step3": "Support",
+    "step3_desc": "24/7 dedicated assistance",
+    "step4": "Success",
+    "step4_desc": "Seamless operations delivered"
+  },
+  "industries": {
+    "title": "Industries We Serve"
+  },
+  "faq": {
+    "title": "Questions & Answers",
+    "q1": "What services does SABAT provide?",
+    "a1": "SABAT provides comprehensive corporate travel solutions including accommodation coordination, executive hospitality, ground transportation, and 24/7 travel operations support.",
+    "q2": "How can we get started?",
+    "a2": "Start by requesting a consultation. Our team will discuss your needs and design a customized proposal.",
+    "q3": "Do you operate internationally?",
+    "a3": "Yes, SABAT operates across multiple countries with a network of trusted local partners.",
+    "q4": "What is your availability?",
+    "a4": "We provide 24/7 support for all corporate travel needs and emergencies.",
+    "q5": "How do organizations begin working with SABAT?",
+    "a5": "Start by requesting a consultation. During this initial meeting, we'll discuss your organization's travel needs, objectives, and current challenges. We'll then design a customized proposal and onboarding plan that works for your team."
+  },
+  "contact": {
+    "title": "Get Started",
+    "description": "Ready to transform your corporate travel management?",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "schedule_meeting": "Schedule a Meeting"
+  },
+  "footer": {
+    "copyright": "2026 SABAT - Professional Corporate Travel Management. All rights reserved."
   }
 }

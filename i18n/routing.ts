@@ -1,4 +1,4 @@
 export const routing = {
-  locales: ["en", "fa", "ar", "tr"],
+  locales: ["en", "fa"],
   defaultLocale: "en",
 };
