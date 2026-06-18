@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     question: "How do organizations begin working with SABAT?",
-    answer: "Start by requesting a consultation. During this initial meeting, we&apos;ll discuss your organization&apos;s travel needs, objectives, and current challenges. We&apos;ll then design a customized proposal and onboarding plan that works for your team.",
+    answer: "Start by requesting a consultation. During this initial meeting, we'll discuss your organization's travel needs, objectives, and current challenges. We'll then design a customized proposal and onboarding plan that works for your team.",
   },
 ];
 
