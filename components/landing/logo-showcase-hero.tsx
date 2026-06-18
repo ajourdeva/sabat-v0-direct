@@ -3,8 +3,10 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import { useLanguage } from "@/lib/language-store";
 
 export function LogoShowcaseHero() {
+  const { t } = useLanguage();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -150,7 +152,7 @@ export function LogoShowcaseHero() {
               SABAT
             </h1>
             <p className="text-sm lg:text-base text-foreground/60 dark:text-foreground/75 font-light tracking-wide">
-              Professional Corporate Travel Management
+              {t('hero.tagline')}
             </p>
           </div>
 
