@@ -66,7 +66,7 @@ export function HeroSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            Professional Corporate Travel Solutions
+            Your Global Partner in Corporate Travel
           </h1>
         </div>
         
@@ -99,24 +99,33 @@ export function HeroSection() {
       </div>
       
       {/* Stats marquee - full width outside container */}
-      <div className="absolute bottom-32 lg:bottom-48 left-0 right-0">
-        <div className="flex gap-24 marquee whitespace-nowrap">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="flex gap-24">
-              {[
-                { value: "24/7", label: "Operational Support", company: "DEDICATED" },
-                { value: "100%", label: "Dedicated Coordination", company: "COMMITTED" },
-                { value: "Nationwide", label: "Hospitality Network", company: "COVERAGE" },
-                { value: "Enterprise", label: "Service Standards", company: "TRUSTED" },
-              ].map((stat) => (
-                <div key={`${stat.company}-${i}`} className="flex items-baseline gap-4">
-                  <span className="text-5xl lg:text-7xl font-display">{stat.value}</span>
-                  <span className="text-base text-muted-foreground">
-                    {stat.label}
-                    <span className="block font-mono text-sm mt-1">{stat.company}</span>
-                  </span>
-                </div>
-              ))}
+      <div className="absolute bottom-32 lg:bottom-48 left-0 right-0 overflow-hidden">
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .marquee-infinite {
+            animation: marquee 60s linear infinite;
+          }
+        `}</style>
+        <div className="flex gap-24 marquee-infinite whitespace-nowrap">
+          {[
+            { value: "5000+", label: "Hotel Partners", company: "GLOBAL" },
+            { value: "100%", label: "Dedicated Coordination", company: "COMMITTED" },
+            { value: "Nationwide", label: "Hospitality Network", company: "COVERAGE" },
+            { value: "Enterprise", label: "Service Standards", company: "TRUSTED" },
+            { value: "5000+", label: "Hotel Partners", company: "GLOBAL" },
+            { value: "100%", label: "Dedicated Coordination", company: "COMMITTED" },
+            { value: "Nationwide", label: "Hospitality Network", company: "COVERAGE" },
+            { value: "Enterprise", label: "Service Standards", company: "TRUSTED" },
+          ].map((stat, i) => (
+            <div key={i} className="flex items-baseline gap-4">
+              <span className="text-5xl lg:text-7xl font-display">{stat.value}</span>
+              <span className="text-base text-muted-foreground">
+                {stat.label}
+                <span className="block font-mono text-sm mt-1">{stat.company}</span>
+              </span>
             </div>
           ))}
         </div>
