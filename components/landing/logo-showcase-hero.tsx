@@ -150,7 +150,7 @@ export function LogoShowcaseHero() {
               SABAT
             </h1>
             <p className="text-sm lg:text-base text-foreground/60 dark:text-foreground/75 font-light tracking-wide">
-              Excellence in Motion
+              Professional Corporate Travel Management
             </p>
           </div>
 
