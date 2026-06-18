@@ -8,11 +8,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
-  { name: "Services", href: "#services" },
-  { name: "How It Works", href: "#how-it-works" },
-  { name: "Industries", href: "#industries" },
-  { name: "About SABAT", href: "#about" },
-  { name: "FAQ", href: "#faq" },
+  { name: "Services", href: "/#services" },
+  { name: "How It Works", href: "/#how-it-works" },
+  { name: "Industries", href: "/#industries" },
+  { name: "About SABAT", href: "/#about" },
+  { name: "FAQ", href: "/#faq" },
 ];
 
 export function Navigation() {
@@ -49,7 +49,7 @@ export function Navigation() {
           }`}
         >
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group">
             <Image 
               src="/sabat-logo.png" 
               alt="SABAT Logo" 
@@ -58,7 +58,7 @@ export function Navigation() {
               className={`transition-all duration-500 ${isScrolled ? "w-7 h-7" : "w-8 h-8"}`}
             />
             <span className={`font-display tracking-tight transition-all duration-500 ${isScrolled ? "text-lg" : "text-xl"} font-bold`}>SABAT</span>
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-12">
