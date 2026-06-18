@@ -24,9 +24,13 @@ const passwordRequirements: PasswordRequirement[] = [
   { label: "One special character", test: (pwd) => /[!@#$%^&*(),.?":{}|<>]/.test(pwd) },
 ]
 
-export default function AuthenticationCard() {
-  const [step, setStep] = useState<AuthStep>("login")
-  const [mode, setMode] = useState<AuthMode>("login")
+interface AuthenticationCardProps {
+  initialMode?: AuthMode;
+}
+
+export default function AuthenticationCard({ initialMode = "login" }: AuthenticationCardProps) {
+  const [step, setStep] = useState<AuthStep>(initialMode)
+  const [mode, setMode] = useState<AuthMode>(initialMode)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)

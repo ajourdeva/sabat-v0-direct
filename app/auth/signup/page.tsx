@@ -8,7 +8,7 @@ export default function SignUpPage() {
     <>
       <Navigation />
       <div className="min-h-screen w-full bg-gradient-to-br from-background via-background/95 to-background/90 flex items-center justify-center p-4">
-        <AuthenticationCard />
+        <AuthenticationCard initialMode="signup" />
       </div>
     </>
   );
