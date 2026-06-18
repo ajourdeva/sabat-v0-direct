@@ -76,19 +76,6 @@ export function MetricsSection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  const getTimeInZone = (tzOffset: number) => {
-    const utc = new Date(time.getTime() + time.getTimezoneOffset() * 60000);
-    const zoneTime = new Date(utc.getTime() + tzOffset * 3600000);
-    return zoneTime.toLocaleTimeString();
-  };
-
-  const timezones = [
-    { city: "Tehran", offset: 3.5 },
-    { city: "London", offset: 0 },
-    { city: "New York", offset: -5 },
-    { city: "Dubai", offset: 4 },
-  ];
-
   useEffect(() => {
     const interval = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(interval);
@@ -126,20 +113,13 @@ export function MetricsSection() {
               for organizations.
             </h2>
           </div>
-          <div className="flex flex-wrap items-center gap-6 font-mono text-sm text-muted-foreground">
+          <div className="flex items-center gap-4 font-mono text-sm text-muted-foreground">
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               Live
             </span>
             <span className="text-foreground/30">|</span>
-            <div className="flex gap-6 flex-wrap">
-              {timezones.map((tz) => (
-                <span key={tz.city} className="flex items-center gap-2">
-                  <span>{tz.city}</span>
-                  <span className="text-foreground/60">{getTimeInZone(tz.offset)}</span>
-                </span>
-              ))}
-            </div>
+            <span>{time.toLocaleTimeString()}</span>
           </div>
         </div>
         

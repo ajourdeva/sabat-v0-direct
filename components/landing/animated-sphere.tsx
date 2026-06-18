@@ -5,8 +5,16 @@ import { useEffect, useRef } from "react";
 export function AnimatedSphere() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const frameRef = useRef(0);
+  const logoRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
+    // Load the logo image
+    const logoImg = new Image();
+    logoImg.src = "/sabat-logo.png";
+    logoImg.onload = () => {
+      logoRef.current = logoImg;
+    };
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -95,12 +103,22 @@ export function AnimatedSphere() {
       ctx.arc(centerX, centerY, radius * 0.15, 0, Math.PI * 2);
       ctx.fill();
       
-      // Center dot
-      ctx.globalAlpha = 1;
-      ctx.fillStyle = textColor;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius * 0.04, 0, Math.PI * 2);
-      ctx.fill();
+      // Draw rotating logo at center
+      if (logoRef.current) {
+        ctx.globalAlpha = 0.3;
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        const logoSize = radius * 0.2;
+        ctx.drawImage(logoRef.current, -logoSize / 2, -logoSize / 2, logoSize, logoSize);
+        ctx.restore();
+      } else {
+        // Fallback center dot if logo hasn't loaded
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = textColor;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius * 0.04, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
       time += 0.02;
       frameRef.current = requestAnimationFrame(render);
