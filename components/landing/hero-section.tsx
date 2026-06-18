@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { AnimatedSphere } from "./animated-sphere";
 import { ScrollIndicator } from "./scroll-indicator";
 
 export function HeroSection() {
@@ -15,10 +14,7 @@ export function HeroSection() {
 
   return (
     <section id="hero-second" className="relative min-h-[120vh] flex flex-col justify-between overflow-hidden pb-20 lg:pb-32">
-      {/* Animated sphere background */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] lg:w-[900px] lg:h-[900px] opacity-100 pointer-events-none">
-        <AnimatedSphere />
-      </div>
+
       
       {/* Subtle grid lines */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
