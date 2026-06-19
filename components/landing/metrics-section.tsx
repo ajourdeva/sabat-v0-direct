@@ -72,7 +72,7 @@ const metrics = [
 ];
 
 export function MetricsSection() {
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState<Date | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLSection>(null);
 
@@ -86,12 +86,14 @@ export function MetricsSection() {
   ];
 
   const getTimeInZone = (tzOffset: number) => {
+    if (!time) return "--:--:-- --";
     const utc = new Date(time.getTime() + time.getTimezoneOffset() * 60000);
     const zoneTime = new Date(utc.getTime() + tzOffset * 3600000);
     return zoneTime.toLocaleTimeString();
   };
 
   useEffect(() => {
+    setTime(new Date());
     const interval = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
