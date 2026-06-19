@@ -114,11 +114,12 @@ export function MetricsSection() {
     <section id="metrics" ref={sectionRef} className="relative py-24 lg:py-32 border-y border-foreground/10">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Header */}
-        <div className="flex flex-col gap-8 mb-16 lg:mb-24">
+        <div className="flex flex-col gap-8 mb-16 lg:mb-24 text-center">
           <div>
-            <span className="inline-flex items-center gap-3 text-sm font-sans text-muted-foreground mb-6">
+            <span className="inline-flex items-center justify-center gap-3 text-sm font-sans text-muted-foreground mb-6">
               <span className="w-8 h-px bg-foreground/30" />
               Enterprise Trust Metrics
+              <span className="w-8 h-px bg-foreground/30" />
             </span>
             <h2
               className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 whitespace-nowrap ${
@@ -128,12 +129,12 @@ export function MetricsSection() {
               Proven partner for organizations.
             </h2>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 items-center justify-center">
             <div className="flex items-center gap-2 font-mono text-sm text-muted-foreground">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               <span>Live </span>
             </div>
-            <div className="flex flex-wrap gap-6 font-mono text-xs text-muted-foreground">
+            <div className="flex flex-wrap gap-6 font-mono text-xs text-muted-foreground justify-center">
               {timezones.map((tz) => (
                 <div key={tz.city} className="flex items-center gap-2">
                   <span className="text-foreground/70">{tz.city}</span>
