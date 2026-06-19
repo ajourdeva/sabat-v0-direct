@@ -114,20 +114,18 @@ export function MetricsSection() {
     <section id="metrics" ref={sectionRef} className="relative py-24 lg:py-32 border-y border-foreground/10">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 lg:mb-24">
+        <div className="flex flex-col gap-8 mb-16 lg:mb-24">
           <div>
             <span className="inline-flex items-center gap-3 text-sm font-sans text-muted-foreground mb-6">
               <span className="w-8 h-px bg-foreground/30" />
               Enterprise Trust Metrics
             </span>
             <h2
-              className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 ${
+              className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 whitespace-nowrap ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              Proven partner
-              <br />
-              for organizations.
+              Proven partner for organizations.
             </h2>
           </div>
           <div className="flex flex-col gap-4">
