@@ -1,30 +1,33 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ChevronDown } from "lucide-react";
 
-const faqs = [
-  {
-    question: "How are services customized for our organization?",
-    answer: "We begin with a comprehensive consultation to understand your travel patterns, budget, service preferences, and specific requirements. Based on these insights, we design tailored service packages that address your unique operational challenges and objectives.",
-  },
-  {
-    question: "Can SABAT support nationwide operations?",
-    answer: "Yes. Our nationwide hospitality network and partnerships enable us to coordinate accommodation and travel across all major cities and regions. Whether your team travels locally or nationally, we maintain consistent service standards and coordination.",
-  },
-  {
-    question: "Do you provide ongoing support?",
-    answer: "Absolutely. We provide 24/7 operational support throughout all business journeys. Our team is available before, during, and after travel to address any changes, issues, or last-minute adjustments that may arise.",
-  },
-  {
-    question: "Can travel arrangements change after confirmation?",
-    answer: "Yes. We understand that business needs evolve. Our team manages any changes, cancellations, or modifications with flexibility and responsiveness. We work with our partners to minimize disruptions and ensure smooth transitions.",
-  },
-  {
-    question: "How do organizations begin working with SABAT?",
-    answer: "Start by requesting a consultation. During this initial meeting, we'll discuss your organization's travel needs, objectives, and current challenges. We'll then design a customized proposal and onboarding plan that works for your team.",
-  },
-];
+function getFAQs(t: any) {
+  return [
+    {
+      question: t('faq.q1'),
+      answer: t('faq.a1'),
+    },
+    {
+      question: t('faq.q2'),
+      answer: t('faq.a2'),
+    },
+    {
+      question: t('faq.q3'),
+      answer: t('faq.a3'),
+    },
+    {
+      question: t('faq.q4'),
+      answer: t('faq.a4'),
+    },
+    {
+      question: t('faq.q5'),
+      answer: t('faq.a5'),
+    },
+  ];
+}
 
 function FAQItem({ question, answer, index, isOpen, onToggle }: any) {
   return (
@@ -54,6 +57,8 @@ function FAQItem({ question, answer, index, isOpen, onToggle }: any) {
 }
 
 export function FAQSection() {
+  const { t } = useTranslation();
+  const faqs = getFAQs(t);
   const [isVisible, setIsVisible] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -81,16 +86,16 @@ export function FAQSection() {
         <div className="mb-12 lg:mb-16">
           <span className="inline-flex items-center gap-3 text-sm font-sans text-muted-foreground mb-6">
             <span className="w-8 h-px bg-foreground/30" />
-            Questions & Answers
+            {t('faq.header_label')}
           </span>
           <h2
             className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            Frequently asked
+            {t('faq.title')}
             <br />
-            <span className="text-muted-foreground">questions.</span>
+            <span className="text-muted-foreground">{t('faq.subtitle')}</span>
           </h2>
         </div>
 
