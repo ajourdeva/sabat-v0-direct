@@ -9,9 +9,15 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     const savedLang = localStorage.getItem('language') || 'en';
     i18n.changeLanguage(savedLang);
 
-    // Update HTML lang attribute
+    // Update HTML lang attribute and apply Persian font class
     const htmlElement = document.documentElement;
     htmlElement.lang = savedLang;
+    
+    if (savedLang === 'fa') {
+      htmlElement.classList.add('fa-font');
+    } else {
+      htmlElement.classList.remove('fa-font');
+    }
     
     // Apply RTL only to main content, not header
     const mainElement = document.querySelector('main');
@@ -23,6 +29,13 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     const handleLanguageChange = (lng: string) => {
       localStorage.setItem('language', lng);
       htmlElement.lang = lng;
+      
+      // Apply Persian font class
+      if (lng === 'fa') {
+        htmlElement.classList.add('fa-font');
+      } else {
+        htmlElement.classList.remove('fa-font');
+      }
       
       // Apply RTL only to main content
       const mainElement = document.querySelector('main');

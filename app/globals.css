@@ -133,8 +133,12 @@
     font-family: var(--font-display);
   }
   
-  html:lang(fa) {
-    font-family: 'Peyda', sans-serif;
+  html.fa-font {
+    font-family: 'Peyda', sans-serif !important;
+  }
+  
+  html.fa-font * {
+    font-family: 'Peyda', sans-serif !important;
   }
   
   .text-stroke {
