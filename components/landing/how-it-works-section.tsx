@@ -1,33 +1,39 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { CheckCircle2, Users, Clock, Zap } from "lucide-react";
 
-const steps = [
-  {
-    number: "I",
-    title: "Consultation",
-    description: "We understand your organization's unique travel needs, budget constraints, and operational requirements.",
-    icon: Users,
-    highlights: ["Assess needs", "Set budget", "Define scope"]
-  },
-  {
-    number: "II",
-    title: "Design & Implementation",
-    description: "We design customized service plans and handle every operational detail, integrating all travel and accommodation services with continuous support.",
-    icon: Zap,
-    highlights: ["Design plan", "Execute bookings", "Support 24/7"]
-  },
-  {
-    number: "III",
-    title: "Optimization",
-    description: "We monitor performance, gather feedback, and continuously refine our solutions to ensure maximum value for your organization.",
-    icon: CheckCircle2,
-    highlights: ["Monitor results", "Gather feedback", "Refine strategy"]
-  },
-];
+function GetSteps() {
+  const { t } = useTranslation();
+  return [
+    {
+      number: "I",
+      title: t('how_it_works.step1'),
+      description: t('how_it_works.step1_desc'),
+      icon: Users,
+      highlights: ["Assess needs", "Set budget", "Define scope"]
+    },
+    {
+      number: "II",
+      title: "Design & Implementation",
+      description: "We design customized service plans and handle every operational detail, integrating all travel and accommodation services with continuous support.",
+      icon: Zap,
+      highlights: ["Design plan", "Execute bookings", "Support 24/7"]
+    },
+    {
+      number: "III",
+      title: "Optimization",
+      description: "We monitor performance, gather feedback, and continuously refine our solutions to ensure maximum value for your organization.",
+      icon: CheckCircle2,
+      highlights: ["Monitor results", "Gather feedback", "Refine strategy"]
+    },
+  ];
+}
 
 export function HowItWorksSection() {
+  const { t } = useTranslation();
+  const steps = GetSteps();
   const [activeStep, setActiveStep] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);

@@ -17,16 +17,26 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     const savedLang = localStorage.getItem('language') || i18n.language || 'en';
     i18n.changeLanguage(savedLang);
 
-    // Update HTML dir attribute
+    // Update HTML lang attribute only (keep header LTR)
     const htmlElement = document.documentElement;
-    htmlElement.dir = savedLang === 'fa' ? 'rtl' : 'ltr';
     htmlElement.lang = savedLang;
+    
+    // Apply RTL only to main content, not header
+    const mainElement = document.querySelector('main');
+    if (mainElement) {
+      mainElement.dir = savedLang === 'fa' ? 'rtl' : 'ltr';
+    }
 
     // Listen for language changes
     const handleLanguageChange = (lng: string) => {
       localStorage.setItem('language', lng);
-      htmlElement.dir = lng === 'fa' ? 'rtl' : 'ltr';
       htmlElement.lang = lng;
+      
+      // Apply RTL only to main content
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        mainElement.dir = lng === 'fa' ? 'rtl' : 'ltr';
+      }
     };
 
     i18n.on('languageChanged', handleLanguageChange);

@@ -69,5 +69,19 @@
   },
   "footer": {
     "copyright": "2026 SABAT - Professional Corporate Travel Management. All rights reserved."
-  }
+  },
+  "cta": {
+    "request_consultation": "Request Consultation",
+    "book_demo": "Book a Demo"
+  },
+  "buttons": {
+    "learn_more": "Learn More",
+    "get_started": "Get Started",
+    "contact_us": "Contact Us",
+    "view_all": "View All"
+  },
+  "logo_showcase": {
+    "trusted_by": "Trusted by leading organizations worldwide"
+  },
+  "proven_partner": "Proven partner for organizations."
 }

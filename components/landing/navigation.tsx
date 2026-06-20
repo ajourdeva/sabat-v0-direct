@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Menu, X, User, LogIn, UserPlus } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
@@ -8,15 +9,16 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 import Image from "next/image";
 import Link from "next/link";
 
-const navLinks = [
-  { name: "Services", href: "/#services" },
-  { name: "How It Works", href: "/#how-it-works" },
-  { name: "Industries", href: "/#industries" },
-  { name: "About SABAT", href: "/#about" },
-  { name: "FAQ", href: "/#faq" },
-];
-
 export function Navigation() {
+  const { t } = useTranslation();
+  
+  const navLinks = [
+    { name: t('nav.services'), href: "/#services" },
+    { name: t('nav.how_it_works'), href: "/#how-it-works" },
+    { name: t('nav.industries'), href: "/#industries" },
+    { name: t('nav.about'), href: "/#about" },
+    { name: t('nav.faq'), href: "/#faq" },
+  ];
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -98,7 +100,7 @@ export function Navigation() {
                     onClick={() => setIsProfileMenuOpen(false)}
                   >
                     <LogIn className="w-4 h-4" />
-                    Sign In
+                    {t('nav.sign_in')}
                   </Link>
                   <Link
                     href="/auth/signup"
@@ -106,7 +108,7 @@ export function Navigation() {
                     onClick={() => setIsProfileMenuOpen(false)}
                   >
                     <UserPlus className="w-4 h-4" />
-                    Sign Up
+                    {t('nav.sign_up')}
                   </Link>
                 </div>
               )}
@@ -116,7 +118,7 @@ export function Navigation() {
               size="sm"
               className={`bg-foreground hover:bg-foreground/90 text-background rounded-full transition-all duration-500 ${isScrolled ? "px-4 h-8 text-xs" : "px-6"}`}
             >
-              Book Consultation
+              {t('nav.book_consultation')}
             </Button>
           </div>
 

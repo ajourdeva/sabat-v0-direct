@@ -69,5 +69,19 @@
   },
   "footer": {
     "copyright": "2026 SABAT - مدیریت حرفه‌ای سفرهای کسب‌وکار. تمامی حقوق محفوظ است."
-  }
+  },
+  "cta": {
+    "request_consultation": "درخواست مشاوره",
+    "book_demo": "رزرو نمایش"
+  },
+  "buttons": {
+    "learn_more": "بیشتر بدانید",
+    "get_started": "شروع کنید",
+    "contact_us": "تماس با ما",
+    "view_all": "دیدن همه"
+  },
+  "logo_showcase": {
+    "trusted_by": "مورد اعتماد سازمان‌های پیشرو در سراسر جهان"
+  },
+  "proven_partner": "شریک قابل اعتماد برای سازمان‌ها."
 }

@@ -1,27 +1,34 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-const features = [
-  {
-    number: "01",
-    title: "Corporate Accommodation",
-    description: "Seamless coordination of business hotel reservations, short-term and long-term stays, group bookings, project-based arrangements, and budget-aligned recommendations tailored to your organization&apos;s needs.",
-    visual: "deploy",
-  },
-  {
-    number: "02",
-    title: "Transfers & Executive Hospitality",
-    description: "Complete management of airport transfers, in-city transportation, guest reception services, chauffeur coordination, and executive hospitality services designed to create exceptional experiences.",
-    visual: "ai",
-  },
-  {
-    number: "03",
-    title: "Business Travel Operations",
-    description: "End-to-end coordination of domestic and international flights, travel planning, change management, ongoing support, and integrated mission logistics for seamless business journeys.",
-    visual: "collab",
-  },
-];
+function FeaturesContent() {
+  const { t } = useTranslation();
+  
+  const features = [
+    {
+      number: "01",
+      title: t('features.accommodation'),
+      description: t('features.accommodation_desc'),
+      visual: "deploy",
+    },
+    {
+      number: "02",
+      title: t('features.hospitality'),
+      description: t('features.hospitality_desc'),
+      visual: "ai",
+    },
+    {
+      number: "03",
+      title: t('features.operations'),
+      description: t('features.operations_desc'),
+      visual: "collab",
+    },
+  ];
+  
+  return features;
+}
 
 function DeployVisual() {
   return (
@@ -291,8 +298,10 @@ function FeatureCard({ feature, index }: { feature: typeof features[0]; index: n
 }
 
 export function FeaturesSection() {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const features = FeaturesContent();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -317,7 +326,7 @@ export function FeaturesSection() {
         <div className="mb-16 lg:mb-24">
   <span className="inline-flex items-center gap-3 text-sm font-sans text-muted-foreground mb-6">
   <span className="w-8 h-px bg-foreground/30" />
-  Our Services
+  {t('features.title')}
   </span>
           <h2
             className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 ${
