@@ -128,7 +128,7 @@ export function MetricsSection() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              {t('metrics.proven_partner')}
+              {t('proven_partner')}
             </h2>
           </div>
           <div className="flex flex-col gap-4 items-center justify-center">
