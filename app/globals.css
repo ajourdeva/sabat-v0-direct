@@ -1,6 +1,14 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@font-face {
+  font-family: 'Peyda';
+  src: url('/fonts/PeydaWeb.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -123,6 +131,10 @@
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
+  }
+  
+  html:lang(fa) {
+    font-family: 'Peyda', sans-serif;
   }
   
   .text-stroke {

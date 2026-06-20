@@ -5,19 +5,11 @@ import i18n from '@/lib/i18n';
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
-    // Initialize i18n on client side only
-    if (!i18n.isInitialized) {
-      i18n.init({
-        lng: localStorage.getItem('language') || 'en',
-        fallbackLng: 'en',
-      });
-    }
-
     // Get saved language or browser preference
-    const savedLang = localStorage.getItem('language') || i18n.language || 'en';
+    const savedLang = localStorage.getItem('language') || 'en';
     i18n.changeLanguage(savedLang);
 
-    // Update HTML lang attribute only (keep header LTR)
+    // Update HTML lang attribute
     const htmlElement = document.documentElement;
     htmlElement.lang = savedLang;
     
