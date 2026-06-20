@@ -4,10 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CheckCircle2, Users, Clock, Zap } from "lucide-react";
 
-export function HowItWorksSection() {
+function GetSteps() {
   const { t } = useTranslation();
-  
-  const steps = [
+  return [
     {
       number: "I",
       title: t('how_it_works.step1'),
@@ -30,6 +29,11 @@ export function HowItWorksSection() {
       highlights: ["Monitor results", "Gather feedback", "Refine strategy"]
     },
   ];
+}
+
+export function HowItWorksSection() {
+  const { t } = useTranslation();
+  const steps = GetSteps();
   const [activeStep, setActiveStep] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
