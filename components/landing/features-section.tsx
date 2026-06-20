@@ -3,33 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-function FeaturesContent() {
-  const { t } = useTranslation();
-  
-  const features = [
-    {
-      number: "01",
-      title: t('features.accommodation'),
-      description: t('features.accommodation_desc'),
-      visual: "deploy",
-    },
-    {
-      number: "02",
-      title: t('features.hospitality'),
-      description: t('features.hospitality_desc'),
-      visual: "ai",
-    },
-    {
-      number: "03",
-      title: t('features.operations'),
-      description: t('features.operations_desc'),
-      visual: "collab",
-    },
-  ];
-  
-  return features;
-}
-
 function DeployVisual() {
   return (
     <svg viewBox="0 0 200 160" className="w-full h-full">
@@ -301,7 +274,27 @@ export function FeaturesSection() {
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const features = FeaturesContent();
+  
+  const features = [
+    {
+      number: "01",
+      title: t('features.accommodation'),
+      description: t('features.accommodation_desc'),
+      visual: "deploy",
+    },
+    {
+      number: "02",
+      title: t('features.hospitality'),
+      description: t('features.hospitality_desc'),
+      visual: "ai",
+    },
+    {
+      number: "03",
+      title: t('features.operations'),
+      description: t('features.operations_desc'),
+      visual: "collab",
+    },
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(

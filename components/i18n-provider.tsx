@@ -17,25 +17,35 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     const savedLang = localStorage.getItem('language') || i18n.language || 'en';
     i18n.changeLanguage(savedLang);
 
-    // Update HTML lang attribute only (keep header LTR)
+    // Update HTML to keep header LTR only
     const htmlElement = document.documentElement;
     htmlElement.lang = savedLang;
+    htmlElement.dir = 'ltr'; // Always keep HTML LTR for header
     
-    // Apply RTL only to main content, not header
-    const mainElement = document.querySelector('main');
-    if (mainElement) {
-      mainElement.dir = savedLang === 'fa' ? 'rtl' : 'ltr';
-    }
+    // Apply RTL only to main content via CSS custom property
+    const applyRTL = () => {
+      const mainElement = document.querySelector('main');
+      if (mainElement) {
+        mainElement.dir = savedLang === 'fa' ? 'rtl' : 'ltr';
+        mainElement.lang = savedLang;
+      }
+    };
+    
+    // Apply immediately and after DOM is ready
+    applyRTL();
+    setTimeout(applyRTL, 100);
 
     // Listen for language changes
     const handleLanguageChange = (lng: string) => {
       localStorage.setItem('language', lng);
       htmlElement.lang = lng;
+      htmlElement.dir = 'ltr'; // Always keep HTML LTR
       
       // Apply RTL only to main content
       const mainElement = document.querySelector('main');
       if (mainElement) {
         mainElement.dir = lng === 'fa' ? 'rtl' : 'ltr';
+        mainElement.lang = lng;
       }
     };
 
