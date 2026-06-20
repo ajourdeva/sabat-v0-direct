@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 function AnimatedCounter({ end, suffix = "", prefix = "" }: { end: number; suffix?: string; prefix?: string }) {
   const [count, setCount] = useState(0);
@@ -72,6 +73,7 @@ const metrics = [
 ];
 
 export function MetricsSection() {
+  const { t } = useTranslation();
   const [time, setTime] = useState<Date | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLSection>(null);
@@ -118,7 +120,7 @@ export function MetricsSection() {
           <div>
             <span className="inline-flex items-center justify-center gap-3 text-sm font-sans text-muted-foreground mb-6">
               <span className="w-8 h-px bg-foreground/30" />
-              Enterprise Trust Metrics
+              {t('metrics.enterprise_trust')}
               <span className="w-8 h-px bg-foreground/30" />
             </span>
             <h2
@@ -126,7 +128,7 @@ export function MetricsSection() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              Proven partner for organizations.
+              {t('metrics.proven_partner')}
             </h2>
           </div>
           <div className="flex flex-col gap-4 items-center justify-center">
