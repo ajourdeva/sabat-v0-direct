@@ -149,15 +149,15 @@ export function Navigation() {
             ? "opacity-100 pointer-events-auto" 
             : "opacity-0 pointer-events-none"
         }`}
-        style={{ top: 0 }}
+        style={{ top: isScrolled ? "4rem" : "5rem" }}
         onClick={() => setIsMobileMenuOpen(false)}
       >
         <div 
-          className="flex flex-col h-full px-8 pt-28 pb-8"
+          className="flex flex-col h-full px-8 py-8 pb-8"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Navigation Links */}
-          <div className="flex-1 flex flex-col justify-center gap-8">
+          <div className="flex-1 flex flex-col justify-start gap-8 pt-12">
             {navLinks.map((link, i) => (
               <a
                 key={link.name}
