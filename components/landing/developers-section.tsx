@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Copy, Check } from "lucide-react";
 
 const codeExamples = [
@@ -35,24 +36,26 @@ console.log('Live at:', app.url)`,
   },
 ];
 
-const features = [
-  { 
-    title: "TypeScript native", 
-    description: "Full type safety with auto-generated types."
-  },
-  { 
-    title: "Zero config", 
-    description: "Sensible defaults that just work."
-  },
-  { 
-    title: "Edge-ready", 
-    description: "Runs anywhere: Node, Deno, Bun, browsers."
-  },
-  { 
-    title: "12KB gzipped", 
-    description: "Lightweight with zero dependencies."
-  },
-];
+function getFeatures(t: any) {
+  return [
+    { 
+      title: t('developers.feature1_title'), 
+      description: t('developers.feature1_desc')
+    },
+    { 
+      title: t('developers.feature2_title'), 
+      description: t('developers.feature2_desc')
+    },
+    { 
+      title: t('developers.feature3_title'), 
+      description: t('developers.feature3_desc')
+    },
+    { 
+      title: t('developers.feature4_title'), 
+      description: t('developers.feature4_desc')
+    },
+  ];
+}
 
 const codeAnimationStyles = `
   .dev-code-line {
@@ -83,6 +86,8 @@ const codeAnimationStyles = `
 `;
 
 export function DevelopersSection() {
+  const { t } = useTranslation();
+  const features = getFeatures(t);
   const [activeTab, setActiveTab] = useState(0);
   const [copied, setCopied] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -119,16 +124,15 @@ export function DevelopersSection() {
           >
             <span className="inline-flex items-center gap-3 text-sm font-mono text-muted-foreground mb-6">
               <span className="w-8 h-px bg-foreground/30" />
-              For developers
+              {t('developers.header_label')}
             </span>
             <h2 className="text-4xl lg:text-6xl font-display tracking-tight mb-8">
-              Built by devs.
+              {t('developers.title')}
               <br />
-              <span className="text-muted-foreground">For devs.</span>
+              <span className="text-muted-foreground">{t('developers.subtitle')}</span>
             </h2>
             <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-              A thoughtfully designed SDK that gets out of your way. 
-              Ship faster with intuitive APIs and exceptional documentation.
+              {t('developers.description')}
             </p>
             
             {/* Features */}
@@ -220,11 +224,11 @@ export function DevelopersSection() {
             {/* Links */}
             <div className="mt-6 flex items-center gap-6 text-sm">
               <a href="#" className="text-foreground hover:underline underline-offset-4">
-                Read the docs
+                {t('developers.docs')}
               </a>
               <span className="text-foreground/20">|</span>
               <a href="#" className="text-muted-foreground hover:text-foreground">
-                View on GitHub
+                {t('developers.github')}
               </a>
             </div>
           </div>

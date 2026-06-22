@@ -33,6 +33,7 @@ export function Navigation() {
 
   return (
     <header
+      dir="ltr"
       className={`fixed z-50 transition-all duration-500 ${
         isScrolled 
           ? "top-4 left-4 right-4" 

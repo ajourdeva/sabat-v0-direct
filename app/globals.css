@@ -1,6 +1,14 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@font-face {
+  font-family: 'Peyda';
+  src: url('/fonts/PeydaWeb.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -41,9 +49,9 @@
 
 .dark {
   --background: oklch(0.12 0.01 60);
-  --foreground: #1E40AF;
+  --foreground: #60A5FA;
   --card: oklch(0.15 0.01 60);
-  --card-foreground: #1E40AF;
+  --card-foreground: #60A5FA;
   --popover: oklch(0.15 0.01 60);
   --popover-foreground: oklch(0.985 0.002 90);
   --primary: oklch(0.985 0.002 90);
@@ -123,6 +131,14 @@
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
+  }
+  
+  html.fa-font {
+    font-family: 'Peyda', sans-serif !important;
+  }
+  
+  html.fa-font * {
+    font-family: 'Peyda', sans-serif !important;
   }
   
   .text-stroke {

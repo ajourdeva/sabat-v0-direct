@@ -5,21 +5,19 @@ import i18n from '@/lib/i18n';
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
-    // Initialize i18n on client side only
-    if (!i18n.isInitialized) {
-      i18n.init({
-        lng: localStorage.getItem('language') || 'en',
-        fallbackLng: 'en',
-      });
-    }
-
     // Get saved language or browser preference
-    const savedLang = localStorage.getItem('language') || i18n.language || 'en';
+    const savedLang = localStorage.getItem('language') || 'en';
     i18n.changeLanguage(savedLang);
 
-    // Update HTML lang attribute only (keep header LTR)
+    // Update HTML lang attribute and apply Persian font class
     const htmlElement = document.documentElement;
     htmlElement.lang = savedLang;
+    
+    if (savedLang === 'fa') {
+      htmlElement.classList.add('fa-font');
+    } else {
+      htmlElement.classList.remove('fa-font');
+    }
     
     // Apply RTL only to main content, not header
     const mainElement = document.querySelector('main');
@@ -31,6 +29,13 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     const handleLanguageChange = (lng: string) => {
       localStorage.setItem('language', lng);
       htmlElement.lang = lng;
+      
+      // Apply Persian font class
+      if (lng === 'fa') {
+        htmlElement.classList.add('fa-font');
+      } else {
+        htmlElement.classList.remove('fa-font');
+      }
       
       // Apply RTL only to main content
       const mainElement = document.querySelector('main');

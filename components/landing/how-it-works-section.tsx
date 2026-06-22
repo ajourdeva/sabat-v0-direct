@@ -4,36 +4,35 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CheckCircle2, Users, Clock, Zap } from "lucide-react";
 
-function GetSteps() {
-  const { t } = useTranslation();
+function GetSteps(t: any) {
   return [
     {
       number: "I",
       title: t('how_it_works.step1'),
       description: t('how_it_works.step1_desc'),
       icon: Users,
-      highlights: ["Assess needs", "Set budget", "Define scope"]
+      highlights: [t('how_it_works.step1_h1'), t('how_it_works.step1_h2'), t('how_it_works.step1_h3')]
     },
     {
       number: "II",
-      title: "Design & Implementation",
-      description: "We design customized service plans and handle every operational detail, integrating all travel and accommodation services with continuous support.",
+      title: t('how_it_works.step2'),
+      description: t('how_it_works.step2_desc'),
       icon: Zap,
-      highlights: ["Design plan", "Execute bookings", "Support 24/7"]
+      highlights: [t('how_it_works.step2_h1'), t('how_it_works.step2_h2'), t('how_it_works.step2_h3')]
     },
     {
       number: "III",
-      title: "Optimization",
-      description: "We monitor performance, gather feedback, and continuously refine our solutions to ensure maximum value for your organization.",
+      title: t('how_it_works.step3'),
+      description: t('how_it_works.step3_desc'),
       icon: CheckCircle2,
-      highlights: ["Monitor results", "Gather feedback", "Refine strategy"]
+      highlights: [t('how_it_works.step3_h1'), t('how_it_works.step3_h2'), t('how_it_works.step3_h3')]
     },
   ];
 }
 
 export function HowItWorksSection() {
   const { t } = useTranslation();
-  const steps = GetSteps();
+  const steps = GetSteps(t);
   const [activeStep, setActiveStep] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -81,16 +80,16 @@ export function HowItWorksSection() {
         <div className="mb-16 lg:mb-24">
           <span className="inline-flex items-center gap-3 text-sm font-sans text-background/50 mb-6">
             <span className="w-8 h-px bg-background/30" />
-            How SABAT Works
+            {t('how_it_works.header_label')}
           </span>
           <h2
             className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            Three-step partnership.
+            {t('how_it_works.title')}
             <br />
-            <span className="text-background/50">Tailored solutions.</span>
+            <span className="text-background/50">{t('how_it_works.subtitle')}</span>
           </h2>
         </div>
 
@@ -188,10 +187,10 @@ export function HowItWorksSection() {
             <div className="mt-8 p-6 border border-background/10 bg-background/5 text-center">
               <Clock className="w-8 h-8 mx-auto mb-3 opacity-50" />
               <p className="text-sm text-background/60">
-                Typical implementation: 2-4 weeks
+                {t('how_it_works.timeline')}
               </p>
               <p className="text-xs text-background/40 mt-2">
-                Ongoing support included
+                {t('how_it_works.support')}
               </p>
             </div>
           </div>
