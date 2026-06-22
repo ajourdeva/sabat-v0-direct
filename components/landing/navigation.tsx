@@ -144,14 +144,18 @@ export function Navigation() {
       
       {/* Mobile Menu - Full Screen Overlay */}
       <div
-        className={`md:hidden fixed inset-0 bg-background z-40 transition-all duration-500 ${
+        className={`md:hidden fixed inset-0 bg-background/95 backdrop-blur-sm z-40 transition-all duration-500 ${
           isMobileMenuOpen 
             ? "opacity-100 pointer-events-auto" 
             : "opacity-0 pointer-events-none"
         }`}
         style={{ top: 0 }}
+        onClick={() => setIsMobileMenuOpen(false)}
       >
-        <div className="flex flex-col h-full px-8 pt-28 pb-8">
+        <div 
+          className="flex flex-col h-full px-8 pt-28 pb-8"
+          onClick={(e) => e.stopPropagation()}
+        >
           {/* Navigation Links */}
           <div className="flex-1 flex flex-col justify-center gap-8">
             {navLinks.map((link, i) => (
