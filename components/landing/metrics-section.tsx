@@ -127,11 +127,11 @@ export function MetricsSection() {
               <span className="w-8 h-px bg-foreground/30" />
             </span>
             <h2
-              className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 whitespace-nowrap text-center ${
+              className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 text-center ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              {t('metrics.proven_partner')}
+              {t('proven_partner')}
             </h2>
           </div>
           <div className="flex flex-col gap-4 items-center justify-center">

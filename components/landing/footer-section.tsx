@@ -1,30 +1,33 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { AnimatedWave } from "./animated-wave";
 
-const footerLinks = {
-  Services: [
-    { name: "Corporate Accommodation", href: "#services" },
-    { name: "Transfers & Hospitality", href: "#services" },
-    { name: "Business Travel Operations", href: "#services" },
-  ],
-  Company: [
-    { name: "About SABAT", href: "#about" },
-    { name: "Industries", href: "#industries" },
-    { name: "FAQ", href: "#faq" },
-    { name: "Contact", href: "#contact" },
-  ],
-  Legal: [
-    { name: "Privacy Policy", href: "#" },
-    { name: "Terms of Service", href: "#" },
-    { name: "Confidentiality", href: "#" },
-  ],
-};
-
-
+function GetFooterLinks(t: any) {
+  return {
+    Services: [
+      { name: t('contact.corporate_accommodation'), href: "#services" },
+      { name: t('contact.transfers_hospitality'), href: "#services" },
+      { name: t('contact.business_travel_operations'), href: "#services" },
+    ],
+    Company: [
+      { name: t('nav.about'), href: "#about" },
+      { name: t('industries.title'), href: "#industries" },
+      { name: t('nav.faq'), href: "#faq" },
+      { name: t('contact.title'), href: "#contact" },
+    ],
+    Legal: [
+      { name: 'Privacy Policy', href: "#" },
+      { name: 'Terms of Service', href: "#" },
+      { name: 'Confidentiality', href: "#" },
+    ],
+  };
+}
 
 export function FooterSection() {
+  const { t } = useTranslation();
+  const footerLinks = GetFooterLinks(t);
   return (
     <footer className="relative border-t border-foreground/10">
       {/* Animated wave background */}
@@ -84,7 +87,7 @@ export function FooterSection() {
         {/* Bottom Bar */}
         <div className="py-8 border-t border-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            2026 SABAT - Professional Corporate Travel Management. All rights reserved.
+            {t('footer.copyright')}
           </p>
 
           <div className="flex items-center gap-4 text-sm text-muted-foreground">

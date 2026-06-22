@@ -88,9 +88,9 @@ export function HowItWorksSection() {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            Three-step partnership.
+            {t('how_it_works.three_step')}
             <br />
-            <span className="text-background/50">Tailored solutions.</span>
+            <span className="text-background/50">{t('how_it_works.tailored_solutions')}</span>
           </h2>
         </div>
 

@@ -101,17 +101,17 @@ export function HeroSection() {
       </div>
       
       {/* Stats marquee - full width outside container */}
-      <div className="absolute bottom-32 lg:bottom-48 left-0 right-0 overflow-hidden">
+      <div className="absolute bottom-32 lg:bottom-48 left-0 right-0 overflow-hidden" dir="ltr">
         <div className="flex gap-24 marquee whitespace-nowrap">
           {[
-            { value: "+5000", label: "Hotel Partners", company: "GLOBAL" },
-            { value: "100%", label: "Dedicated Coordination", company: "COMMITTED" },
-            { value: "Nationwide", label: "Hospitality Network", company: "COVERAGE" },
-            { value: "Enterprise", label: "Service Standards", company: "TRUSTED" },
-            { value: "+5000", label: "Hotel Partners", company: "GLOBAL" },
-            { value: "100%", label: "Dedicated Coordination", company: "COMMITTED" },
-            { value: "Nationwide", label: "Hospitality Network", company: "COVERAGE" },
-            { value: "Enterprise", label: "Service Standards", company: "TRUSTED" },
+            { value: "+5000", label: t('marquee.hotel_partners'), company: t('marquee.global') },
+            { value: "100%", label: t('marquee.dedicated_coordination'), company: t('marquee.committed') },
+            { value: "Nationwide", label: t('marquee.hospitality_network'), company: t('marquee.coverage') },
+            { value: "Enterprise", label: t('marquee.service_standards'), company: t('marquee.trusted') },
+            { value: "+5000", label: t('marquee.hotel_partners'), company: t('marquee.global') },
+            { value: "100%", label: t('marquee.dedicated_coordination'), company: t('marquee.committed') },
+            { value: "Nationwide", label: t('marquee.hospitality_network'), company: t('marquee.coverage') },
+            { value: "Enterprise", label: t('marquee.service_standards'), company: t('marquee.trusted') },
           ].map((stat, index) => (
             <div key={index} className="flex items-baseline gap-4 flex-shrink-0">
               <span className="text-5xl lg:text-7xl font-display">{stat.value}</span>

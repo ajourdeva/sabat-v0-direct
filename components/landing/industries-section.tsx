@@ -1,17 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-const industries = [
-  "Corporations",
-  "Government Institutions",
-  "Healthcare Organizations",
-  "Educational Institutions",
-  "Industrial Enterprises",
-  "Executive Offices",
-];
+function GetIndustries(t: any) {
+  return [
+    t('industries.corporations'),
+    t('industries.government'),
+    t('industries.healthcare'),
+    t('industries.education'),
+    t('industries.industrial'),
+    t('industries.executive'),
+  ];
+}
 
 export function IndustriesSection() {
+  const { t } = useTranslation();
+  const industries = GetIndustries(t);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -38,16 +43,16 @@ export function IndustriesSection() {
         <div className="mb-16 lg:mb-24">
           <span className="inline-flex items-center gap-3 text-sm font-sans text-muted-foreground mb-6">
             <span className="w-8 h-px bg-foreground/30" />
-            Industries We Serve
+            {t('industries.title')}
           </span>
           <h2
             className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            Trusted by organizations
+            {t('industries.trusted_by')}
             <br />
-            <span className="text-muted-foreground">across sectors.</span>
+            <span className="text-muted-foreground">{t('industries.across_sectors')}</span>
           </h2>
         </div>
 
@@ -66,7 +71,7 @@ export function IndustriesSection() {
                 {industry}
               </h3>
               <p className="text-sm text-muted-foreground mt-3 group-hover:text-foreground/70 transition-colors">
-                Professional travel coordination and hospitality management
+                {t('industries.description')}
               </p>
               <div className="absolute top-6 right-6 w-10 h-10 rounded-full border border-foreground/10 flex items-center justify-center group-hover:border-foreground/30 group-hover:bg-foreground/5 transition-all duration-500">
                 <span className="text-xs font-mono text-muted-foreground">→</span>
