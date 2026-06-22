@@ -45,35 +45,38 @@ function AnimatedCounter({ end, suffix = "", prefix = "" }: { end: number; suffi
   );
 }
 
-const metrics = [
-  { 
-    value: 1500, 
-    suffix: "+", 
-    prefix: "",
-    label: "Organization Partners",
-  },
-  { 
-    value: 99, 
-    suffix: ".9%", 
-    prefix: "",
-    label: "Service Satisfaction",
-  },
-  { 
-    value: 5000, 
-    suffix: "+", 
-    prefix: "",
-    label: "Hotel Partners",
-  },
-  { 
-    value: 50, 
-    suffix: "+", 
-    prefix: "",
-    label: "Cities Covered",
-  },
-];
+function GetMetrics(t: any) {
+  return [
+    { 
+      value: 1500, 
+      suffix: "+", 
+      prefix: "",
+      label: t('metrics.organization_partners'),
+    },
+    { 
+      value: 99, 
+      suffix: ".9%", 
+      prefix: "",
+      label: t('metrics.service_satisfaction'),
+    },
+    { 
+      value: 5000, 
+      suffix: "+", 
+      prefix: "",
+      label: t('metrics.hotel_partners'),
+    },
+    { 
+      value: 50, 
+      suffix: "+", 
+      prefix: "",
+      label: t('metrics.cities_covered'),
+    },
+  ];
+}
 
 export function MetricsSection() {
   const { t } = useTranslation();
+  const metrics = GetMetrics(t);
   const [time, setTime] = useState<Date | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLSection>(null);

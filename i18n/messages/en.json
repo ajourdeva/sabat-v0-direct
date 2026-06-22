@@ -72,7 +72,8 @@
   },
   "cta": {
     "request_consultation": "Request Consultation",
-    "book_demo": "Book a Demo"
+    "book_demo": "Book a Demo",
+    "book_consultation": "Book Consultation"
   },
   "buttons": {
     "learn_more": "Learn More",
@@ -83,5 +84,43 @@
   "logo_showcase": {
     "trusted_by": "Trusted by leading organizations worldwide"
   },
-  "proven_partner": "Proven partner for organizations."
+  "proven_partner": "Proven partner for organizations.",
+  "faq": {
+    "title": "Questions & Answers",
+    "subtitle": "questions.",
+    "q1": "How are services customized for our organization?",
+    "a1": "We begin with a comprehensive consultation to understand your travel patterns, budget, service preferences, and specific requirements. Based on these insights, we design tailored service packages that address your unique operational challenges and objectives.",
+    "q2": "Can SABAT support nationwide operations?",
+    "a2": "Yes. Our nationwide hospitality network and partnerships enable us to coordinate accommodation and travel across all major cities and regions. Whether your team travels locally or nationally, we maintain consistent service standards and coordination.",
+    "q3": "Do you provide ongoing support?",
+    "a3": "Absolutely. We provide 24/7 operational support throughout all business journeys. Our team is available before, during, and after travel to address any changes, issues, or last-minute adjustments that may arise.",
+    "q4": "Can travel arrangements change after confirmation?",
+    "a4": "Yes. We understand that business needs evolve. Our team manages any changes, cancellations, or modifications with flexibility and responsiveness. We work with our partners to minimize disruptions and ensure smooth transitions.",
+    "q5": "How do organizations begin working with SABAT?",
+    "a5": "Start by requesting a consultation. During this initial meeting, we'll discuss your organization's travel needs, objectives, and current challenges. We'll then design a customized proposal and onboarding plan that works for your team."
+  },
+  "contact": {
+    "title": "Get Started",
+    "subtitle": "ready",
+    "description": "Whether managing executive guests, employee missions, or long-term accommodation projects, SABAT becomes an extension of your team.",
+    "cta_text": "Ready to get SABATIZED?",
+    "business_whatsapp": "WhatsApp Business",
+    "office": "Office",
+    "mobile": "Mobile",
+    "email": "Email",
+    "address": "Address",
+    "connect_with_us": "Connect With Us",
+    "organization_name": "Organization Name",
+    "contact_person": "Contact Person",
+    "service_interest": "Service Interest",
+    "message": "Message",
+    "message_placeholder": "Tell us about your travel coordination needs...",
+    "corporate_accommodation": "Corporate Accommodation",
+    "transfers_hospitality": "Transfers & Executive Hospitality",
+    "business_travel_operations": "Business Travel Operations",
+    "all_services": "All Services",
+    "book_consultation": "Book Consultation",
+    "thank_you": "Thank you!",
+    "response_time": "We'll respond within 24 business hours."
+  }
 }

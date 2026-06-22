@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, Instagram, Send, Linkedin, MapPin, Youtube } from "lucide-react";
 
@@ -14,6 +15,7 @@ const socialLinks = [
 ];
 
 export function ContactSection() {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     organizationName: "",
@@ -71,21 +73,21 @@ export function ContactSection() {
           <div>
             <span className="inline-flex items-center gap-3 text-sm font-sans text-muted-foreground mb-6">
               <span className="w-8 h-px bg-foreground/30" />
-              Get Started
+              {t('contact.title')}
             </span>
             <h2
               className={`text-4xl lg:text-6xl font-display tracking-tight mb-8 transition-all duration-700 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              Ready to get SABATIZED?
+              {t('contact.cta_text')}
             </h2>
             <p
               className={`text-lg text-muted-foreground leading-relaxed mb-12 transition-all duration-700 delay-100 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              Whether managing executive guests, employee missions, or long-term accommodation projects, SABAT becomes an extension of your team.
+              {t('contact.description')}
             </p>
 
             {/* Contact Info */}
@@ -95,15 +97,15 @@ export function ContactSection() {
               }`}
             >
               <div>
-                <p className="text-sm font-mono text-muted-foreground mb-2">WhatsApp Business</p>
+                <p className="text-sm font-mono text-muted-foreground mb-2">{t('contact.business_whatsapp')}</p>
                 <a href="https://wa.me/989982550013" className="text-lg text-foreground hover:text-foreground/80 transition-colors">+98 998 255 0013</a>
               </div>
               <div>
-                <p className="text-sm font-mono text-muted-foreground mb-2">Office</p>
+                <p className="text-sm font-mono text-muted-foreground mb-2">{t('contact.office')}</p>
                 <p className="text-lg text-foreground">+98 21 5621 7234</p>
               </div>
               <div>
-                <p className="text-sm font-mono text-muted-foreground mb-2">Mobile</p>
+                <p className="text-sm font-mono text-muted-foreground mb-2">{t('contact.mobile')}</p>
                 <div className="space-y-1">
                   <p className="text-lg text-foreground">+98 998 255 0013</p>
                   <p className="text-lg text-foreground">+98 998 255 0014</p>
@@ -111,17 +113,17 @@ export function ContactSection() {
                 </div>
               </div>
               <div>
-                <p className="text-sm font-mono text-muted-foreground mb-2">Email</p>
+                <p className="text-sm font-mono text-muted-foreground mb-2">{t('contact.email')}</p>
                 <p className="text-lg text-foreground">contact@sabat.ir</p>
               </div>
               <div>
-                <p className="text-sm font-mono text-muted-foreground mb-2">Address</p>
+                <p className="text-sm font-mono text-muted-foreground mb-2">{t('contact.address')}</p>
                 <p className="text-lg text-foreground">Tehran, Iran</p>
               </div>
 
               {/* Social Links Box */}
               <div className="p-6 border border-foreground/10 rounded-lg bg-background/50 backdrop-blur-sm w-fit">
-                <p className="text-xs font-medium text-foreground/60 mb-4 uppercase tracking-wide">Connect With Us</p>
+                <p className="text-xs font-medium text-foreground/60 mb-4 uppercase tracking-wide">{t('contact.connect_with_us')}</p>
                 <div className="grid grid-cols-3 gap-3">
                   {socialLinks.map((link) => {
                     const Icon = link.icon;
@@ -151,7 +153,7 @@ export function ContactSection() {
               {/* Organization Name */}
               <div>
                 <label className="block text-sm font-mono text-muted-foreground mb-2">
-                  Organization Name *
+                  {t('contact.organization_name')} *
                 </label>
                 <input
                   type="text"
@@ -167,7 +169,7 @@ export function ContactSection() {
               {/* Contact Person */}
               <div>
                 <label className="block text-sm font-mono text-muted-foreground mb-2">
-                  Contact Person *
+                  {t('contact.contact_person')} *
                 </label>
                 <input
                   type="text"
@@ -183,7 +185,7 @@ export function ContactSection() {
               {/* Email */}
               <div>
                 <label className="block text-sm font-mono text-muted-foreground mb-2">
-                  Email *
+                  {t('contact.email')} *
                 </label>
                 <input
                   type="email"
@@ -199,7 +201,7 @@ export function ContactSection() {
               {/* Phone */}
               <div>
                 <label className="block text-sm font-mono text-muted-foreground mb-2">
-                  Phone *
+                  {t('contact.mobile')} *
                 </label>
                 <input
                   type="tel"
@@ -215,7 +217,7 @@ export function ContactSection() {
               {/* Service Interest */}
               <div>
                 <label className="block text-sm font-mono text-muted-foreground mb-2">
-                  Service Interest *
+                  {t('contact.service_interest')} *
                 </label>
                 <select
                   name="serviceInterest"
@@ -223,17 +225,17 @@ export function ContactSection() {
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-background border border-foreground/10 rounded-lg focus:outline-none focus:border-foreground/30 focus:ring-1 focus:ring-foreground/10 transition-all text-foreground"
                 >
-                  <option value="accommodation">Corporate Accommodation</option>
-                  <option value="transfers">Transfers & Executive Hospitality</option>
-                  <option value="business-travel">Business Travel Operations</option>
-                  <option value="all">All Services</option>
+                  <option value="accommodation">{t('contact.corporate_accommodation')}</option>
+                  <option value="transfers">{t('contact.transfers_hospitality')}</option>
+                  <option value="business-travel">{t('contact.business_travel_operations')}</option>
+                  <option value="all">{t('contact.all_services')}</option>
                 </select>
               </div>
 
               {/* Message */}
               <div>
                 <label className="block text-sm font-mono text-muted-foreground mb-2">
-                  Message
+                  {t('contact.message')}
                 </label>
                 <textarea
                   name="message"
@@ -241,7 +243,7 @@ export function ContactSection() {
                   onChange={handleChange}
                   rows={4}
                   className="w-full px-4 py-3 bg-background border border-foreground/10 rounded-lg focus:outline-none focus:border-foreground/30 focus:ring-1 focus:ring-foreground/10 transition-all text-foreground placeholder:text-muted-foreground resize-none"
-                  placeholder="Tell us about your travel coordination needs..."
+                  placeholder={t('contact.message_placeholder')}
                 />
               </div>
 
@@ -250,12 +252,12 @@ export function ContactSection() {
                 type="submit"
                 className="w-full bg-foreground hover:bg-foreground/90 text-background rounded-lg h-12 text-base font-medium group"
               >
-                {submitted ? "Thank you!" : "Book Consultation"}
+                {submitted ? t('contact.thank_you') : t('contact.book_consultation')}
                 {!submitted && <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />}
               </Button>
 
               <p className="text-xs text-muted-foreground text-center">
-                We&apos;ll respond within 24 business hours.
+                {t('contact.response_time')}
               </p>
             </form>
           </div>

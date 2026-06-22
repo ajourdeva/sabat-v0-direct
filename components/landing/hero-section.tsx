@@ -92,7 +92,7 @@ export function HeroSection() {
               size="lg" 
               className="bg-foreground hover:bg-foreground/90 text-background px-[101px] h-14 text-base rounded-full group"
             >
-              Book Consultation
+              {t('cta.book_consultation')}
               <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
