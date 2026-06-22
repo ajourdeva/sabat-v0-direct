@@ -60,7 +60,7 @@ export function IntegrationsSection() {
       </div>
       
       {/* Full-width marquees outside container */}
-      <div className="w-full mb-6">
+      <div className="w-full mb-6" dir="ltr">
         <div className="flex gap-6 marquee">
           {[...Array(2)].map((_, setIndex) => (
             <div key={setIndex} className="flex gap-6 shrink-0">
