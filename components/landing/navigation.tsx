@@ -38,6 +38,7 @@ export function Navigation() {
           ? "top-4 left-4 right-4" 
           : "top-0 left-0 right-0"
       }`}
+      dir="ltr"
     >
       <nav 
         className={`mx-auto transition-all duration-500 ${
@@ -192,7 +193,7 @@ export function Navigation() {
                 variant="outline" 
                 className="w-full rounded-full h-12 text-base"
               >
-                Sign In
+                {t('nav.sign_in')}
               </Button>
             </Link>
             <Link 
@@ -203,7 +204,7 @@ export function Navigation() {
               <Button 
                 className="w-full bg-foreground text-background rounded-full h-12 text-base"
               >
-                Sign Up
+                {t('nav.sign_up')}
               </Button>
             </Link>
           </div>

@@ -17,26 +17,26 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     const savedLang = localStorage.getItem('language') || i18n.language || 'en';
     i18n.changeLanguage(savedLang);
 
-    // Update HTML lang attribute only (keep header LTR)
+    // Update HTML lang attribute only (keep header LTR always)
     const htmlElement = document.documentElement;
     htmlElement.lang = savedLang;
+    htmlElement.dir = 'ltr'; // Keep header LTR always
     
-    // Apply RTL only to main content, not header
-    const mainElement = document.querySelector('main');
-    if (mainElement) {
-      mainElement.dir = savedLang === 'fa' ? 'rtl' : 'ltr';
-    }
+    // Apply RTL to body for content direction
+    const bodyElement = document.body;
+    bodyElement.dir = savedLang === 'fa' ? 'rtl' : 'ltr';
+    bodyElement.className = savedLang === 'fa' ? bodyElement.className + ' font-persian' : bodyElement.className.replace(' font-persian', '');
 
     // Listen for language changes
     const handleLanguageChange = (lng: string) => {
       localStorage.setItem('language', lng);
       htmlElement.lang = lng;
+      htmlElement.dir = 'ltr'; // Keep header LTR always
       
-      // Apply RTL only to main content
-      const mainElement = document.querySelector('main');
-      if (mainElement) {
-        mainElement.dir = lng === 'fa' ? 'rtl' : 'ltr';
-      }
+      // Apply RTL to body for content
+      const bodyElement = document.body;
+      bodyElement.dir = lng === 'fa' ? 'rtl' : 'ltr';
+      bodyElement.className = lng === 'fa' ? bodyElement.className + ' font-persian' : bodyElement.className.replace(' font-persian', '');
     };
 
     i18n.on('languageChanged', handleLanguageChange);

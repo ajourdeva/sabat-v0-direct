@@ -1,6 +1,13 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@font-face {
+  font-family: 'PeydaWeb';
+  src: url('/fonts/PeydaWeb.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -41,25 +48,25 @@
 
 .dark {
   --background: oklch(0.12 0.01 60);
-  --foreground: #1E40AF;
+  --foreground: #5B9EFF;
   --card: oklch(0.15 0.01 60);
-  --card-foreground: #1E40AF;
+  --card-foreground: #6BA3FF;
   --popover: oklch(0.15 0.01 60);
-  --popover-foreground: oklch(0.985 0.002 90);
-  --primary: oklch(0.985 0.002 90);
+  --popover-foreground: oklch(0.95 0.01 90);
+  --primary: oklch(0.90 0.01 90);
   --primary-foreground: oklch(0.12 0.01 60);
   --secondary: oklch(0.2 0.01 60);
-  --secondary-foreground: oklch(0.985 0.002 90);
+  --secondary-foreground: oklch(0.92 0.01 90);
   --muted: oklch(0.25 0.01 60);
-  --muted-foreground: oklch(0.65 0.02 60);
+  --muted-foreground: oklch(0.72 0.02 60);
   --accent: oklch(0.3 0.01 60);
-  --accent-foreground: oklch(0.985 0.002 90);
+  --accent-foreground: oklch(0.92 0.01 90);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
   --border: oklch(0.25 0.01 60);
   --input: oklch(0.2 0.01 60);
-  --ring: oklch(0.985 0.002 90);
-  --chart-1: oklch(0.985 0.002 90);
+  --ring: oklch(0.90 0.01 90);
+  --chart-1: oklch(0.90 0.01 90);
   --chart-2: oklch(0.75 0.02 60);
   --chart-3: oklch(0.55 0.02 60);
   --chart-4: oklch(0.35 0.02 60);
@@ -70,6 +77,7 @@
   --font-sans: var(--font-instrument), 'Instrument Sans', system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), 'JetBrains Mono', monospace;
   --font-display: var(--font-instrument-serif), 'Instrument Serif', Georgia, serif;
+  --font-persian: 'PeydaWeb', system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -123,6 +131,10 @@
 @layer utilities {
   .font-display {
     font-family: var(--font-display);
+  }
+  
+  .font-persian {
+    font-family: var(--font-persian);
   }
   
   .text-stroke {

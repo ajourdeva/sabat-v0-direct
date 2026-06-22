@@ -12,21 +12,21 @@ function GetSteps() {
       title: t('how_it_works.step1'),
       description: t('how_it_works.step1_desc'),
       icon: Users,
-      highlights: ["Assess needs", "Set budget", "Define scope"]
+      highlights: [t('how_it_works.step1'), t('how_it_works.step1_desc'), t('buttons.learn_more')]
     },
     {
       number: "II",
-      title: "Design & Implementation",
-      description: "We design customized service plans and handle every operational detail, integrating all travel and accommodation services with continuous support.",
+      title: t('how_it_works.step2'),
+      description: t('how_it_works.step2_desc'),
       icon: Zap,
-      highlights: ["Design plan", "Execute bookings", "Support 24/7"]
+      highlights: [t('buttons.learn_more'), t('cta.book_demo'), t('buttons.contact_us')]
     },
     {
       number: "III",
-      title: "Optimization",
-      description: "We monitor performance, gather feedback, and continuously refine our solutions to ensure maximum value for your organization.",
+      title: t('how_it_works.step3'),
+      description: t('how_it_works.step3_desc'),
       icon: CheckCircle2,
-      highlights: ["Monitor results", "Gather feedback", "Refine strategy"]
+      highlights: [t('buttons.learn_more'), t('cta.request_consultation'), t('buttons.get_started')]
     },
   ];
 }
@@ -81,7 +81,7 @@ export function HowItWorksSection() {
         <div className="mb-16 lg:mb-24">
           <span className="inline-flex items-center gap-3 text-sm font-sans text-background/50 mb-6">
             <span className="w-8 h-px bg-background/30" />
-            How SABAT Works
+            {t('how_it_works.title')}
           </span>
           <h2
             className={`text-4xl lg:text-6xl font-display tracking-tight transition-all duration-700 ${
@@ -191,7 +191,7 @@ export function HowItWorksSection() {
                 Typical implementation: 2-4 weeks
               </p>
               <p className="text-xs text-background/40 mt-2">
-                Ongoing support included
+                {t('how_it_works.step3_desc')}
               </p>
             </div>
           </div>
